@@ -1,0 +1,184 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de verges et prix — Opera Upholstering</title>
+<meta name="description" content="Combien de tissu pour un sofa, un fauteuil ou six chaises ? Les allocations standards du métier, ce qui décide du prix, et les questions qu’on reçoit chaque semaine.">
+<link rel="icon" href="assets/logo-opera.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<a class="skip" href="#contenu" data-en="Skip to content">Aller au contenu</a>
+
+<header class="topbar">
+  <div class="wrap bar">
+    <a class="logo" href="index.html" aria-label="Opera Upholstering — accueil">
+      <img src="assets/logo-opera.png" alt="Opera Upholstering">
+    </a>
+    <nav class="navlinks" aria-label="Principal">
+      <a href="index.html" data-en="Home">Accueil</a>
+      <a href="tissus.html" data-en="The library">La bibliothèque</a>
+      <a href="savoir-faire.html" data-en="Craft">Savoir-faire</a>
+      <a href="cannage.html" data-en="Caning">Cannage</a>
+      <a href="calculateur.html" aria-current="page" data-en="Yardage">Calculateur</a>
+      <a href="index.html#soumission" data-en="Contact">Contact</a>
+    </nav>
+    <div class="navtools">
+      <div class="langtog" role="group" aria-label="Langue / Language">
+        <button type="button" id="btn-fr" aria-pressed="true">FR</button>
+        <button type="button" id="btn-en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn" href="index.html#soumission" data-en="Get a quote">Soumission</a>
+    </div>
+  </div>
+</header>
+
+<main id="contenu">
+<section id="calculateur">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <div>
+        <h2 data-en="How much fabric is needed?">Combien de tissu faut-il ?</h2>
+        <p class="kicker" data-en="The figures below are the trade’s standard allowances for 54-inch goods, welting and a normal margin included. They are intended for planning and for pricing fabric; the exact cut is measured off the piece itself.">Les chiffres ci-dessous sont les allocations standards du métier pour du tissu de 54 pouces, passepoil et marge normale inclus. Ils servent à planifier et à chiffrer le tissu; la coupe exacte se mesure sur la pièce elle-même.</p>
+      </div>
+    </div>
+
+    <div class="calc rise">
+      <form id="calcform" onsubmit="return false">
+        <div class="field">
+          <label for="piece" data-en="The piece">La pièce</label>
+          <select id="piece"></select>
+        </div>
+        <div class="field">
+          <label for="qty" data-en="How many">Combien</label>
+          <input type="number" id="qty" min="1" max="40" value="1" inputmode="numeric">
+        </div>
+        <div class="checks">
+          <label><input type="checkbox" id="opt-repeat"><span data-en="The fabric has a large pattern repeat (adds 20%)">Le tissu a un grand rapport de motif (ajoute 20 %)</span></label>
+          <label><input type="checkbox" id="opt-stripe"><span data-en="Stripes or a pattern that must line up (adds 15%)">Rayures ou motif à raccorder (ajoute 15 %)</span></label>
+          <label><input type="checkbox" id="opt-skirt"><span data-en="Add a skirt around the base (adds 2½ yards)">Ajouter une jupe autour de la base (ajoute 2½ verges)</span></label>
+          <label><input type="checkbox" id="opt-contrast"><span data-en="Contrast welting cut on the bias (adds 1 yard)">Passepoil contrastant coupé en biais (ajoute 1 verge)</span></label>
+          <label><input type="checkbox" id="opt-narrow"><span data-en="The fabric is 45 inches wide, not 54 (adds 20%)">Le tissu fait 45 pouces de large, pas 54 (ajoute 20 %)</span></label>
+        </div>
+        <p class="tiny muted" data-en="Leather is quoted in square feet, not yards — roughly 18 square feet per yard of fabric. Ask at the counter.">Le cuir se calcule en pieds carrés, pas en verges — environ 18 pieds carrés par verge de tissu. Informez-vous au comptoir.</p>
+      </form>
+
+      <div class="readout" aria-live="polite">
+        <span class="lbl" data-en="Estimated yardage">Verges estimées</span>
+        <div class="big"><span id="yards">6</span><span class="unit" id="unit">verges</span></div>
+        <p class="tiny" style="color:var(--noir-muted);margin:14px 0 0" id="calcnote"></p>
+        <div class="breakdown" id="breakdown"></div>
+        <div style="margin-top:22px"><a class="btn light" href="index.html#soumission" data-en="Get this quoted">Faire chiffrer ça</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sunk" id="prix">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <div>
+        <h2 data-en="What decides the price">Ce qui décide du prix</h2>
+        <p class="kicker" data-en="Two armchairs of identical dimensions can be four hours apart in labour, which is why a category name is not enough to price a piece. These are the lines that move an estimate.">Deux fauteuils de dimensions identiques peuvent être séparés par quatre heures de travail, et c’est pourquoi un nom de catégorie ne suffit pas à chiffrer une pièce. Voici les postes qui font varier une estimation.</p>
+      </div>
+    </div>
+
+    <div class="tablewrap rise">
+      <table>
+        <thead><tr><th data-en="Factor">Facteur</th><th data-en="Why it moves the price">Pourquoi ça bouge le prix</th><th data-en="What helps">Ce qui aide</th></tr></thead>
+        <tbody>
+          <tr><td data-en="Yardage">Métrage</td><td data-en="Fabric is usually the largest single line on the estimate, and it is priced per yard before labour is even counted.">Le tissu est habituellement la plus grosse ligne de l’estimation, et il se chiffre à la verge avant même la main-d’œuvre.</td><td data-en="Use the calculator above, then pick a price band on the wall.">Servez-vous du calculateur ci-dessus, puis choisissez une gamme de prix au mur.</td></tr>
+          <tr><td data-en="Pattern repeat">Rapport de motif</td><td data-en="Anything that must line up across a seat, back and arms wastes cloth between cuts — sometimes a fifth of the order.">Tout ce qui doit se raccorder entre siège, dossier et bras gaspille du tissu entre les coupes — parfois un cinquième de la commande.</td><td data-en="A plain or a small all-over texture removes the surcharge entirely.">Un uni ou une petite texture répétée élimine complètement le supplément.</td></tr>
+          <tr><td data-en="What the frame needs">Ce que la structure exige</td><td data-en="Re-gluing, doweling, new corner blocks and retying springs are hours that only appear once the piece is stripped.">Recollage, chevillage, blocs de coin neufs et guindage des ressorts sont des heures qui n’apparaissent qu’une fois la pièce dégarnie.</td><td data-en="Photos of any wobble or sag let us flag it in the estimate rather than after.">Des photos de tout jeu ou affaissement nous permettent de le signaler dans l’estimation plutôt qu’après.</td></tr>
+          <tr><td data-en="Tufting &amp; buttons">Capitonnage &amp; boutons</td><td data-en="Deep buttoning is measured, marked, drilled and pulled one button at a time. It can double the labour on a headboard.">Le capitonnage profond se mesure, se marque, se perce et se tire un bouton à la fois. Ça peut doubler la main-d’œuvre sur une tête de lit.</td><td data-en="Channelling gives a similar look for meaningfully less work.">Les cannelures donnent un effet semblable pour nettement moins de travail.</td></tr>
+          <tr><td data-en="Trim &amp; nailing">Garniture &amp; clouage</td><td data-en="Hand-applied gimp, cord and individual decorative nails are priced by the foot and by the nail.">Galon, cordonnet et clous décoratifs posés à la main se chiffrent au pied et au clou.</td><td data-en="A simple welt in the same cloth is included in most jobs.">Un passepoil simple dans le même tissu est inclus dans la plupart des travaux.</td></tr>
+          <tr><td data-en="Cushion fill">Garnissage des coussins</td><td data-en="New high-density foam, a feather-down wrap or a spring-down core are three very different costs for the same cover.">Mousse haute densité neuve, enveloppe de duvet ou noyau à ressorts sont trois coûts très différents pour la même housse.</td><td data-en="Say how you want it to sit — firm, medium, sink-in — before we quote.">Dites comment vous voulez que ça s’assoie — ferme, moyen, enveloppant — avant qu’on chiffre.</td></tr>
+          <tr><td data-en="Season">Saison</td><td data-en="April to June is the busiest stretch of the year for outdoor cushions and pre-summer work.">D’avril à juin, c’est la période la plus chargée de l’année pour les coussins d’extérieur et le travail d’avant-été.</td><td data-en="Booking in January or September shortens the delay considerably.">Réserver en janvier ou en septembre raccourcit beaucoup le délai.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cols rise" style="margin-top:clamp(26px,3vw,40px)">
+      <div><h4 data-en="Always included in an estimate">Toujours inclus dans une estimation</h4><p class="muted small" data-en="Stripping to the frame, disposal of the old material, new webbing where it has failed, standard welting in your fabric, a new dust cover underneath, and labour written out separately from materials.">Dégarnissage jusqu’à la structure, disposition des vieux matériaux, sangles neuves là où elles ont lâché, passepoil standard dans votre tissu, toile de fond neuve dessous, et main-d’œuvre inscrite séparément des matériaux.</p></div>
+      <div><h4 data-en="Quoted separately">Chiffré séparément</h4><p class="muted small" data-en="Frame repair, spring retying, new foam or down, decorative nailing, contrast trim, skirts, and delivery. Each appears as its own line so you can decide what to keep.">Réparation de structure, guindage des ressorts, mousse ou duvet neufs, clouage décoratif, garniture contrastante, jupes, et livraison. Chacun apparaît sur sa propre ligne pour que vous décidiez quoi garder.</p></div>
+      <div><h4 data-en="Is it worth it?">Est-ce que ça vaut la peine ?</h4><p class="muted small" data-en="A hardwood frame with sound joints is almost always worth rebuilding, and the finished piece outlasts most new furniture at the same price. A stapled softwood or particle-board frame usually is not, and saying so costs nothing.">Une structure de bois franc aux joints sains vaut presque toujours la peine d’être refaite, et la pièce terminée dure plus longtemps que la plupart des meubles neufs au même prix. Une structure de bois mou agrafé ou d’aggloméré, généralement non — et le dire ne coûte rien.</p></div>
+    </div>
+  </div>
+</section>
+<section id="questions">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <div>
+        <h2 data-en="Common questions">Questions courantes</h2>
+      </div>
+    </div>
+    <div class="faq rise narrow">
+      <details open><summary data-en="Is it cheaper to reupholster or to buy new?">Est-ce moins cher de rembourrer ou d’acheter neuf ?</summary><div class="ans"><p data-en="Reupholstering generally costs more than a comparable sofa from a chain and less than a new sofa of equivalent construction. A hardwood frame with hand-tied springs is no longer sold at chain prices, so where the frame is sound the rebuilt piece is the better-built of the two — and it stays out of a landfill.">Rembourrer coûte généralement plus cher qu’un sofa comparable d’une chaîne, et moins cher qu’un sofa neuf de construction équivalente. Une structure de bois franc à ressorts guindés ne se vend plus au prix des chaînes : lorsque la structure est saine, la pièce refaite est la mieux bâtie des deux, et elle échappe au dépotoir.</p></div></details>
+      <details><summary data-en="How long does it take?">Ça prend combien de temps ?</summary><div class="ans"><p data-en="One to three weeks for dining chairs, three to five for an armchair or sofa, five to nine for a full antique restoration, and two to four for caning. April through June is the busiest stretch — book outdoor cushions in the winter if you can.">Une à trois semaines pour des chaises de salle à manger, trois à cinq pour un fauteuil ou un sofa, cinq à neuf pour une restauration complète d’antiquité, et deux à quatre pour un cannage. D’avril à juin, c’est la période la plus chargée — réservez vos coussins d’extérieur l’hiver si vous le pouvez.</p></div></details>
+      <details><summary data-en="Can I bring my own fabric?">Puis-je apporter mon propre tissu ?</summary><div class="ans"><p data-en="Yes. It is standard practice, known in the trade as COM — customer’s own material. It should arrive before cutting so the width, the repeat and the abrasion rating can be checked; dress fabric and quilting cotton rarely last on a seat.">Oui. C’est une pratique courante, appelée COM dans le métier — le tissu fourni par le client. Il doit arriver avant la coupe pour que la laize, le rapport et la cote d’abrasion soient vérifiés; le tissu à vêtement et le coton à courtepointe durent rarement sur un siège.</p></div></details>
+      <details><summary data-en="What fabric survives a cat?">Quel tissu survit à un chat ?</summary><div class="ans"><p data-en="Anything without a loop for a claw to catch: microsuede, a tight flat weave, or a performance velvet. Bouclé, chenille and open loop weaves are the ones to avoid, since a single claw pulls a whole run and the repair is always visible. Crypton adds a liquid barrier on top of the abrasion rating.">Tout ce qui n’offre pas de boucle où une griffe peut s’accrocher : microsuède, tissé plat et serré, ou velours performance. Le bouclé, la chenille et les tissages à boucle ouverte sont à éviter, une seule griffe tirant toute une rangée et la réparation restant visible. Le Crypton ajoute une barrière aux liquides par-dessus la cote d’abrasion.</p></div></details>
+      <details><summary data-en="How is antique furniture handled?">Comment les antiquités sont-elles traitées ?</summary><div class="ans"><p data-en="With traditional materials: jute webbing, hand-tied coils, horsehair kept wherever it remains sound, stitched edge rolls rebuilt, tacks on period frames, and gimp and nailing chosen to suit the period. The method takes longer and costs more than a straight recover.">Avec des matériaux traditionnels : sangles de jute, ressorts guindés à la main, crin conservé partout où il demeure sain, bourrelets piqués reconstruits, semences sur les structures d’époque, et galon et clouage choisis selon la période. La méthode est plus longue et plus coûteuse qu’un simple recouvrement.</p></div></details>
+      <details><summary data-en="Do you pick up and deliver?">Faites-vous la cueillette et la livraison ?</summary><div class="ans"><p data-en="Yes, across the island of Montreal and the near suburbs, quoted by distance and by the number of people needed to carry the piece. Narrow stairwells, spiral staircases and elevators that require booking should be mentioned in advance.">Oui, sur l’île de Montréal et en proche banlieue, chiffré selon la distance et le nombre de personnes nécessaires pour porter la pièce. Les cages d’escalier étroites, les escaliers en colimaçon et les ascenseurs à réserver doivent être signalés à l’avance.</p></div></details>
+      <details><summary data-en="How many yards do I need for a three-seat sofa?">Combien de verges pour un sofa trois places ?</summary><div class="ans"><p data-en="Fourteen to eighteen yards of 54-inch goods for a plain fabric, including welting. Add about twenty percent for a large pattern repeat, and another twenty if the cloth is only 45 inches wide. The calculator above will do it for your exact piece.">De quatorze à dix-huit verges de tissu de 54 pouces pour un uni, passepoil inclus. Ajoutez environ vingt pour cent pour un grand rapport de motif, et vingt de plus si le tissu ne fait que 45 pouces de large. Le calculateur ci-dessus le fera pour votre pièce exacte.</p></div></details>
+      <details><summary data-en="What kinds of caning are done?">Quels types de cannage sont réalisés ?</summary><div class="ans"><p data-en="Hand-woven cane threaded hole by hole, sheet cane set into a spline groove, rush seats, Danish paper cord and wicker repair. Twenty mesh sizes and weaves are held in stock, and custom weaves can be ordered.">Cannage tissé à la main trou par trou, cannage en feuille posé en rainure, sièges de jonc, corde de papier danoise et réparation d’osier. Vingt maillages et tissages sont tenus en stock, et des tissages sur mesure peuvent être commandés.</p></div></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="flogo"><img src="assets/logo-opera.png" alt="Opera Upholstering"></div>
+        <p style="margin-top:16px;max-width:34ch" data-en="Upholstery, antique restoration and hand caning on Plaza Saint-Hubert since 1955.">Rembourrage, restauration d’antiquités et cannage tissé à la main sur la Plaza Saint-Hubert depuis 1955.</p>
+        <p style="margin-top:14px"><a href="tel:+15142704352">(514) 270-4352</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
+      </div>
+      <div>
+        <h4 data-en="Services">Services</h4>
+        <p><a href="index.html#services" data-en="Armchairs &amp; sofas">Fauteuils &amp; sofas</a><br>
+        <a href="index.html#services" data-en="Antique restoration">Restauration d’antiquités</a><br>
+        <a href="cannage.html" data-en="Cane, rush &amp; wicker">Cannage, jonc &amp; rotin</a><br>
+        <a href="index.html#services" data-en="Dining chairs">Chaises de salle à manger</a><br>
+        <a href="index.html#services" data-en="Custom headboards">Têtes de lit sur mesure</a><br>
+        <a href="index.html#services" data-en="Cushions &amp; outdoor">Coussins &amp; extérieur</a><br>
+        <a href="index.html#services" data-en="Banquettes &amp; contract">Banquettes &amp; contrat</a><br>
+        <a href="index.html#services" data-en="Frames &amp; springs">Structure &amp; ressorts</a></p>
+      </div>
+      <div>
+        <h4 data-en="Learn">Comprendre</h4>
+        <p><a href="tissus.html" data-en="The fabric library">La bibliothèque de tissus</a><br>
+        <a href="tissus.html#performance" data-en="Which cloth survives your household">Quel tissu survit à votre maison</a><br>
+        <a href="savoir-faire.html" data-en="What is under the fabric">Ce qu’il y a sous le tissu</a><br>
+        <a href="savoir-faire.html#glossaire" data-en="Glossary">Glossaire</a><br>
+        <a href="calculateur.html" data-en="Yardage calculator">Calculateur de verges</a><br>
+        <a href="calculateur.html#prix" data-en="What decides the price">Ce qui décide du prix</a><br>
+        <a href="calculateur.html#questions" data-en="Questions">Questions</a></p>
+      </div>
+      <div>
+        <h4 data-en="Served areas">Secteurs desservis</h4>
+        <p data-en="Villeray · Petite-Patrie · Rosemont · Plateau-Mont-Royal · Outremont · Ahuntsic · Mile End · Saint-Léonard · Westmount · Town of Mount Royal · Laval · South Shore">Villeray · Petite-Patrie · Rosemont · Plateau-Mont-Royal · Outremont · Ahuntsic · Mile End · Saint-Léonard · Westmount · Mont-Royal · Laval · Rive-Sud</p>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© <span id="year">2026</span> Opera Upholstering</span>
+      <span data-en="Est. 1955 · Plaza Saint-Hubert">Depuis 1955 · Plaza Saint-Hubert</span>
+      <span data-en="Service in French and English">Service en français et en anglais</span>
+    </div>
+  </div>
+</footer>
+
+<div class="tray" id="tray" aria-live="polite">
+  <div class="wrap bar">
+    <span class="lbl" data-en="Your tray">Votre plateau</span>
+    <div class="tray-items" id="trayitems"></div>
+    <span class="note" id="traynote"></span>
+    <a class="btn light" href="index.html#soumission" id="traycta" data-en="Reserve at the counter">Réserver au comptoir</a>
+  </div>
+</div>
+
+<div class="mobilebar">
+  <a class="btn light" href="tel:+15142704352" data-en="Call">Appeler</a>
+  <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
+</div>
+
+<script src="assets/site.js"></script>
