@@ -611,15 +611,37 @@ if(MOTION && 'IntersectionObserver' in window){
     setTimeout(go, 400);
     return;
   }
-  if(location.hash === '#introhold'){ sp.classList.add('hold'); return; }
-  try { sessionStorage.setItem('operaIntro', '1'); } catch(e){}
-  setTimeout(go, 2300);                                   /* l'enseigne démarre juste avant la levée */
-  setTimeout(function(){ sp.classList.add('done'); }, 2400);
-  setTimeout(function(){ if(sp.parentNode) sp.remove(); }, 3400);
-  setTimeout(function(){                                   /* filet de sécurité */
+  if(location.hash === '#introhold'){ sp.classList.add('run', 'hold'); return; }
+
+  var started = false;
+  function start(){
+    if(started) return;
+    started = true;
+    /* La session n'est marquée qu'au moment où l'ouverture est
+       réellement jouée : un chargement en arrière-plan ne doit pas
+       la consommer sans que personne ne l'ait vue. */
+    try { sessionStorage.setItem('operaIntro', '1'); } catch(e){}
+    sp.classList.add('run');
+    setTimeout(go, 2300);                                  /* l'enseigne démarre juste avant la levée */
+    setTimeout(function(){ sp.classList.add('done'); }, 2400);
+    setTimeout(function(){ if(sp.parentNode) sp.remove(); }, 3400);
+  }
+
+  if(document.visibilityState === 'visible'){
+    start();
+  } else {
+    document.addEventListener('visibilitychange', function onVis(){
+      if(document.visibilityState === 'visible'){
+        document.removeEventListener('visibilitychange', onVis);
+        start();
+      }
+    });
+  }
+
+  setTimeout(function(){                                   /* filet absolu */
     var s = document.getElementById('splash');
     if(s){ s.remove(); document.body.classList.add('ready'); }
-  }, 6000);
+  }, 15000);
 })();
 document.querySelectorAll('#year').forEach(function(e){ e.textContent = montrealNow().getFullYear(); });
 try{ var saved = localStorage.getItem('opera-lang'); if(saved === 'en'){ applyLang('en'); } }catch(e){}

@@ -542,21 +542,23 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
   /* l'enseigne attend sous l'écran : sa chorégraphie n'est pas gaspillée */
   html:not(.intro-skip) body:has(.splash:not(.done)) .hero-photo img{transition:none}
 
-  .splash{animation:splash-leave .7s cubic-bezier(.7,0,.3,1) 2.4s forwards}
-  .splash.hold{animation:none}
+  .splash.run{animation:splash-leave .7s cubic-bezier(.7,0,.3,1) 2.4s forwards}
+  .splash.run.hold{animation:none}
   @keyframes splash-leave{to{translate:0 -101%}}
 
   /* 1 · le filet se trace depuis le centre */
-  .splash-rule{transform:scaleX(0);animation:rule-draw .7s cubic-bezier(.22,.7,.24,1) .1s forwards}
+  .splash-rule{transform:scaleX(0)}
+  .splash.run .splash-rule{animation:rule-draw .7s cubic-bezier(.22,.7,.24,1) .1s forwards}
   @keyframes rule-draw{to{transform:scaleX(1)}}
 
   /* 2 · le mot se lève hors du filet */
-  .splash-mark{clip-path:inset(100% 0 0 0);animation:mark-rise .95s cubic-bezier(.22,.7,.24,1) .45s forwards}
+  .splash-mark{clip-path:inset(100% 0 0 0)}
+  .splash.run .splash-mark{animation:mark-rise .95s cubic-bezier(.22,.7,.24,1) .45s forwards}
   @keyframes mark-rise{to{clip-path:inset(0 0 0 0)}}
 
   /* 3 · la ligne d'appui se pose */
-  .splash-sub{opacity:0;transform:translateY(7px);
-    animation:sub-settle .55s cubic-bezier(.22,.7,.24,1) 1.35s forwards}
+  .splash-sub{opacity:0;transform:translateY(7px)}
+  .splash.run .splash-sub{animation:sub-settle .55s cubic-bezier(.22,.7,.24,1) 1.35s forwards}
   @keyframes sub-settle{to{opacity:1;transform:none}}
 }
 @media (prefers-reduced-motion: reduce){ .splash{display:none} }
