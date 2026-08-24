@@ -6,7 +6,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v=6e115def">
+<script>
+/* Avant la premiere peinture : on saute l'ouverture si elle a deja
+   ete vue dans cette session ou si le mouvement est desactive.
+   #intro la rejoue, #introhold la fige pour la revue. */
+(function(){
+  var replay = location.hash === '#intro' || location.hash === '#introhold';
+  var seen;
+  try { seen = sessionStorage.getItem('operaIntro'); } catch (e) { seen = null; }
+  if (!replay && (seen || matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    document.documentElement.classList.add('intro-skip');
+  }
+})();
+</script>
+
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-lock">
+    <img class="splash-mark" src="assets/logo-mark.png" alt="" width="511" height="140">
+    <span class="splash-rule"></span>
+    <img class="splash-sub" src="assets/logo-sub.png" alt="" width="511" height="30">
+  </div>
+</div>
 
 <a class="skip" href="#contenu" data-en="Skip to content">Aller au contenu</a>
 
@@ -120,4 +141,4 @@
   <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
 </div>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=815a25d6"></script>

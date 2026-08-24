@@ -598,9 +598,29 @@ if(MOTION && 'IntersectionObserver' in window){
 })();
 
 /* ═══════ 9 · DÉMARRAGE ════════════════════════════ */
-requestAnimationFrame(function(){
-  requestAnimationFrame(function(){ document.body.classList.add('ready'); });
-});
+/* ── cycle de vie de l'ouverture ──────────────────────────── */
+(function(){
+  function go(){ document.body.classList.add('ready'); }
+  var sp = document.getElementById('splash');
+  var skip = document.documentElement.classList.contains('intro-skip');
+  if(!sp || skip){
+    if(sp) sp.remove();
+    requestAnimationFrame(function(){ requestAnimationFrame(go); });
+    /* rAF est throttlé dans un onglet d'arrière-plan : sans ce filet,
+       l'enseigne resterait invisible au retour d'un visiteur. */
+    setTimeout(go, 400);
+    return;
+  }
+  if(location.hash === '#introhold'){ sp.classList.add('hold'); return; }
+  try { sessionStorage.setItem('operaIntro', '1'); } catch(e){}
+  setTimeout(go, 2300);                                   /* l'enseigne démarre juste avant la levée */
+  setTimeout(function(){ sp.classList.add('done'); }, 2400);
+  setTimeout(function(){ if(sp.parentNode) sp.remove(); }, 3400);
+  setTimeout(function(){                                   /* filet de sécurité */
+    var s = document.getElementById('splash');
+    if(s){ s.remove(); document.body.classList.add('ready'); }
+  }, 6000);
+})();
 document.querySelectorAll('#year').forEach(function(e){ e.textContent = montrealNow().getFullYear(); });
 try{ var saved = localStorage.getItem('opera-lang'); if(saved === 'en'){ applyLang('en'); } }catch(e){}
 buildPieceSelect();

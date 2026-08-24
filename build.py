@@ -14,6 +14,26 @@ NAV = [
     ('calculateur.html',  'Calculateur',      'Yardage'),
 ]
 
+import hashlib
+
+def ver(path):
+    """Empreinte courte du contenu, pour casser le cache à chaque mise à jour."""
+    return hashlib.sha1(pathlib.Path(path).read_bytes()).hexdigest()[:8]
+
+PREPAINT = """<script>
+/* Avant la premiere peinture : on saute l'ouverture si elle a deja
+   ete vue dans cette session ou si le mouvement est desactive.
+   #intro la rejoue, #introhold la fige pour la revue. */
+(function(){
+  var replay = location.hash === '#intro' || location.hash === '#introhold';
+  var seen;
+  try { seen = sessionStorage.getItem('operaIntro'); } catch (e) { seen = null; }
+  if (!replay && (seen || matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    document.documentElement.classList.add('intro-skip');
+  }
+})();
+</script>"""
+
 def head(title, desc):
     return f'''<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +43,8 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v={ver('assets/site.css')}">
+{PREPAINT}
 '''
 
 def header(current):
@@ -32,7 +53,15 @@ def header(current):
         cur = ' aria-current="page"' if href == current else ''
         links.append(f'      <a href="{href}"{cur} data-en="{en}">{fr}</a>')
     links.append('      <a href="index.html#soumission" data-en="Contact">Contact</a>')
-    return '''<a class="skip" href="#contenu" data-en="Skip to content">Aller au contenu</a>
+    return '''<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-lock">
+    <img class="splash-mark" src="assets/logo-mark.png" alt="" width="511" height="140">
+    <span class="splash-rule"></span>
+    <img class="splash-sub" src="assets/logo-sub.png" alt="" width="511" height="30">
+  </div>
+</div>
+
+<a class="skip" href="#contenu" data-en="Skip to content">Aller au contenu</a>
 
 <header class="topbar">
   <div class="wrap bar">
@@ -119,11 +148,12 @@ FOOTER = '''<footer>
   <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
 </div>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v={JSVER}"></script>
 '''
 
 def page(filename, title, desc, body, statusbar=False):
-    html = head(title, desc) + '\n' + header(filename) + (STATUSBAR if statusbar else '') + '\n<main id="contenu">\n' + body + '\n</main>\n\n' + FOOTER
+    footer = FOOTER.replace('{JSVER}', ver('assets/site.js'))
+    html = head(title, desc) + '\n' + header(filename) + (STATUSBAR if statusbar else '') + '\n<main id="contenu">\n' + body + '\n</main>\n\n' + footer
     pathlib.Path(filename).write_text(html, encoding='utf-8')
     print('wrote', filename, len(html), 'bytes')
 
@@ -234,12 +264,12 @@ HOME = '''<section class="hero" id="haut">
           <a class="btn ghost" href="savoir-faire.html" data-en="The ten layers of a seat">Les dix couches d’un siège</a>
         </div>
       </div>
-      <div class="cols" data-stagger style="gap:16px">
-        <figure class="fig-tall rise">
+      <div class="cols atelier-pair" data-stagger style="gap:16px">
+        <figure class="fig-sq rise">
           <img src="assets/etabli.jpg" alt="Établi de rembourreur : tendeur à sangles, jute, ficelle, semences, et une bergère à demi dégarnie." loading="lazy">
           <figcaption data-en="The bench">L’établi</figcaption>
         </figure>
-        <figure class="fig-tall rise">
+        <figure class="fig-sq rise">
           <img src="assets/ressorts.jpg" alt="Ressorts guindés à la ficelle sur des sangles de jute neuves." loading="lazy">
           <figcaption data-en="Springs, hand-tied">Ressorts guindés à la main</figcaption>
         </figure>

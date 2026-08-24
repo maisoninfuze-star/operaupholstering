@@ -105,6 +105,24 @@ html = """<meta charset="utf-8">
 %s
 .view[hidden]{display:none}
 </style>
+<script>
+(function(){
+  var replay = location.hash === '#intro' || location.hash === '#introhold';
+  var seen;
+  try { seen = sessionStorage.getItem('operaIntro'); } catch (e) { seen = null; }
+  if (!replay && (seen || matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    document.documentElement.classList.add('intro-skip');
+  }
+})();
+</script>
+
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-lock">
+    <img class="splash-mark" src="__MARK__" alt="" width="511" height="140">
+    <span class="splash-rule"></span>
+    <img class="splash-sub" src="__SUB__" alt="" width="511" height="30">
+  </div>
+</div>
 
 <a class="skip" href="#contenu">Aller au contenu</a>
 <header class="topbar">
@@ -137,6 +155,8 @@ html = """<meta charset="utf-8">
 %s
 """ % (css, logo, nav, statusbar, '\n'.join(views), footer, js, ROUTER)
 
+html = html.replace('__MARK__', datauri('assets/logo-mark.png'))
+html = html.replace('__SUB__', datauri('assets/logo-sub.png'))
 html = inline_assets(html)
 out = pathlib.Path('../opera-site-preview.html')
 out.write_text(html, encoding='utf-8')
