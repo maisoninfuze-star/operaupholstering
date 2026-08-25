@@ -643,7 +643,7 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
    calculée sur le seul ratio de l'image et la légende déborde dessous. */
 .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(20px,2vw,30px);align-items:start}
 .work figure{margin:0;display:flex;flex-direction:column}
-.work figure img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--rule);flex:0 0 auto}
+.work figure img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#FEFEFE;border:1px solid var(--rule);flex:0 0 auto}
 .work figcaption{margin-top:10px;line-height:1.5}
 @media (prefers-reduced-motion:no-preference){
   .work figure{transition:transform .35s cubic-bezier(.22,.7,.24,1)}
