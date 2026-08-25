@@ -34,7 +34,7 @@ PREPAINT = """<script>
 </script>"""
 
 SITE = 'https://operaupholstering.com/'
-OG_IMAGE = SITE + 'assets/seq/f_30.jpg'
+OG_IMAGE = SITE + 'assets/hero.jpg'
 
 SCHEMA = """<script type="application/ld+json">
 {
@@ -47,7 +47,7 @@ SCHEMA = """<script type="application/ld+json">
   "telephone": "+1-514-270-4352",
   "foundingDate": "1955",
   "priceRange": "$$",
-  "image": "https://operaupholstering.com/assets/seq/f_30.jpg",
+  "image": "https://operaupholstering.com/assets/hero.jpg",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "7498 rue Saint-Hubert",
@@ -185,7 +185,6 @@ FOOTER = '''<footer>
         <p><a href="tissus.html" data-en="The fabric library">La bibliothèque de tissus</a><br>
         <a href="tissus.html#performance" data-en="Which cloth survives your household">Quel tissu survit à votre maison</a><br>
         <a href="savoir-faire.html" data-en="What is under the fabric">Ce qu’il y a sous le tissu</a><br>
-        <a href="savoir-faire.html#glossaire" data-en="Glossary">Glossaire</a><br>
         <a href="savoir-faire.html#prix" data-en="What decides the price">Ce qui décide du prix</a><br>
         <a href="savoir-faire.html#questions" data-en="Questions">Questions</a></p>
       </div>
@@ -243,7 +242,7 @@ for k in S: S[k] = clean(S[k])
 S['bibliotheque'] = S['bibliotheque'].replace('id="swatchgrid"', 'data-swatchgrid')
 
 # sections lifted onto sub-pages must aim their CTAs at the home page anchor
-for k in ('cannage','calculateur','prix','questions','anatomie','procede','glossaire','bibliotheque','performance'):
+for k in [k for k in ('cannage','calculateur','prix','questions','anatomie','procede','glossaire','bibliotheque','performance') if k in S]:
     S[k] = S[k].replace('href="#soumission"', 'href="index.html#soumission"')
 print('sections loaded')
 
@@ -294,7 +293,7 @@ svc_cards = '\n'.join(
 
 HOME = '''<section class="hero" id="haut">
   <div class="hero-media">
-    <img class="hero-photo" src="assets/hero.jpg" alt="Un fauteuil pivotant en cuir brun, refait à l’atelier, dans une pièce sombre éclairée à la lampe." fetchpriority="high" width="2000" height="1116">
+    <img class="hero-photo" src="assets/hero.jpg" alt="Un sofa haut de gamme retapissé dans un tissu à motif floral aquarelle, dans une pièce sombre éclairée par un rideau voilé et une lampe sur pied." fetchpriority="high" width="2000" height="1116">
     <span class="hero-scrim"></span>
   </div>
   <div class="hero-type">
@@ -309,7 +308,7 @@ HOME = '''<section class="hero" id="haut">
     </div>
     <div class="hero-figures">
       <div class="fig"><b>71</b><span data-en="years on Saint-Hubert">ans rue Saint-Hubert</span></div>
-      <div class="fig"><b>58</b><span data-en="collections in stock">collections en magasin</span></div>
+      <div class="fig"><b>4 000+</b><span data-en="fabrics in stock">tissus en magasin</span></div>
       <div class="fig"><b>20</b><span data-en="cane weaves">maillages de cannage</span></div>
       <div class="fig"><b>4,3</b><span data-en="Google · 47 reviews">Google · 47 avis</span></div>
     </div>
@@ -365,37 +364,40 @@ HOME = '''<section class="hero" id="haut">
     <div class="sec-head rise">
       <span class="lbl" data-en="Recent work">Réalisations</span>
       <h2 data-en="Pieces that left the shop">Des pièces sorties de l’atelier</h2>
-      <p class="kicker" data-en="Photographed at 7498 rue Saint-Hubert. Fabric and leather, antiques and modern pieces, and the occasional sleigh.">Photographiées au 7498, rue Saint-Hubert. Tissu et cuir, antiquités et pièces modernes, et parfois un traîneau.</p>
+      <p class="kicker" data-en="Fabric and leather, antiques and modern pieces, and the occasional sleigh — all rebuilt at 7498 rue Saint-Hubert.">Tissu et cuir, antiquités et pièces modernes, et parfois un traîneau — tout refait au 7498, rue Saint-Hubert.</p>
     </div>
-    <div class="cols work" data-stagger>
-      <figure class="fig-sq rise">
-        <img src="assets/travaux/cuir-elda.jpg" alt="Fauteuil pivotant enveloppant, entièrement refait en cuir brun." loading="lazy" width="1100" height="1100">
+    <div class="work" data-stagger>
+      <figure class="rise">
+        <img src="assets/travaux/cuir-elda.jpg" alt="Fauteuil pivotant enveloppant, entièrement refait en cuir brun." loading="lazy" width="1000" height="1000">
         <figcaption data-en="Swivel lounge chair · full-grain leather">Fauteuil pivotant · cuir pleine fleur</figcaption>
       </figure>
-      <figure class="fig-sq rise">
-        <img src="assets/travaux/louis-xv-fleuri.jpg" alt="Fauteuil Louis XV recouvert d’un imprimé floral, galon clouté sur bois apparent." loading="lazy" width="1100" height="1100">
-        <figcaption data-en="Louis XV armchair · printed linen and nailhead trim">Fauteuil Louis XV · lin imprimé et galon clouté</figcaption>
+      <figure class="rise">
+        <img src="assets/travaux/louis-xv-fleuri.jpg" alt="Fauteuil Louis XV recouvert d’un imprimé floral, galon clouté sur bois apparent." loading="lazy" width="1000" height="1000">
+        <figcaption data-en="Louis XV armchair · printed linen">Fauteuil Louis XV · lin imprimé</figcaption>
       </figure>
-      <figure class="fig-sq rise">
-        <img src="assets/travaux/bergeres-bleues.jpg" alt="Paire de bergères à oreilles en tissu bleu à motif, bois laqué crème." loading="lazy" width="1100" height="1100">
-        <figcaption data-en="Pair of wing chairs · lacquered show-wood">Paire de bergères à oreilles · bois laqué</figcaption>
+      <figure class="rise">
+        <img src="assets/travaux/bergeres-bleues.jpg" alt="Paire de bergères à oreilles en tissu bleu à motif, bois laqué crème." loading="lazy" width="1000" height="1000">
+        <figcaption data-en="Pair of wing chairs">Paire de bergères à oreilles</figcaption>
       </figure>
-      <figure class="fig-sq rise">
-        <img src="assets/travaux/art-deco-chevron.jpg" alt="Fauteuil art déco en noyer recouvert d’un tissé à chevrons multicolores." loading="lazy" width="1100" height="1100">
+      <figure class="rise">
+        <img src="assets/travaux/art-deco-chevron.jpg" alt="Fauteuil art déco en noyer recouvert d’un tissé à chevrons multicolores." loading="lazy" width="1000" height="1000">
         <figcaption data-en="Art deco tub chair · chevron weave">Fauteuil art déco · tissé à chevrons</figcaption>
       </figure>
-      <figure class="fig-sq rise">
-        <img src="assets/travaux/fauteuil-tonneau.jpg" alt="Fauteuil tonneau à bois noirci sculpté, recouvert d’un tissé bleu à feuillage." loading="lazy" width="1100" height="1100">
+      <figure class="rise">
+        <img src="assets/travaux/fauteuil-tonneau.jpg" alt="Fauteuil tonneau à bois noirci sculpté, recouvert d’un tissé bleu à feuillage." loading="lazy" width="1000" height="1000">
         <figcaption data-en="Barrel chair · carved ebonised frame">Fauteuil tonneau · bois sculpté noirci</figcaption>
       </figure>
-      <figure class="fig-sq rise">
-        <img src="assets/travaux/traineau.jpg" alt="Traîneau ancien en bois cintré, assise refaite en cuir rouge à cannelures." loading="lazy" width="1100" height="1100">
-        <figcaption data-en="Antique sleigh · fluted red leather">Traîneau ancien · cuir rouge à cannelures</figcaption>
+      <figure class="rise">
+        <img src="assets/travaux/rocking-cannage.jpg" alt="Chaise berçante en rotin dont le dossier et l’assise ont été recannés à la main." loading="lazy" width="1000" height="1000">
+        <figcaption data-en="Rattan rocker · re-caned by hand">Berçante en rotin · recannée à la main</figcaption>
+      </figure>
+      <figure class="rise">
+        <img src="assets/travaux/traineau.jpg" alt="Traîneau ancien en bois cintré, assise refaite en cuir rouge à cannelures." loading="lazy" width="1000" height="1000">
+        <figcaption data-en="Antique sleigh · red leather">Traîneau ancien · cuir rouge</figcaption>
       </figure>
     </div>
     <div class="endcta rise">
       <a class="btn" href="#soumission" data-en="Request an estimate">Demander une estimation</a>
-      <a class="btn ghost" href="tissus.html" data-en="Discover the fabrics">Découvrir les tissus</a>
     </div>
   </div>
 </section>
@@ -482,8 +484,8 @@ page('tissus.html',
 
 page('savoir-faire.html',
      'Savoir-faire — comment ça marche · Opera Upholstering',
-     'Les six étapes de l’atelier, ce qui décide du prix, les questions courantes et le glossaire des mots qui apparaissent sur une estimation.',
-     sec('procede') + '\n' + sec('prix', 'sunk') + '\n' + sec('questions') + '\n' + sec('glossaire', 'sunk'))
+     'Les six étapes de l’atelier, ce qui décide du prix, et les questions qu’on reçoit le plus souvent.',
+     sec('procede') + '\n' + sec('prix', 'sunk') + '\n' + sec('questions'))
 
 page('cannage.html',
      'Cannage, roseau et jonc — Opera Upholstering',

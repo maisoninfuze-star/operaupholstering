@@ -141,16 +141,20 @@ function shift(hex, amt){
 
 var SWATCHES = (function(){
   var out = [];
-  COLLECTIONS.forEach(function(c){
+  /* Une teinte par collection : la bibliothèque montre l'étendue de
+     l'offre, pas l'inventaire — le reste se voit en magasin. La famille
+     est décalée d'une collection à l'autre, sinon tout ressort crème,
+     puisque c'est la première famille de presque toutes les gammes. */
+  COLLECTIONS.forEach(function(c, ci){
     var name = c[0], house = c[1], tex = c[2], fams = c[3], tags = c[4];
-    fams.forEach(function(fam, i){
-      var tone = TONES[fam][i % TONES[fam].length];
-      var s = { n:name, h:house, t:tex, c:tone[2], fam:fam, tags:tags,
-                d:[tone[0], tone[1]] };
-      if(tex === 'motif' || tex === 'damas' || tex === 'raye') s.c2 = shift(tone[2], .55);
-      if(tex === 'ext'){ s.c = '#EDE8D6'; s.c2 = '#2F5A34'; s.c3 = '#7BA84C'; }
-      out.push(s);
-    });
+    var fam  = fams[ci % fams.length];
+    var pal  = TONES[fam];
+    var tone = pal[(ci * 3) % pal.length];
+    var s = { n:name, h:house, t:tex, c:tone[2], fam:fam, tags:tags,
+              d:[tone[0], tone[1]] };
+    if(tex === 'motif' || tex === 'damas' || tex === 'raye') s.c2 = shift(tone[2], .55);
+    if(tex === 'ext'){ s.c = '#EDE8D6'; s.c2 = '#2F5A34'; s.c3 = '#7BA84C'; }
+    out.push(s);
   });
   return out;
 })();
@@ -178,7 +182,7 @@ var COLOURS = [
   ['brun','Brun','Brown'],['noir','Noir','Black']
 ];
 var state = { house:'all', texture:'all', perf:'all', colour:'all' };
-var PAGE = 60, shownCount = PAGE;
+var PAGE = 24, shownCount = PAGE;
 var tray = [];
 try{ tray = JSON.parse(localStorage.getItem('opera-tray') || '[]'); }catch(e){ tray = []; }
 function saveTray(){ try{ localStorage.setItem('opera-tray', JSON.stringify(tray)); }catch(e){} }
@@ -247,7 +251,7 @@ function renderSwatches(){
   if(more){
     var left = total - shownCount;
     more.hidden = left <= 0;
-    more.textContent = t('Voir 60 coloris de plus', 'Show 60 more colourways') + (left > 0 ? '  (' + left + ')' : '');
+    more.textContent = t('Voir plus de tissus', 'Show more fabrics') + (left > 0 ? '  (' + left + ')' : '');
   }
 }
 function renderSwatchGrid(grid){

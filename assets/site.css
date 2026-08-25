@@ -639,8 +639,10 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
 /* ── réalisations ────────────────────────────────────────
    Leur travail réel : les photographies portent la page
    mieux que n'importe quelle image fabriquée. */
-.work{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,2vw,26px)}
-.work figure img{border:1px solid var(--rule)}
+.work{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(14px,1.6vw,22px)}
+.work figure{margin:0}
+.work figure img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--rule)}
+.work figcaption{margin-top:9px}
 @media (prefers-reduced-motion:no-preference){
   .work figure{transition:transform .35s cubic-bezier(.22,.7,.24,1)}
   .work figure:hover{transform:translateY(-4px)}
