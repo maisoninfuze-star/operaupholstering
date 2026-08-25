@@ -273,6 +273,9 @@ SERVICES_SHORT = [
  ('Structure &amp; ressorts','Frames &amp; springs',
   'Traverses fendues, blocs de coin remplacés, sièges affaissés, mécanismes d’inclinaison entretenus.',
   'Cracked rails, corner blocks replaced, sagging seats, recliner mechanisms serviced.','Estimation gratuite','Free estimate'),
+ ('Cuir','Leather',
+  'Cuir pleine fleur cousu et tendu à la main : fauteuils, banquettes, capitonnage et sièges d’auto anciens.',
+  'Full-grain leather, sewn and stretched by hand: armchairs, banquettes, buttoning and vintage car seats.','4–7 semaines','4–7 weeks'),
  ('Décapage &amp; finition du bois','Wood stripping &amp; finishing',
   'Le bois apparent est décapé, poncé, teint et refini : vernis, huile ou cire, selon la pièce.',
   'Show-wood is stripped, sanded, stained and refinished — varnish, oil or wax, to suit the piece.','2–4 semaines','2–4 weeks'),
@@ -289,22 +292,20 @@ svc_cards = '\n'.join(
       </article>''' % (en, fr, den, dfr, men, mfr)
  for fr, en, dfr, den, mfr, men in SERVICES_SHORT)
 
-HOME = '''<section class="hero-stage" id="haut">
- <div class="hero">
+HOME = '''<section class="hero" id="haut">
   <div class="hero-media">
-    <img class="hero-base" src="assets/seq/f_01.jpg" alt="Un sofa dégarni jusqu’à sa structure de noyer, sangles et ressorts apparents, seul dans une pièce vide." fetchpriority="high" width="1100" height="619">
-    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <img class="hero-photo" src="assets/hero.jpg" alt="Un fauteuil pivotant en cuir brun, refait à l’atelier, dans une pièce sombre éclairée à la lampe." fetchpriority="high" width="2000" height="1116">
     <span class="hero-scrim"></span>
   </div>
   <div class="hero-type">
     <span class="lbl" data-en="Plaza Saint-Hubert · Montréal">Plaza Saint-Hubert · Montréal</span>
     <h1 data-en="Seventy-one years at the same bench.">Soixante et onze ans au même établi.</h1>
-    <p class="hero-sub" data-en="Upholstering · Restoration · Caning">Rembourrage · Restauration · Cannage</p>
+    <p class="hero-sub" data-en="Upholstering · Leather · Restoration · Caning">Rembourrage · Cuir · Restauration · Cannage</p>
     <p class="tagline" data-en="The frame is opened before any fabric is discussed.">On ouvre la structure avant de parler de tissu.</p>
-    <p class="lede" data-en="Full reupholstery, antique restoration and hand caning at 7498 rue Saint-Hubert since 1955. Estimates are made from photographs and returned the next business day.">Rembourrage complet, restauration de meubles anciens et cannage tissé à la main, au 7498, rue Saint-Hubert depuis 1955. Les estimations se font sur photographies et reviennent le jour ouvrable suivant.</p>
+    <p class="lede" data-en="Full reupholstery in fabric and leather, antique restoration and hand caning at 7498 rue Saint-Hubert since 1955. Estimates are made from photographs and returned the next business day.">Rembourrage complet en tissu et en cuir, restauration de meubles anciens et cannage tissé à la main, au 7498, rue Saint-Hubert depuis 1955. Les estimations se font sur photographies et reviennent le jour ouvrable suivant.</p>
     <div class="hero-cta">
       <a class="btn light" href="#soumission" data-en="Request an estimate">Demander une estimation</a>
-      <a class="btn outline-light" href="tissus.html" data-en="Discover the fabrics">Découvrir les tissus</a>
+      <a class="btn outline-light" href="#realisations" data-en="See the work">Voir les réalisations</a>
     </div>
     <div class="hero-figures">
       <div class="fig"><b>71</b><span data-en="years on Saint-Hubert">ans rue Saint-Hubert</span></div>
@@ -313,7 +314,6 @@ HOME = '''<section class="hero-stage" id="haut">
       <div class="fig"><b>4,3</b><span data-en="Google · 47 reviews">Google · 47 avis</span></div>
     </div>
   </div>
-</div>
 </section>
 
 <section id="services">
@@ -360,11 +360,51 @@ HOME = '''<section class="hero-stage" id="haut">
   </div>
 </section>
 
+<section class="sunk" id="realisations">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <span class="lbl" data-en="Recent work">Réalisations</span>
+      <h2 data-en="Pieces that left the shop">Des pièces sorties de l’atelier</h2>
+      <p class="kicker" data-en="Photographed at 7498 rue Saint-Hubert. Fabric and leather, antiques and modern pieces, and the occasional sleigh.">Photographiées au 7498, rue Saint-Hubert. Tissu et cuir, antiquités et pièces modernes, et parfois un traîneau.</p>
+    </div>
+    <div class="cols work" data-stagger>
+      <figure class="fig-sq rise">
+        <img src="assets/travaux/cuir-elda.jpg" alt="Fauteuil pivotant enveloppant, entièrement refait en cuir brun." loading="lazy" width="1100" height="1100">
+        <figcaption data-en="Swivel lounge chair · full-grain leather">Fauteuil pivotant · cuir pleine fleur</figcaption>
+      </figure>
+      <figure class="fig-sq rise">
+        <img src="assets/travaux/louis-xv-fleuri.jpg" alt="Fauteuil Louis XV recouvert d’un imprimé floral, galon clouté sur bois apparent." loading="lazy" width="1100" height="1100">
+        <figcaption data-en="Louis XV armchair · printed linen and nailhead trim">Fauteuil Louis XV · lin imprimé et galon clouté</figcaption>
+      </figure>
+      <figure class="fig-sq rise">
+        <img src="assets/travaux/bergeres-bleues.jpg" alt="Paire de bergères à oreilles en tissu bleu à motif, bois laqué crème." loading="lazy" width="1100" height="1100">
+        <figcaption data-en="Pair of wing chairs · lacquered show-wood">Paire de bergères à oreilles · bois laqué</figcaption>
+      </figure>
+      <figure class="fig-sq rise">
+        <img src="assets/travaux/art-deco-chevron.jpg" alt="Fauteuil art déco en noyer recouvert d’un tissé à chevrons multicolores." loading="lazy" width="1100" height="1100">
+        <figcaption data-en="Art deco tub chair · chevron weave">Fauteuil art déco · tissé à chevrons</figcaption>
+      </figure>
+      <figure class="fig-sq rise">
+        <img src="assets/travaux/fauteuil-tonneau.jpg" alt="Fauteuil tonneau à bois noirci sculpté, recouvert d’un tissé bleu à feuillage." loading="lazy" width="1100" height="1100">
+        <figcaption data-en="Barrel chair · carved ebonised frame">Fauteuil tonneau · bois sculpté noirci</figcaption>
+      </figure>
+      <figure class="fig-sq rise">
+        <img src="assets/travaux/traineau.jpg" alt="Traîneau ancien en bois cintré, assise refaite en cuir rouge à cannelures." loading="lazy" width="1100" height="1100">
+        <figcaption data-en="Antique sleigh · fluted red leather">Traîneau ancien · cuir rouge à cannelures</figcaption>
+      </figure>
+    </div>
+    <div class="endcta rise">
+      <a class="btn" href="#soumission" data-en="Request an estimate">Demander une estimation</a>
+      <a class="btn ghost" href="tissus.html" data-en="Discover the fabrics">Découvrir les tissus</a>
+    </div>
+  </div>
+</section>
+
 <section class="sunk" id="cannage-teaser">
   <div class="wrap">
     <div class="cols-2 rise">
       <figure class="fig-wide">
-        <img src="assets/cannage.jpg" alt="Mains tissant le cannage à la main dans les trous percés d’un siège ancien." loading="lazy">
+        <img src="assets/travaux/rocking-cannage.jpg" alt="Chaise berçante en rotin recannée à la main à l’atelier." loading="lazy" width="1100" height="1100">
       </figure>
       <div>
         <span class="lbl" data-en="Caning">Cannage</span>

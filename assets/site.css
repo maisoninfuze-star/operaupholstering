@@ -153,20 +153,17 @@ h4{font-size:.98rem;line-height:1.3;letter-spacing:0}
 /* La scène est plus haute que l'écran : c'est cette hauteur
    supplémentaire qui donne au fauteuil le temps de se refaire.
    L'enseigne elle-même reste épinglée pendant la remontée. */
-.hero-stage{position:relative;height:230vh;background:var(--noir)}
 .hero{
-  position:sticky;top:0;height:100vh;min-height:560px;
+  position:relative;min-height:min(88vh,860px);
   display:flex;align-items:center;overflow:hidden;background:var(--noir);
 }
-@media(max-width:940px){ .hero-stage{height:170vh} }
-@media(max-width:620px){ .hero-stage{height:150vh} .hero{min-height:520px} }
+@media(max-width:620px){ .hero{min-height:74vh} }
 .hero-media{position:absolute;inset:0;z-index:0}
-.hero-base,.hero-canvas{
+.hero-photo{
   position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:50% 45%;
+  object-fit:cover;object-position:58% 64%;
 }
-.hero-canvas{opacity:0;transition:opacity .4s ease}
-.hero-canvas.on{opacity:1}
+@media(max-width:940px){ .hero-photo{object-position:62% 66%} }
 .hero-scrim{
   position:absolute;inset:0;pointer-events:none;
   background:
@@ -183,8 +180,8 @@ h4{font-size:.98rem;line-height:1.3;letter-spacing:0}
 .hero h1{color:var(--noir-ink);margin:22px 0 0;font-size:clamp(2.1rem,4.4vw,3.7rem);text-transform:none;letter-spacing:-.028em;max-width:15ch}
 .hero-sub{
   font-family:'Jost',sans-serif;font-weight:300;font-size:clamp(.62rem,1vw,.78rem);
-  letter-spacing:.42em;text-transform:uppercase;color:var(--noir-muted);
-  margin:18px 0 0;padding-top:16px;border-top:1px solid rgba(244,242,237,.18);width:fit-content;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--noir-muted);
+  margin:18px 0 0;padding-top:16px;border-top:1px solid rgba(244,242,237,.18);width:fit-content;white-space:nowrap;
 }
 .hero .tagline{
   font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:300;
@@ -638,3 +635,13 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
   @keyframes fr-settle{to{opacity:1;transform:none}}
 }
 @media (prefers-reduced-motion: reduce){ .splash{display:none} }
+
+/* ── réalisations ────────────────────────────────────────
+   Leur travail réel : les photographies portent la page
+   mieux que n'importe quelle image fabriquée. */
+.work{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,2vw,26px)}
+.work figure img{border:1px solid var(--rule)}
+@media (prefers-reduced-motion:no-preference){
+  .work figure{transition:transform .35s cubic-bezier(.22,.7,.24,1)}
+  .work figure:hover{transform:translateY(-4px)}
+}
