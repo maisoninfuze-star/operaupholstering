@@ -6,11 +6,11 @@ Run:  python3 build_artifact.py
 import re, base64, pathlib, mimetypes
 
 PAGES = [
-    ('index',        'index.html',        'Accueil',         'Home'),
-    ('tissus',       'tissus.html',       'La bibliothèque', 'The library'),
-    ('savoir-faire', 'savoir-faire.html', 'Savoir-faire',    'Craft'),
-    ('cannage',      'cannage.html',      'Cannage',         'Caning'),
-    ('calculateur',  'calculateur.html',  'Calculateur',     'Yardage'),
+    ('index',        'index.html',        'Accueil',      'Home'),
+    ('a-propos',     'a-propos.html',     'À propos',     'About'),
+    ('savoir-faire', 'savoir-faire.html', 'Savoir-faire', 'Craft'),
+    ('cannage',      'cannage.html',      'Cannage',      'Caning'),
+    ('tissus',       'tissus.html',       'Les tissus',   'Fabrics'),
 ]
 
 def datauri(path):

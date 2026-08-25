@@ -529,10 +529,41 @@ if(qf) qf.addEventListener('submit', function(e){
 /* ═══════ 8 · RÉVÉLATION AU DÉFILEMENT ═════════════ */
 var MOTION = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* Mouvement réduit : la vidéo de l'enseigne s'arrête sur son affiche. */
+/* ── L'enseigne se parcourt au défilement ──────────────────
+   Le fauteuil se refait à mesure qu'on descend : la position
+   de défilement pilote directement le temps de la vidéo.
+   Sous mouvement réduit, elle reste sur sa première image. */
 (function(){
   var v = document.querySelector('.hero-video');
-  if(v && !MOTION){ v.removeAttribute('autoplay'); v.pause(); v.currentTime = 0; }
+  var hero = document.querySelector('.hero');
+  if(!v || !hero) return;
+  v.pause();
+  if(!MOTION) return;
+
+  var dur = 0, ticking = false;
+  function ready(){ dur = v.duration || 0; scrub(); }
+  if(v.readyState >= 1) ready();
+  v.addEventListener('loadedmetadata', ready);
+
+  function scrub(){
+    ticking = false;
+    if(!dur) return;
+    var h = hero.offsetHeight || window.innerHeight;
+    var y = window.scrollY || window.pageYOffset;
+    var p = Math.max(0, Math.min(1, y / h));          /* 0 en haut, 1 quand l'enseigne est passée */
+    var t = p * (dur - 0.05);
+    if(Math.abs(t - v.currentTime) < 0.02) return;
+    if(v.fastSeek){ try { v.fastSeek(t); } catch(e){ v.currentTime = t; } }
+    else { v.currentTime = t; }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(scrub); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  /* Un onglet caché suspend le décodage : on resynchronise l'image
+     dès qu'on revient, sans attendre un défilement. */
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'visible'){ dur = v.duration || dur; onScroll(); }
+  });
 })();
 
 /* ── entrées échelonnées ─────────────────────────────────── */
@@ -584,7 +615,7 @@ if(MOTION && 'IntersectionObserver' in window){
 
 /* ── barre condensée + parallaxe de l'enseigne ───────────── */
 (function(){
-  var img = document.querySelector('.hero-media video, .hero-media img');
+  var img = document.querySelector('.hero-media img');
   var ticking = false, lastScrolled = null;
   function frame(){
     ticking = false;

@@ -11,7 +11,6 @@ NAV = [
     ('a-propos.html',     'À propos',     'About'),
     ('savoir-faire.html', 'Savoir-faire', 'Craft'),
     ('cannage.html',      'Cannage',      'Caning'),
-    ('calculateur.html',  'Calculateur',  'Yardage'),
 ]
 
 import hashlib
@@ -55,6 +54,7 @@ def header(current):
     links.append('      <a href="index.html#soumission" data-en="Contact">Contact</a>')
     return '''<div class="splash" id="splash" aria-hidden="true">
   <div class="splash-lock">
+    <span class="splash-fr">Rembourrage</span>
     <img class="splash-mark" src="assets/logo-mark.png" alt="" width="511" height="140">
     <span class="splash-rule"></span>
     <img class="splash-sub" src="assets/logo-sub.png" alt="" width="511" height="30">
@@ -118,9 +118,8 @@ FOOTER = '''<footer>
         <a href="tissus.html#performance" data-en="Which cloth survives your household">Quel tissu survit à votre maison</a><br>
         <a href="savoir-faire.html" data-en="What is under the fabric">Ce qu’il y a sous le tissu</a><br>
         <a href="savoir-faire.html#glossaire" data-en="Glossary">Glossaire</a><br>
-        <a href="calculateur.html" data-en="Yardage calculator">Calculateur de verges</a><br>
-        <a href="calculateur.html#prix" data-en="What decides the price">Ce qui décide du prix</a><br>
-        <a href="calculateur.html#questions" data-en="Questions">Questions</a></p>
+        <a href="savoir-faire.html#prix" data-en="What decides the price">Ce qui décide du prix</a><br>
+        <a href="savoir-faire.html#questions" data-en="Questions">Questions</a></p>
       </div>
       <div>
         <h4 data-en="Served areas">Secteurs desservis</h4>
@@ -224,7 +223,7 @@ svc_cards = '\n'.join(
 
 HOME = '''<section class="hero" id="haut">
   <div class="hero-media">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+    <video class="hero-video" muted playsinline preload="auto"
            poster="assets/chair-before.jpg"
            aria-label="Un fauteuil ancien dégarni jusqu’à la structure se refait sous les yeux : sangles, ressorts, bourrage, puis velours.">
       <source src="assets/atelier.mp4" type="video/mp4">
@@ -365,16 +364,12 @@ page('tissus.html',
      sec('bibliotheque') + '\n' + sec('performance', 'sunk'))
 
 page('savoir-faire.html',
-     'Savoir-faire — de la photo à la livraison · Opera Upholstering',
-     'Les six étapes de l’atelier, de la première photographie au retour de la pièce, et le glossaire des mots qui apparaissent sur une estimation.',
-     sec('procede') + '\n' + sec('glossaire', 'sunk'))
+     'Savoir-faire — comment ça marche · Opera Upholstering',
+     'Les six étapes de l’atelier, ce qui décide du prix, les questions courantes et le glossaire des mots qui apparaissent sur une estimation.',
+     sec('procede') + '\n' + sec('prix', 'sunk') + '\n' + sec('questions') + '\n' + sec('glossaire', 'sunk'))
 
 page('cannage.html',
      'Cannage, roseau et jonc — Opera Upholstering',
      'Cannage tissé à la main ou en feuille, jonc, corde danoise et rotin. Vingt maillages en stock, tissages sur mesure en commande spéciale.',
      sec('cannage'))
 
-page('calculateur.html',
-     'Calculateur de verges et prix — Opera Upholstering',
-     'Combien de tissu pour un sofa, un fauteuil ou six chaises ? Les allocations standards du métier, ce qui décide du prix, et les questions qu’on reçoit chaque semaine.',
-     sec('calculateur') + '\n' + sec('prix', 'sunk') + '\n' + sec('questions'))

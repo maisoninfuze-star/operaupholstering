@@ -551,6 +551,11 @@ footer .flogo img{height:26px;width:auto;filter:invert(1) brightness(1.9)}
 .intro-skip .splash{display:none}
 html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
 .splash-lock{display:flex;flex-direction:column;align-items:center;width:min(62vw,420px)}
+.splash-fr{
+  font-family:'Jost',sans-serif;font-weight:300;font-size:clamp(.6rem,1.5vw,.78rem);
+  letter-spacing:.42em;text-transform:uppercase;color:var(--noir-muted);
+  line-height:1;margin-bottom:16px;text-indent:.42em;
+}
 .splash-mark{width:100%;height:auto;filter:invert(1) brightness(1.9)}
 .splash-rule{display:block;width:100%;height:1px;background:var(--brass);margin:18px 0 14px}
 .splash-sub{width:100%;height:auto;filter:invert(1) brightness(1.9)}
@@ -577,5 +582,10 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
   .splash-sub{opacity:0;transform:translateY(7px)}
   .splash.run .splash-sub{animation:sub-settle .55s cubic-bezier(.22,.7,.24,1) 1.35s forwards}
   @keyframes sub-settle{to{opacity:1;transform:none}}
+
+  /* 4 · le mot français descend au-dessus, symétrique de la ligne d'appui */
+  .splash-fr{opacity:0;transform:translateY(-7px)}
+  .splash.run .splash-fr{animation:fr-settle .55s cubic-bezier(.22,.7,.24,1) 1.35s forwards}
+  @keyframes fr-settle{to{opacity:1;transform:none}}
 }
 @media (prefers-reduced-motion: reduce){ .splash{display:none} }
