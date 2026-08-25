@@ -639,10 +639,12 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
 /* ── réalisations ────────────────────────────────────────
    Leur travail réel : les photographies portent la page
    mieux que n'importe quelle image fabriquée. */
-.work{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(14px,1.6vw,22px)}
-.work figure{margin:0}
-.work figure img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--rule)}
-.work figcaption{margin-top:9px}
+/* align-items:start, sinon la figure est étirée à la hauteur de rangée
+   calculée sur le seul ratio de l'image et la légende déborde dessous. */
+.work{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(20px,2vw,30px);align-items:start}
+.work figure{margin:0;display:flex;flex-direction:column}
+.work figure img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--rule);flex:0 0 auto}
+.work figcaption{margin-top:10px;line-height:1.5}
 @media (prefers-reduced-motion:no-preference){
   .work figure{transition:transform .35s cubic-bezier(.22,.7,.24,1)}
   .work figure:hover{transform:translateY(-4px)}

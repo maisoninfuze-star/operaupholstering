@@ -384,8 +384,16 @@ HOME = '''<section class="hero" id="haut">
         <figcaption data-en="Art deco tub chair · chevron weave">Fauteuil art déco · tissé à chevrons</figcaption>
       </figure>
       <figure class="rise">
+        <img src="assets/travaux/fauteuil-tonneau.jpg" alt="Fauteuil tonneau à bois noirci sculpté, recouvert d’un tissé bleu à feuillage." loading="lazy" width="1000" height="1000">
+        <figcaption data-en="Barrel chair · carved ebonised frame">Fauteuil tonneau · bois sculpté noirci</figcaption>
+      </figure>
+      <figure class="rise">
         <img src="assets/travaux/paire-os-mouton.jpg" alt="Paire de fauteuils os-de-mouton recouverts d’un imprimé floral, bois clair." loading="lazy" width="1000" height="1000">
         <figcaption data-en="Pair of os-de-mouton armchairs">Paire de fauteuils os-de-mouton</figcaption>
+      </figure>
+      <figure class="rise">
+        <img src="assets/travaux/louis-xvi-velours.jpg" alt="Fauteuil Louis XVI recouvert d’un velours à motif floral vif." loading="lazy" width="1000" height="1000">
+        <figcaption data-en="Louis XVI armchair · painted velvet">Fauteuil Louis XVI · velours peint</figcaption>
       </figure>
       <figure class="rise">
         <img src="assets/travaux/rocking-cannage.jpg" alt="Chaise berçante en rotin dont le dossier et l’assise ont été recannés à la main." loading="lazy" width="1000" height="1000">
