@@ -7,11 +7,11 @@ import json, re, pathlib
 S = json.loads(pathlib.Path('content.json').read_text(encoding='utf-8'))
 
 NAV = [
-    ('index.html',        'Accueil',          'Home'),
-    ('tissus.html',       'La bibliothèque',  'The library'),
-    ('savoir-faire.html', 'Savoir-faire',     'Craft'),
-    ('cannage.html',      'Cannage',          'Caning'),
-    ('calculateur.html',  'Calculateur',      'Yardage'),
+    ('index.html',        'Accueil',      'Home'),
+    ('a-propos.html',     'À propos',     'About'),
+    ('savoir-faire.html', 'Savoir-faire', 'Craft'),
+    ('cannage.html',      'Cannage',      'Caning'),
+    ('calculateur.html',  'Calculateur',  'Yardage'),
 ]
 
 import hashlib
@@ -65,8 +65,9 @@ def header(current):
 
 <header class="topbar">
   <div class="wrap bar">
-    <a class="logo" href="index.html" aria-label="Opera Upholstering — accueil">
-      <img src="assets/logo-opera.png" alt="Opera Upholstering">
+    <a class="logo" href="index.html" aria-label="Opéra Rembourrage — accueil">
+      <span class="logo-fr">Rembourrage</span>
+      <img src="assets/logo-opera.png" alt="Opéra Rembourrage · Opera Upholstering">
     </a>
     <nav class="navlinks" aria-label="Principal">
 ''' + '\n'.join(links) + '''
@@ -193,9 +194,9 @@ SERVICES_SHORT = [
  ('Chaises de salle à manger','Dining chairs',
   'Traitées en lot et chiffrées par ensemble. Un tissu performance convient mieux à une salle à manger.',
   'Handled as a batch and priced by the set. A performance fabric suits a dining room better.','1–3 semaines','1–3 weeks'),
- ('Têtes de lit sur mesure','Custom headboards',
-  'Hauteur et forme sur mesure : unie, à cannelures ou capitonnée, fixée au mur ou au sommier.',
-  'Height and shape made to measure: plain, channelled or deep-buttoned, wall or bed mounted.','2–4 semaines','2–4 weeks'),
+ ('Têtes de lit','Headboards',
+  'Toute hauteur et toute forme : unie, à cannelures ou capitonnée, fixée au mur ou au sommier.',
+  'Any height and any shape: plain, channelled or deep-buttoned, wall or bed mounted.','2–4 semaines','2–4 weeks'),
  ('Coussins &amp; extérieur','Cushions &amp; outdoor',
   'Sunbrella et acryliques teints dans la masse, coupés au gabarit, fil de qualité marine.',
   'Sunbrella and solution-dyed acrylics, cut to template, marine-grade thread.','2–3 semaines','2–3 weeks'),
@@ -205,6 +206,12 @@ SERVICES_SHORT = [
  ('Structure &amp; ressorts','Frames &amp; springs',
   'Traverses fendues, blocs de coin remplacés, sièges affaissés, mécanismes d’inclinaison entretenus.',
   'Cracked rails, corner blocks replaced, sagging seats, recliner mechanisms serviced.','Estimation gratuite','Free estimate'),
+ ('Décapage &amp; finition du bois','Wood stripping &amp; finishing',
+  'Le bois apparent est décapé, poncé, teint et refini : vernis, huile ou cire, selon la pièce.',
+  'Show-wood is stripped, sanded, stained and refinished — varnish, oil or wax, to suit the piece.','2–4 semaines','2–4 weeks'),
+ ('Cueillette &amp; livraison','Pick-up &amp; delivery',
+  'On vient chercher la pièce et on la rapporte, sur l’île de Montréal et en proche banlieue.',
+  'We collect the piece and bring it back, across the island of Montreal and the near suburbs.','Sur demande','On request'),
 ]
 
 svc_cards = '\n'.join(
@@ -216,6 +223,14 @@ svc_cards = '\n'.join(
  for fr, en, dfr, den, mfr, men in SERVICES_SHORT)
 
 HOME = '''<section class="hero" id="haut">
+  <div class="hero-media">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+           poster="assets/chair-before.jpg"
+           aria-label="Un fauteuil ancien dégarni jusqu’à la structure se refait sous les yeux : sangles, ressorts, bourrage, puis velours.">
+      <source src="assets/atelier.mp4" type="video/mp4">
+    </video>
+    <span class="hero-scrim"></span>
+  </div>
   <div class="hero-type">
     <span class="lbl" data-en="Plaza Saint-Hubert · Montréal">Plaza Saint-Hubert · Montréal</span>
     <h1 data-en="Seventy-one years at the same bench.">Soixante et onze ans au même établi.</h1>
@@ -224,7 +239,7 @@ HOME = '''<section class="hero" id="haut">
     <p class="lede" data-en="Full reupholstery, antique restoration and hand caning at 7498 rue Saint-Hubert since 1955. Estimates are made from photographs and returned the next business day.">Rembourrage complet, restauration de meubles anciens et cannage tissé à la main, au 7498, rue Saint-Hubert depuis 1955. Les estimations se font sur photographies et reviennent le jour ouvrable suivant.</p>
     <div class="hero-cta">
       <a class="btn light" href="#soumission" data-en="Request an estimate">Demander une estimation</a>
-      <a class="btn outline-light" href="tissus.html" data-en="The fabric library">La bibliothèque de tissus</a>
+      <a class="btn outline-light" href="tissus.html" data-en="Discover the fabrics">Découvrir les tissus</a>
     </div>
     <div class="hero-figures">
       <div class="fig"><b>71</b><span data-en="years on Saint-Hubert">ans rue Saint-Hubert</span></div>
@@ -232,9 +247,6 @@ HOME = '''<section class="hero" id="haut">
       <div class="fig"><b>20</b><span data-en="cane weaves">maillages de cannage</span></div>
       <div class="fig"><b>4,3</b><span data-en="Google · 47 reviews">Google · 47 avis</span></div>
     </div>
-  </div>
-  <div class="hero-photo">
-    <img src="assets/bibliotheque.jpg" alt="La salle d’échantillons de l’atelier, du sol au plafond." loading="eager">
   </div>
 </section>
 
@@ -247,6 +259,10 @@ HOME = '''<section class="hero" id="haut">
     </div>
     <div class="cols" data-stagger>
 ''' + svc_cards + '''
+    </div>
+    <div class="endcta rise">
+      <a class="btn" href="tissus.html" data-en="Discover the fabrics">Découvrir les tissus</a>
+      <a class="btn ghost" href="#soumission" data-en="Request an estimate">Demander une estimation</a>
     </div>
   </div>
 </section>
@@ -278,21 +294,6 @@ HOME = '''<section class="hero" id="haut">
   </div>
 </section>
 
-<section id="bibliotheque">
-  <div class="wrap">
-    <div class="sec-head rise">
-      <span class="lbl" data-en="The library">La bibliothèque</span>
-      <h2 data-en="The fabric library">La bibliothèque de tissus</h2>
-      <p class="kicker" data-en="Nine houses, fifty-eight collections and several hundred sample books line the sample room, from performance velvet to marine acrylic. Any three swatches can be set aside at the counter, at no charge.">Neuf maisons, cinquante-huit collections et plusieurs centaines de cartables garnissent la salle d’échantillons, du velours performance à l’acrylique marine. Trois échantillons, quels qu’ils soient, peuvent être mis de côté au comptoir, sans frais.</p>
-    </div>
-    <div class="grid-swatch rise" data-swatchgrid data-limit="12"></div>
-    <div class="endcta rise">
-      <a class="btn" href="tissus.html" data-en="Browse the full library">Parcourir la bibliothèque</a>
-      <a class="btn ghost" href="tissus.html#performance" data-en="Which cloth survives your household">Quel tissu survit à votre maison</a>
-    </div>
-  </div>
-</section>
-
 <section class="sunk" id="cannage-teaser">
   <div class="wrap">
     <div class="cols-2 rise">
@@ -318,15 +319,55 @@ page('index.html',
      HOME, statusbar=True)
 
 # ═════════════════════════ SOUS-PAGES ═════════════════════════
+# ═════════════════════════ À PROPOS ═════════════════════════
+APROPOS = '''<section>
+  <div class="wrap">
+    <div class="sec-head rise">
+      <span class="lbl" data-en="About">À propos</span>
+      <h2 data-en="The shop on Saint-Hubert">L’atelier de la rue Saint-Hubert</h2>
+      <p class="kicker" data-en="Opera has been upholstering furniture at 7498 rue Saint-Hubert since 1955. Same trade, same street, three generations of customers.">Opera rembourre des meubles au 7498, rue Saint-Hubert depuis 1955. Le même métier, la même rue, trois générations de clients.</p>
+    </div>
+
+    <div class="cols-2 rise">
+      <div>
+        <p class="muted" data-en="The shop opened when Plaza Saint-Hubert was still lined with tailors and furriers. Most of those trades have gone. Upholstery stayed, because a well-built chair is worth repairing and because someone has to know how.">L’atelier a ouvert quand la Plaza Saint-Hubert comptait encore des tailleurs et des fourreurs. La plupart de ces métiers ont disparu. Le rembourrage est resté, parce qu’un fauteuil bien bâti mérite d’être réparé et parce qu’il faut bien que quelqu’un sache le faire.</p>
+        <p class="muted" data-en="Everything is done on site: stripping, frame repair, webbing, springs, stuffing, sewing, caning and wood finishing. Nothing is sent out, which is why the estimate holds and the delay is ours to keep.">Tout se fait sur place : dégarnissage, réparation de structure, sangles, ressorts, bourrage, couture, cannage et finition du bois. Rien n’est envoyé ailleurs, et c’est pour ça que l’estimation tient et que le délai nous appartient.</p>
+        <p class="muted" data-en="Customers come with a chair from a grandmother, a sofa that has held up for thirty years, or twelve restaurant banquettes that need to be back in service by Friday. The work is the same: open it, look, and rebuild it properly.">Les clients arrivent avec un fauteuil de grand-mère, un sofa qui a tenu trente ans, ou douze banquettes de restaurant à remettre en service pour vendredi. Le travail est le même : ouvrir, regarder, et refaire les choses comme il faut.</p>
+      </div>
+      <figure class="fig-wide rise">
+        <img src="assets/etabli.jpg" alt="L’établi de l’atelier : tendeur à sangles, jute, ficelle, semences et une bergère à demi dégarnie." loading="lazy">
+        <figcaption data-en="The bench">L’établi</figcaption>
+      </figure>
+    </div>
+
+    <div class="cols rise" style="margin-top:clamp(30px,4vw,52px)">
+      <div><h3 data-en="Since 1955">Depuis 1955</h3><p class="muted small" data-en="Seventy-one years at the same address, through the whole life of the Plaza and its marquee.">Soixante et onze ans à la même adresse, à travers toute la vie de la Plaza et de sa marquise.</p></div>
+      <div><h3 data-en="Everything under one roof">Tout sous un même toit</h3><p class="muted small" data-en="Upholstery, antique restoration, caning, wood finishing, commercial banquettes, pick-up and delivery.">Rembourrage, restauration d’antiquités, cannage, finition du bois, banquettes commerciales, cueillette et livraison.</p></div>
+      <div><h3 data-en="French and English">Français et anglais</h3><p class="muted small" data-en="At the counter and on the phone, whichever you are more comfortable in.">Au comptoir et au téléphone, dans la langue qui vous convient.</p></div>
+      <div><h3 data-en="Free estimates">Estimation gratuite</h3><p class="muted small" data-en="Send three photographs and a written figure comes back the next business day.">Envoyez trois photographies et un chiffre écrit revient le jour ouvrable suivant.</p></div>
+    </div>
+
+    <div class="endcta rise">
+      <a class="btn" href="index.html#soumission" data-en="Request an estimate">Demander une estimation</a>
+      <a class="btn ghost" href="tissus.html" data-en="Discover the fabrics">Découvrir les tissus</a>
+    </div>
+  </div>
+</section>'''
+
+page('a-propos.html',
+     'À propos — Opera Upholstering, rue Saint-Hubert depuis 1955',
+     'Atelier de rembourrage au 7498, rue Saint-Hubert depuis 1955. Rembourrage, restauration d’antiquités, cannage et finition du bois, tout sur place.',
+     APROPOS)
+
 page('tissus.html',
      'La bibliothèque de tissus — Opera Upholstering',
      'Dix maisons de tissus, des centaines de cartables : velours, bouclé, chenille, tissés, performance et extérieur. Réservez trois échantillons gratuits au comptoir.',
      sec('bibliotheque') + '\n' + sec('performance', 'sunk'))
 
 page('savoir-faire.html',
-     'Savoir-faire — ce qu’il y a sous le tissu · Opera Upholstering',
-     'La coupe d’un siège rembourré en dix couches, les six étapes de l’atelier, et le glossaire de vingt mots qui apparaissent sur une estimation.',
-     sec('anatomie') + '\n' + sec('procede', 'sunk') + '\n' + sec('glossaire'))
+     'Savoir-faire — de la photo à la livraison · Opera Upholstering',
+     'Les six étapes de l’atelier, de la première photographie au retour de la pièce, et le glossaire des mots qui apparaissent sur une estimation.',
+     sec('procede') + '\n' + sec('glossaire', 'sunk'))
 
 page('cannage.html',
      'Cannage, roseau et jonc — Opera Upholstering',

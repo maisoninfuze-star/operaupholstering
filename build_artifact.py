@@ -19,7 +19,7 @@ def datauri(path):
 
 CACHE = {}
 def inline_assets(html):
-    for m in set(re.findall(r'(?:src|href)="(assets/[^"]+\.(?:jpg|jpeg|png|webp))"', html)):
+    for m in set(re.findall(r'(?:src|href)="(assets/[^"]+\.(?:jpg|jpeg|png|webp|mp4))"', html)):
         if m not in CACHE: CACHE[m] = datauri(m)
         html = html.replace('"%s"' % m, '"%s"' % CACHE[m])
     return html

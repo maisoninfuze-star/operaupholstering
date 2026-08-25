@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=2b102632">
+<link rel="stylesheet" href="assets/site.css?v=53a3ea55">
 <script>
 /* Avant la premiere peinture : on saute l'ouverture si elle a deja
    ete vue dans cette session ou si le mouvement est desactive.
@@ -33,12 +33,13 @@
 
 <header class="topbar">
   <div class="wrap bar">
-    <a class="logo" href="index.html" aria-label="Opera Upholstering — accueil">
-      <img src="assets/logo-opera.png" alt="Opera Upholstering">
+    <a class="logo" href="index.html" aria-label="Opéra Rembourrage — accueil">
+      <span class="logo-fr">Rembourrage</span>
+      <img src="assets/logo-opera.png" alt="Opéra Rembourrage · Opera Upholstering">
     </a>
     <nav class="navlinks" aria-label="Principal">
       <a href="index.html" aria-current="page" data-en="Home">Accueil</a>
-      <a href="tissus.html" data-en="The library">La bibliothèque</a>
+      <a href="a-propos.html" data-en="About">À propos</a>
       <a href="savoir-faire.html" data-en="Craft">Savoir-faire</a>
       <a href="cannage.html" data-en="Caning">Cannage</a>
       <a href="calculateur.html" data-en="Yardage">Calculateur</a>
@@ -64,6 +65,14 @@
 
 <main id="contenu">
 <section class="hero" id="haut">
+  <div class="hero-media">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+           poster="assets/chair-before.jpg"
+           aria-label="Un fauteuil ancien dégarni jusqu’à la structure se refait sous les yeux : sangles, ressorts, bourrage, puis velours.">
+      <source src="assets/atelier.mp4" type="video/mp4">
+    </video>
+    <span class="hero-scrim"></span>
+  </div>
   <div class="hero-type">
     <span class="lbl" data-en="Plaza Saint-Hubert · Montréal">Plaza Saint-Hubert · Montréal</span>
     <h1 data-en="Seventy-one years at the same bench.">Soixante et onze ans au même établi.</h1>
@@ -72,7 +81,7 @@
     <p class="lede" data-en="Full reupholstery, antique restoration and hand caning at 7498 rue Saint-Hubert since 1955. Estimates are made from photographs and returned the next business day.">Rembourrage complet, restauration de meubles anciens et cannage tissé à la main, au 7498, rue Saint-Hubert depuis 1955. Les estimations se font sur photographies et reviennent le jour ouvrable suivant.</p>
     <div class="hero-cta">
       <a class="btn light" href="#soumission" data-en="Request an estimate">Demander une estimation</a>
-      <a class="btn outline-light" href="tissus.html" data-en="The fabric library">La bibliothèque de tissus</a>
+      <a class="btn outline-light" href="tissus.html" data-en="Discover the fabrics">Découvrir les tissus</a>
     </div>
     <div class="hero-figures">
       <div class="fig"><b>71</b><span data-en="years on Saint-Hubert">ans rue Saint-Hubert</span></div>
@@ -80,9 +89,6 @@
       <div class="fig"><b>20</b><span data-en="cane weaves">maillages de cannage</span></div>
       <div class="fig"><b>4,3</b><span data-en="Google · 47 reviews">Google · 47 avis</span></div>
     </div>
-  </div>
-  <div class="hero-photo">
-    <img src="assets/bibliotheque.jpg" alt="La salle d’échantillons de l’atelier, du sol au plafond." loading="eager">
   </div>
 </section>
 
@@ -115,8 +121,8 @@
         <div class="meta"><span data-en="Typical delay">Délai type</span><b data-en="1–3 weeks">1–3 semaines</b></div>
       </article>
       <article class="svc rise">
-        <h3 data-en="Custom headboards">Têtes de lit sur mesure</h3>
-        <p data-en="Height and shape made to measure: plain, channelled or deep-buttoned, wall or bed mounted.">Hauteur et forme sur mesure : unie, à cannelures ou capitonnée, fixée au mur ou au sommier.</p>
+        <h3 data-en="Headboards">Têtes de lit</h3>
+        <p data-en="Any height and any shape: plain, channelled or deep-buttoned, wall or bed mounted.">Toute hauteur et toute forme : unie, à cannelures ou capitonnée, fixée au mur ou au sommier.</p>
         <div class="meta"><span data-en="Typical delay">Délai type</span><b data-en="2–4 weeks">2–4 semaines</b></div>
       </article>
       <article class="svc rise">
@@ -134,6 +140,20 @@
         <p data-en="Cracked rails, corner blocks replaced, sagging seats, recliner mechanisms serviced.">Traverses fendues, blocs de coin remplacés, sièges affaissés, mécanismes d’inclinaison entretenus.</p>
         <div class="meta"><span data-en="Typical delay">Délai type</span><b data-en="Free estimate">Estimation gratuite</b></div>
       </article>
+      <article class="svc rise">
+        <h3 data-en="Wood stripping &amp; finishing">Décapage &amp; finition du bois</h3>
+        <p data-en="Show-wood is stripped, sanded, stained and refinished — varnish, oil or wax, to suit the piece.">Le bois apparent est décapé, poncé, teint et refini : vernis, huile ou cire, selon la pièce.</p>
+        <div class="meta"><span data-en="Typical delay">Délai type</span><b data-en="2–4 weeks">2–4 semaines</b></div>
+      </article>
+      <article class="svc rise">
+        <h3 data-en="Pick-up &amp; delivery">Cueillette &amp; livraison</h3>
+        <p data-en="We collect the piece and bring it back, across the island of Montreal and the near suburbs.">On vient chercher la pièce et on la rapporte, sur l’île de Montréal et en proche banlieue.</p>
+        <div class="meta"><span data-en="Typical delay">Délai type</span><b data-en="On request">Sur demande</b></div>
+      </article>
+    </div>
+    <div class="endcta rise">
+      <a class="btn" href="tissus.html" data-en="Discover the fabrics">Découvrir les tissus</a>
+      <a class="btn ghost" href="#soumission" data-en="Request an estimate">Demander une estimation</a>
     </div>
   </div>
 </section>
@@ -161,21 +181,6 @@
           <figcaption data-en="Springs, hand-tied">Ressorts guindés à la main</figcaption>
         </figure>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="bibliotheque">
-  <div class="wrap">
-    <div class="sec-head rise">
-      <span class="lbl" data-en="The library">La bibliothèque</span>
-      <h2 data-en="The fabric library">La bibliothèque de tissus</h2>
-      <p class="kicker" data-en="Nine houses, fifty-eight collections and several hundred sample books line the sample room, from performance velvet to marine acrylic. Any three swatches can be set aside at the counter, at no charge.">Neuf maisons, cinquante-huit collections et plusieurs centaines de cartables garnissent la salle d’échantillons, du velours performance à l’acrylique marine. Trois échantillons, quels qu’ils soient, peuvent être mis de côté au comptoir, sans frais.</p>
-    </div>
-    <div class="grid-swatch rise" data-swatchgrid data-limit="12"></div>
-    <div class="endcta rise">
-      <a class="btn" href="tissus.html" data-en="Browse the full library">Parcourir la bibliothèque</a>
-      <a class="btn ghost" href="tissus.html#performance" data-en="Which cloth survives your household">Quel tissu survit à votre maison</a>
     </div>
   </div>
 </section>
@@ -227,8 +232,6 @@
         <h3 data-en="Finding the shop">Nous trouver</h3>
         <div class="infoline"><span class="lbl" data-en="Address">Adresse</span><span>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3<br><a href="https://maps.google.com/?q=7498+Rue+St-Hubert,+Montr%C3%A9al,+QC+H2R+2N3" target="_blank" rel="noopener" data-en="Open in Maps">Ouvrir dans Maps</a></span></div>
         <div class="infoline"><span class="lbl" data-en="Phone">Téléphone</span><span><a href="tel:+15142704352">(514) 270-4352</a></span></div>
-        <div class="infoline"><span class="lbl" data-en="Getting there">S’y rendre</span><span data-en="On Plaza Saint-Hubert between Jean-Talon and Bélanger. Metro Jean-Talon or Beaubien, then a short walk. Paid street parking under the marquee, and a municipal lot one block east.">Sur la Plaza Saint-Hubert entre Jean-Talon et Bélanger. Métro Jean-Talon ou Beaubien, puis quelques minutes à pied. Stationnement payant sur rue sous la marquise, et un stationnement municipal à un coin de rue à l’est.</span></div>
-        <div class="infoline"><span class="lbl" data-en="Languages">Langues</span><span data-en="French and English, at the counter and on the phone.">Français et anglais, au comptoir et au téléphone.</span></div>
 
         <h3 style="margin-top:30px" data-en="Hours">Heures d’ouverture</h3>
         <table class="hours" id="hourstable">
@@ -303,4 +306,4 @@
   <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
 </div>
 
-<script src="assets/site.js?v=34493979"></script>
+<script src="assets/site.js?v=1355e7fa"></script>

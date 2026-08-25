@@ -529,6 +529,12 @@ if(qf) qf.addEventListener('submit', function(e){
 /* ═══════ 8 · RÉVÉLATION AU DÉFILEMENT ═════════════ */
 var MOTION = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* Mouvement réduit : la vidéo de l'enseigne s'arrête sur son affiche. */
+(function(){
+  var v = document.querySelector('.hero-video');
+  if(v && !MOTION){ v.removeAttribute('autoplay'); v.pause(); v.currentTime = 0; }
+})();
+
 /* ── entrées échelonnées ─────────────────────────────────── */
 if(MOTION && 'IntersectionObserver' in window){
   var groups = new WeakMap();
@@ -578,7 +584,7 @@ if(MOTION && 'IntersectionObserver' in window){
 
 /* ── barre condensée + parallaxe de l'enseigne ───────────── */
 (function(){
-  var img = document.querySelector('.hero-photo img');
+  var img = document.querySelector('.hero-media video, .hero-media img');
   var ticking = false, lastScrolled = null;
   function frame(){
     ticking = false;

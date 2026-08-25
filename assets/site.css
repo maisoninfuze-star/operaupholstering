@@ -83,11 +83,15 @@ h4{font-size:.98rem;line-height:1.3;letter-spacing:0}
   border-bottom:1px solid var(--rule);
 }
 .topbar .bar{display:flex;align-items:center;gap:clamp(12px,2.2vw,28px);height:70px}
-.logo{flex:0 0 auto;display:block;line-height:0}
+.logo{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;line-height:0;text-decoration:none}
+.logo-fr{
+  font-family:'Jost',sans-serif;font-size:.5rem;font-weight:400;letter-spacing:.36em;
+  text-transform:uppercase;color:var(--muted);line-height:1;margin-bottom:5px;text-indent:.36em;
+}
 .logo img{height:30px;width:auto}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .logo img{filter:invert(1) brightness(1.9)}}
 :root[data-theme="dark"] .logo img{filter:invert(1) brightness(1.9)}
-.navlinks{display:flex;gap:clamp(10px,1.6vw,24px);margin-left:auto;align-items:center}
+.navlinks{display:flex;gap:clamp(10px,1.6vw,24px);margin-left:clamp(18px,3vw,46px);align-items:center}
 .navlinks a{
   font-family:'Jost',sans-serif;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
   text-decoration:none;color:var(--muted);white-space:nowrap;padding:6px 0;position:relative;
@@ -97,7 +101,7 @@ h4{font-size:.98rem;line-height:1.3;letter-spacing:0}
 .navlinks a:hover::after,.navlinks a[aria-current="page"]::after{right:0}
 @media(max-width:1100px){.navlinks{display:none}}
 .navtools{display:flex;align-items:center;gap:9px;margin-left:auto}
-@media(min-width:1101px){.navtools{margin-left:0}}
+
 .langtog{display:flex;border:1px solid var(--rule);font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:.14em}
 .langtog button{border:0;background:transparent;color:var(--muted);padding:7px 9px;cursor:pointer;font:inherit;letter-spacing:inherit}
 .langtog button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
@@ -114,36 +118,50 @@ h4{font-size:.98rem;line-height:1.3;letter-spacing:0}
 .btn.light:hover{background:var(--accent);border-color:var(--accent);color:#FCF7F3}
 .btn.outline-light{background:transparent;border-color:rgba(244,242,237,.4);color:var(--noir-ink)}
 .btn.outline-light:hover{background:var(--noir-ink);color:var(--noir)}
-@media(max-width:620px){.topbar .bar{height:60px}.logo img{height:24px}.btn{padding:10px 14px;font-size:.68rem;letter-spacing:.14em}}
+@media(max-width:620px){.topbar .bar{height:60px}.logo img{height:24px}.logo-fr{font-size:.44rem;letter-spacing:.28em}.btn{padding:10px 14px;font-size:.68rem;letter-spacing:.14em}}
 
 /* ── enseigne ────────────────────────────────────── */
-.hero{display:grid;grid-template-columns:1fr 1fr;background:var(--noir);min-height:min(84vh,820px)}
-@media(max-width:940px){.hero{grid-template-columns:1fr}}
-.hero-type{
-  background:var(--noir);color:var(--noir-ink);
-  padding:clamp(38px,5.5vw,80px) clamp(24px,4.5vw,68px);
-  display:flex;flex-direction:column;justify-content:center;
+.hero{
+  position:relative;display:flex;align-items:center;overflow:hidden;
+  min-height:min(88vh,880px);background:var(--noir);
 }
-.hero h1{color:var(--noir-ink);margin:22px 0 0;font-size:clamp(2.2rem,4.6vw,3.9rem);text-transform:none;letter-spacing:-.028em}
-/* la ligne d'appui reprend le traitement du logo : capitales légères, très espacées */
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media video,.hero-media img{
+  position:absolute;top:-6%;left:0;width:100%;height:112%;
+  object-fit:cover;object-position:50% 45%;will-change:transform;
+}
+/* le voile garde le texte lisible par-dessus l'image animée */
+.hero-scrim{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(14,15,17,.94) 0%,rgba(14,15,17,.86) 30%,rgba(14,15,17,.55) 58%,rgba(14,15,17,.30) 100%),
+    linear-gradient(0deg,rgba(14,15,17,.55) 0%,transparent 38%);
+}
+@media(max-width:940px){
+  .hero-scrim{background:linear-gradient(0deg,rgba(14,15,17,.95) 18%,rgba(14,15,17,.72) 55%,rgba(14,15,17,.45) 100%)}
+}
+.hero-type{
+  position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;
+  padding:clamp(56px,8vw,110px) clamp(20px,4vw,44px);
+  color:var(--noir-ink);
+}
+.hero h1{color:var(--noir-ink);margin:22px 0 0;font-size:clamp(2.2rem,4.6vw,3.9rem);text-transform:none;letter-spacing:-.028em;max-width:15ch}
 .hero-sub{
   font-family:'Jost',sans-serif;font-weight:300;font-size:clamp(.66rem,1.05vw,.8rem);
   letter-spacing:.42em;text-transform:uppercase;color:var(--noir-muted);
   margin:20px 0 0;padding-top:18px;border-top:1px solid rgba(244,242,237,.18);max-width:none;
 }
+.hero-sub{width:fit-content}
 .hero .tagline{
   font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:300;
   font-size:clamp(1.05rem,1.7vw,1.32rem);color:var(--noir-ink);margin:22px 0 0;max-width:26ch;line-height:1.35;
 }
 .hero .lede{color:var(--noir-muted);margin:18px 0 0;max-width:46ch;font-size:1rem}
 .hero-cta{display:flex;flex-wrap:wrap;gap:11px;margin-top:30px}
-.hero-figures{display:grid;grid-template-columns:repeat(4,auto);gap:clamp(14px,3vw,36px);margin-top:42px;padding-top:24px;border-top:1px solid rgba(244,242,237,.16)}
-@media(max-width:560px){.hero-figures{grid-template-columns:repeat(2,1fr);gap:18px}}
+.hero-figures{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:clamp(14px,3vw,44px);margin-top:42px;padding-top:24px;border-top:1px solid rgba(244,242,237,.16)}
+@media(max-width:620px){.hero-figures{grid-template-columns:repeat(2,1fr);gap:18px}}
 .fig b{display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:1.8rem;line-height:1;color:var(--noir-ink);font-variant-numeric:tabular-nums}
 .fig span{display:block;font-family:'Jost',sans-serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--noir-muted);margin-top:8px;line-height:1.4}
-.hero-photo{position:relative;overflow:hidden;background:var(--noir-2);min-height:50vh}
-@media(max-width:940px){.hero-photo{min-height:62vw}}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
 
 /* ── bandeau d'état ──────────────────────────────── */
 .statusbar{background:var(--noir-2);color:var(--noir-muted);font-family:'Jost',sans-serif;font-size:.71rem;letter-spacing:.16em;text-transform:uppercase}
@@ -446,7 +464,6 @@ footer .flogo img{height:26px;width:auto;filter:invert(1) brightness(1.9)}
 .btn:hover{background-size:100% 100%}
 
 /* la photo de l'enseigne déborde pour laisser de la course au parallaxe */
-.hero-photo img{position:absolute;top:-6%;left:0;width:100%;height:112%;will-change:transform}
 
 @media (prefers-reduced-motion: no-preference){
 
@@ -463,8 +480,7 @@ footer .flogo img{height:26px;width:auto;filter:invert(1) brightness(1.9)}
   .hero-type > *:nth-child(6){--d:.48s}
   .hero-type > *:nth-child(7){--d:.56s}
 
-  .hero-photo img{clip-path:inset(0 0 100% 0)}
-  body.ready .hero-photo img{clip-path:inset(0 0 0 0);
+  body.ready .hero-media video,body.ready .hero-media img{clip-path:inset(0 0 0 0);
     transition:clip-path 1.35s cubic-bezier(.22,.7,.24,1) .12s}
 
   .statusbar{opacity:0}
@@ -487,6 +503,7 @@ footer .flogo img{height:26px;width:auto;filter:invert(1) brightness(1.9)}
   .logo img{transition:height .35s cubic-bezier(.22,.7,.24,1)}
   body.scrolled .topbar .bar{height:56px}
   body.scrolled .logo img{height:23px}
+  body.scrolled .logo-fr{font-size:.46rem;margin-bottom:3px}
   body.scrolled .topbar{box-shadow:0 14px 34px -28px var(--shadow)}
 
   /* ── assemblage de la coupe ────────────────────────────── */
@@ -516,7 +533,7 @@ footer .flogo img{height:26px;width:auto;filter:invert(1) brightness(1.9)}
 /* sans mouvement : tout est déjà en place */
 @media (prefers-reduced-motion: reduce){
   .rise,.hero-type > *,.grid-swatch .swatch,.anat-stage .layer{opacity:1;transform:none}
-  .hero-photo img,.rise figure img{clip-path:none}
+  .hero-media video,.hero-media img,.rise figure img{clip-path:none}
   .statusbar{opacity:1}
 }
 
@@ -540,7 +557,7 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
 
 @media (prefers-reduced-motion: no-preference){
   /* l'enseigne attend sous l'écran : sa chorégraphie n'est pas gaspillée */
-  html:not(.intro-skip) body:has(.splash:not(.done)) .hero-photo img{transition:none}
+  html:not(.intro-skip) body:has(.splash:not(.done)) :is(.hero-media video,.hero-media img){transition:none}
 
   .splash.run{animation:splash-leave .7s cubic-bezier(.7,0,.3,1) 2.4s forwards}
   .splash.run.hold{animation:none}

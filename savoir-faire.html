@@ -1,12 +1,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Savoir-faire — ce qu’il y a sous le tissu · Opera Upholstering</title>
-<meta name="description" content="La coupe d’un siège rembourré en dix couches, les six étapes de l’atelier, et le glossaire de vingt mots qui apparaissent sur une estimation.">
+<title>Savoir-faire — de la photo à la livraison · Opera Upholstering</title>
+<meta name="description" content="Les six étapes de l’atelier, de la première photographie au retour de la pièce, et le glossaire des mots qui apparaissent sur une estimation.">
 <link rel="icon" href="assets/logo-opera.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=2b102632">
+<link rel="stylesheet" href="assets/site.css?v=53a3ea55">
 <script>
 /* Avant la premiere peinture : on saute l'ouverture si elle a deja
    ete vue dans cette session ou si le mouvement est desactive.
@@ -33,12 +33,13 @@
 
 <header class="topbar">
   <div class="wrap bar">
-    <a class="logo" href="index.html" aria-label="Opera Upholstering — accueil">
-      <img src="assets/logo-opera.png" alt="Opera Upholstering">
+    <a class="logo" href="index.html" aria-label="Opéra Rembourrage — accueil">
+      <span class="logo-fr">Rembourrage</span>
+      <img src="assets/logo-opera.png" alt="Opéra Rembourrage · Opera Upholstering">
     </a>
     <nav class="navlinks" aria-label="Principal">
       <a href="index.html" data-en="Home">Accueil</a>
-      <a href="tissus.html" data-en="The library">La bibliothèque</a>
+      <a href="a-propos.html" data-en="About">À propos</a>
       <a href="savoir-faire.html" aria-current="page" data-en="Craft">Savoir-faire</a>
       <a href="cannage.html" data-en="Caning">Cannage</a>
       <a href="calculateur.html" data-en="Yardage">Calculateur</a>
@@ -55,164 +56,25 @@
 </header>
 
 <main id="contenu">
-<section id="anatomie">
+<section id="procede">
   <div class="wrap">
     <div class="sec-head rise">
       <div>
-        <h2 data-en="What is under the fabric">Ce qu’il y a sous le tissu</h2>
-        <p class="kicker" data-en="A seat is built in ten layers; the chosen cloth is the last of them. The cutaway below is peeled back one layer at a time — hover or tap a line to isolate it.">Un siège se construit en dix couches, et le tissu choisi est la dernière. La coupe ci-dessous est pelée une couche à la fois : survolez ou touchez une ligne pour l’isoler.</p>
-      </div>
-    </div>
-
-    <div class="anat rise" id="anat">
-      <div class="anat-stage">
-        <svg viewBox="0 0 900 520" role="img" aria-labelledby="anat-title">
-          <title id="anat-title">Coupe d’un siège rembourré : dix couches, du tissu jusqu’à la structure de bois.</title>
-          <defs>
-            <pattern id="p-weave" width="8" height="8" patternUnits="userSpaceOnUse">
-              <rect width="8" height="8" fill="#8C3742"/>
-              <path d="M0 2h8M0 6h8" stroke="rgba(255,255,255,.22)" stroke-width="1"/>
-              <path d="M2 0v8M6 0v8" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
-            </pattern>
-            <pattern id="p-muslin" width="6" height="6" patternUnits="userSpaceOnUse">
-              <rect width="6" height="6" fill="#E4DCC6"/>
-              <path d="M0 3h6M3 0v6" stroke="rgba(120,105,70,.28)" stroke-width=".8"/>
-            </pattern>
-            <pattern id="p-ouate" width="16" height="16" patternUnits="userSpaceOnUse">
-              <rect width="16" height="16" fill="#F1EDE1"/>
-              <circle cx="4" cy="5" r="3.4" fill="rgba(180,168,138,.30)"/>
-              <circle cx="12" cy="11" r="3.8" fill="rgba(180,168,138,.22)"/>
-            </pattern>
-            <pattern id="p-crin" width="14" height="14" patternUnits="userSpaceOnUse">
-              <rect width="14" height="14" fill="#7C6544"/>
-              <path d="M1 11c3-6 6 3 9-3" stroke="rgba(232,220,196,.45)" stroke-width="1.1" fill="none"/>
-              <path d="M2 4c3 5 7-3 10 2" stroke="rgba(40,30,16,.35)" stroke-width="1.1" fill="none"/>
-            </pattern>
-            <pattern id="p-burlap" width="7" height="7" patternUnits="userSpaceOnUse">
-              <rect width="7" height="7" fill="#B99A63"/>
-              <path d="M0 3.5h7" stroke="rgba(80,60,26,.35)" stroke-width="1.4"/>
-              <path d="M3.5 0v7" stroke="rgba(255,246,224,.30)" stroke-width="1.4"/>
-            </pattern>
-            <pattern id="p-jute" width="18" height="12" patternUnits="userSpaceOnUse">
-              <rect width="18" height="12" fill="#C3A468"/>
-              <rect y="1" width="18" height="4" fill="rgba(120,92,40,.40)"/>
-              <rect y="7" width="18" height="4" fill="rgba(255,247,226,.32)"/>
-            </pattern>
-            <pattern id="p-wood" width="26" height="14" patternUnits="userSpaceOnUse">
-              <rect width="26" height="14" fill="#5A3B22"/>
-              <path d="M0 4q7 3 13 0t13 0M0 10q6-3 13 0t13 0" stroke="rgba(28,16,8,.55)" stroke-width="1.3" fill="none"/>
-              <path d="M0 7q7 2 13 0t13 0" stroke="rgba(214,175,126,.30)" stroke-width="1" fill="none"/>
-            </pattern>
-          </defs>
-
-          <!-- 10 · Cadre -->
-          <g class="layer" data-layer="10">
-            <rect x="60" y="436" width="770" height="44" fill="url(#p-wood)"/>
-            <rect x="60" y="436" width="770" height="44" fill="none" stroke="#2E1D10" stroke-width="1.5"/>
-            <circle cx="852" cy="458" r="13" fill="#8E6718"/><text x="852" y="463" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">10</text>
-          </g>
-          <!-- 9 · Sangles -->
-          <g class="layer" data-layer="9">
-            <rect x="60" y="392" width="740" height="44" fill="url(#p-jute)"/>
-            <rect x="60" y="392" width="740" height="44" fill="none" stroke="#7A5C28" stroke-width="1.2"/>
-            <circle cx="822" cy="414" r="13" fill="#8E6718"/><text x="822" y="419" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">9</text>
-          </g>
-          <!-- 8 · Ressorts -->
-          <g class="layer" data-layer="8">
-            <rect x="60" y="316" width="710" height="76" fill="#EAE3D2"/>
-            <rect x="60" y="316" width="710" height="76" fill="none" stroke="#B9AE93" stroke-width="1.2"/>
-            <g stroke="#7C6A4A" stroke-width="3.2" fill="none">
-              <g><ellipse cx="150" cy="380" rx="42" ry="9"/><ellipse cx="150" cy="362" rx="38" ry="8"/><ellipse cx="150" cy="344" rx="34" ry="7"/><ellipse cx="150" cy="328" rx="31" ry="6"/></g>
-              <g><ellipse cx="300" cy="380" rx="42" ry="9"/><ellipse cx="300" cy="362" rx="38" ry="8"/><ellipse cx="300" cy="344" rx="34" ry="7"/><ellipse cx="300" cy="328" rx="31" ry="6"/></g>
-              <g><ellipse cx="450" cy="380" rx="42" ry="9"/><ellipse cx="450" cy="362" rx="38" ry="8"/><ellipse cx="450" cy="344" rx="34" ry="7"/><ellipse cx="450" cy="328" rx="31" ry="6"/></g>
-              <g><ellipse cx="600" cy="380" rx="42" ry="9"/><ellipse cx="600" cy="362" rx="38" ry="8"/><ellipse cx="600" cy="344" rx="34" ry="7"/><ellipse cx="600" cy="328" rx="31" ry="6"/></g>
-            </g>
-            <circle cx="792" cy="354" r="13" fill="#8E6718"/><text x="792" y="359" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">8</text>
-          </g>
-          <!-- 7 · Guindage -->
-          <g class="layer" data-layer="7">
-            <rect x="60" y="292" width="680" height="24" fill="#F2ECDD"/>
-            <path d="M60 306h680" stroke="#6E5A36" stroke-width="2.6"/>
-            <g fill="#6E5A36"><circle cx="150" cy="306" r="6"/><circle cx="300" cy="306" r="6"/><circle cx="450" cy="306" r="6"/><circle cx="600" cy="306" r="6"/></g>
-            <rect x="60" y="292" width="680" height="24" fill="none" stroke="#C0B69B" stroke-width="1.2"/>
-            <circle cx="762" cy="304" r="13" fill="#8E6718"/><text x="762" y="309" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">7</text>
-          </g>
-          <!-- 6 · Toile de ressorts -->
-          <g class="layer" data-layer="6">
-            <rect x="60" y="256" width="650" height="36" fill="url(#p-burlap)"/>
-            <rect x="60" y="256" width="650" height="36" fill="none" stroke="#7A5C28" stroke-width="1.2"/>
-            <circle cx="732" cy="274" r="13" fill="#8E6718"/><text x="732" y="279" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">6</text>
-          </g>
-          <!-- 5 · Bourrelet piqué -->
-          <g class="layer" data-layer="5">
-            <rect x="60" y="212" width="620" height="44" fill="#8A7350"/>
-            <path d="M60 234h620" stroke="rgba(245,235,210,.5)" stroke-width="1.4" stroke-dasharray="9 7"/>
-            <path d="M60 222h620" stroke="rgba(40,28,12,.4)" stroke-width="1.2" stroke-dasharray="9 7"/>
-            <path d="M60 246h620" stroke="rgba(40,28,12,.4)" stroke-width="1.2" stroke-dasharray="9 7"/>
-            <rect x="60" y="212" width="620" height="44" fill="none" stroke="#4E3E24" stroke-width="1.2"/>
-            <circle cx="702" cy="234" r="13" fill="#8E6718"/><text x="702" y="239" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">5</text>
-          </g>
-          <!-- 4 · Crin / mousse -->
-          <g class="layer" data-layer="4">
-            <rect x="60" y="156" width="590" height="56" fill="url(#p-crin)"/>
-            <rect x="60" y="156" width="590" height="56" fill="none" stroke="#4A3A22" stroke-width="1.2"/>
-            <circle cx="672" cy="184" r="13" fill="#8E6718"/><text x="672" y="189" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">4</text>
-          </g>
-          <!-- 3 · Ouate -->
-          <g class="layer" data-layer="3">
-            <rect x="60" y="120" width="560" height="36" fill="url(#p-ouate)"/>
-            <rect x="60" y="120" width="560" height="36" fill="none" stroke="#BCB294" stroke-width="1.2"/>
-            <circle cx="642" cy="138" r="13" fill="#8E6718"/><text x="642" y="143" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">3</text>
-          </g>
-          <!-- 2 · Toile blanche -->
-          <g class="layer" data-layer="2">
-            <rect x="60" y="92" width="530" height="28" fill="url(#p-muslin)"/>
-            <rect x="60" y="92" width="530" height="28" fill="none" stroke="#B4A987" stroke-width="1.2"/>
-            <circle cx="612" cy="106" r="13" fill="#8E6718"/><text x="612" y="111" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">2</text>
-          </g>
-          <!-- 1 · Tissu -->
-          <g class="layer" data-layer="1">
-            <rect x="60" y="44" width="500" height="48" fill="url(#p-weave)"/>
-            <rect x="60" y="44" width="500" height="48" fill="none" stroke="#5C2029" stroke-width="1.5"/>
-            <circle cx="582" cy="68" r="13" fill="#8E6718"/><text x="582" y="73" text-anchor="middle" font-family="Jost,sans-serif" font-size="14" fill="#FDF8EE">1</text>
-          </g>
-        </svg>
-      </div>
-
-      <ul class="anat-list" id="anatlist">
-        <li><button type="button" data-target="1"><span class="no">01</span><span><b>Tissu de finition <i>Top fabric</i></b><span data-en="The only layer you choose from the wall, and the last one to go on. Its double-rub rating decides how long everything underneath stays hidden.">La seule couche que vous choisissez au mur, et la dernière à monter. Sa cote de doubles frottements décide combien de temps tout le reste demeure caché.</span></span></button></li>
-        <li><button type="button" data-target="2"><span class="no">02</span><span><b>Toile blanche <i>Muslin</i></b><span data-en="A plain cotton skin over the padding. It holds the shape, takes the strain off the show fabric, and lets the piece be recovered again in thirty years without starting over.">Une peau de coton uni par-dessus le bourrage. Elle tient la forme, retire la tension du tissu apparent, et permet de recouvrir la pièce à nouveau dans trente ans sans tout recommencer.</span></span></button></li>
-        <li><button type="button" data-target="3"><span class="no">03</span><span><b>Ouate de coton <i>Cotton batting</i></b><span data-en="The soft blanket that erases every hard line underneath. Skip it and you will feel the edge of the foam through the cloth within a year.">La couverture douce qui efface toute arête en dessous. Sautez-la et vous sentirez le bord de la mousse à travers le tissu en moins d’un an.</span></span></button></li>
-        <li><button type="button" data-target="4"><span class="no">04</span><span><b>Crin ou mousse <i>Horsehair or foam</i></b><span data-en="The seat itself. Curled horsehair breathes and lasts a century; high-density foam is firmer, cheaper and predictable. On an antique we usually keep the hair and add foam only where it has gone.">Le siège lui-même. Le crin frisé respire et dure un siècle; la mousse haute densité est plus ferme, moins chère et prévisible. Sur une antiquité, on garde habituellement le crin et on ajoute de la mousse seulement là où il a disparu.</span></span></button></li>
-        <li><button type="button" data-target="5"><span class="no">05</span><span><b>Bourrelet piqué <i>Stitched edge roll</i></b><span data-en="A firm rolled edge sewn by hand around the front rail. It holds the crisp profile of the seat and keeps the front edge from collapsing under years of use.">Un bourrelet ferme cousu à la main autour de la traverse avant. Il tient le profil net du siège et empêche l’arête avant de s’affaisser au fil des années.</span></span></button></li>
-        <li><button type="button" data-target="6"><span class="no">06</span><span><b>Toile de ressorts <i>Spring burlap</i></b><span data-en="Heavy jute stretched over the tied springs so the stuffing above never works its way down into the coils.">Jute épais tendu par-dessus les ressorts guindés pour que le bourrage au-dessus ne descende jamais dans les spires.</span></span></button></li>
-        <li><button type="button" data-target="7"><span class="no">07</span><span><b>Guindage <i>Spring tying</i></b><span data-en="Eight knots of Italian twine per spring, tied front to back and side to side. This is the slowest hour of the job and the one that decides whether the seat still sits level in forty years.">Huit nœuds de ficelle italienne par ressort, noués d’avant en arrière et d’un côté à l’autre. C’est l’heure la plus lente du travail, et celle qui décide si le siège sera encore de niveau dans quarante ans.</span></span></button></li>
-        <li><button type="button" data-target="8"><span class="no">08</span><span><b>Ressorts <i>Coil springs</i></b><span data-en="Hand-tied coils give a deep, progressive sit. Sinuous zigzag springs sit flatter and go in faster, and are straightforward to replace once they fatigue.">Les ressorts guindés à la main donnent une assise profonde et progressive. Les ressorts sinueux sont plus plats et plus rapides à poser, et se remplacent aisément une fois fatigués.</span></span></button></li>
-        <li><button type="button" data-target="9"><span class="no">09</span><span><b>Sangles <i>Webbing</i></b><span data-en="Jute or elastic straps interwoven across the frame and stretched by hand. When a seat sags, this is almost always what failed — and it is the cheapest layer to replace.">Sangles de jute ou élastiques entrecroisées sur la structure et tendues à la main. Quand un siège s’affaisse, c’est presque toujours ça qui a lâché — et c’est la couche la moins chère à remplacer.</span></span></button></li>
-        <li><button type="button" data-target="10"><span class="no">10</span><span><b>Structure <i>Frame</i></b><span data-en="Kiln-dried hardwood, doweled and corner-blocked. Everything above it can be rebuilt as long as the frame itself is sound, which is what makes a piece worth keeping.">Bois franc séché au four, chevillé et bloqué aux coins. Tout ce qui la surmonte peut être refait tant que la structure elle-même est saine, et c’est ce qui rend une pièce digne d’être gardée.</span></span></button></li>
-      </ul>
-    </div>
-  </div>
-</section>
-<section class="sunk" id="procede">
-  <div class="wrap">
-    <div class="sec-head rise">
-      <div>
-        <h2 data-en="From photo to delivery">De la photo à la livraison</h2>
-        <p class="kicker" data-en="Six steps, from the first photograph to the piece coming home.">Six étapes, de la première photographie au retour de la pièce.</p>
+        <h2 data-en="How it works">Comment ça marche</h2>
+        <p class="kicker" data-en="Six steps. The first one takes a minute and costs nothing.">Six étapes. La première prend une minute et ne coûte rien.</p>
       </div>
     </div>
     <div class="steps" data-stagger>
-      <div class="step rise"><span class="no">i</span><h4 data-en="Send three photos">Envoyez trois photos</h4><p data-en="The whole piece, a close-up of the wear, and a hand in frame for scale. Text, WhatsApp or email — whichever you already use.">La pièce au complet, un gros plan de l’usure, et une main dans l’image pour l’échelle. Texto, WhatsApp ou courriel — ce que vous utilisez déjà.</p></div>
-      <div class="step rise"><span class="no">ii</span><h4 data-en="A real number back">Un vrai chiffre en retour</h4><p data-en="Within one business day, with the yardage, the labour and the delay written out. Not a vague range.">En un jour ouvrable, avec le métrage, la main-d’œuvre et le délai écrits. Pas une fourchette vague.</p></div>
-      <div class="step rise"><span class="no">iii</span><h4 data-en="Choose the cloth">Choisissez le tissu</h4><p data-en="Come and put your hands on the wall, or reserve three swatches here and pick them up at the counter.">Venez toucher le mur, ou réservez trois échantillons ici et passez les prendre au comptoir.</p></div>
-      <div class="step rise"><span class="no">iv</span><h4 data-en="The piece is stripped">La pièce est dégarnie</h4><p data-en="Down to the frame. If we find something the photos could not show, you get a call before any extra work happens.">Jusqu’à la structure. Si on trouve ce que les photos ne montraient pas, vous recevez un appel avant tout travail supplémentaire.</p></div>
-      <div class="step rise"><span class="no">v</span><h4 data-en="Rebuilt, then covered">Refaite, puis recouverte</h4><p data-en="Frame, webbing, springs, stuffing — in that order, and only then the fabric. Trim and nailing last.">Structure, sangles, ressorts, bourrage — dans cet ordre, et seulement ensuite le tissu. Garniture et clouage en dernier.</p></div>
-      <div class="step rise"><span class="no">vi</span><h4 data-en="Pick-up or delivery">Cueillette ou livraison</h4><p data-en="Delivery available across the island and the near suburbs. Bring the room’s dimensions if a piece has to come up a stairwell.">Livraison offerte sur l’île et en proche banlieue. Apportez les dimensions si une pièce doit monter par une cage d’escalier.</p></div>
+      <div class="step rise"><span class="no">i</span><h4 data-en="Send us photos">Envoyez-nous des photos</h4><p data-en="The whole piece, a close-up of what is worn, and a hand in the picture so we can see the size. Text, WhatsApp or email — whatever is easiest.">La pièce au complet, un gros plan de ce qui est usé, et une main sur la photo pour voir la taille. Texto, WhatsApp ou courriel — au plus simple.</p></div>
+      <div class="step rise"><span class="no">ii</span><h4 data-en="You get a price">Vous recevez un prix</h4><p data-en="Usually the next working day, written out so you can see what costs what.">Habituellement le jour ouvrable suivant, détaillé pour que vous voyiez ce qui coûte quoi.</p></div>
+      <div class="step rise"><span class="no">iii</span><h4 data-en="Choose your fabric">Choisissez votre tissu</h4><p data-en="Come and feel them in the shop, or pick three here and we will keep them at the counter for you.">Venez les toucher en magasin, ou choisissez-en trois ici et on les garde au comptoir pour vous.</p></div>
+      <div class="step rise"><span class="no">iv</span><h4 data-en="We open it up">On ouvre la pièce</h4><p data-en="If we find something the photos did not show, we call you before doing any extra work.">Si on trouve quelque chose que les photos ne montraient pas, on vous appelle avant de faire quoi que ce soit de plus.</p></div>
+      <div class="step rise"><span class="no">v</span><h4 data-en="We rebuild it">On la refait</h4><p data-en="Frame first, then everything that goes underneath, and the fabric last.">La structure d’abord, ensuite tout ce qui va dessous, et le tissu en dernier.</p></div>
+      <div class="step rise"><span class="no">vi</span><h4 data-en="We bring it back">On vous la rapporte</h4><p data-en="Pick-up and delivery across Montreal and the near suburbs. Tell us in advance about narrow stairs.">Cueillette et livraison sur l’île et en proche banlieue. Prévenez-nous si l’escalier est étroit.</p></div>
     </div>
   </div>
 </section>
-<section id="glossaire">
+<section class="sunk" id="glossaire">
   <div class="wrap">
     <div class="sec-head rise">
       <div>
@@ -304,4 +166,4 @@
   <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
 </div>
 
-<script src="assets/site.js?v=34493979"></script>
+<script src="assets/site.js?v=1355e7fa"></script>
