@@ -155,6 +155,9 @@ html = """<meta charset="utf-8">
 %s
 """ % (css, logo, nav, statusbar, '\n'.join(views), footer, js, ROUTER)
 
+# SEQ_INLINE : un fichier unique ne peut pas charger assets/seq/,
+# la toile est donc neutralisee et l'image de base reste seule.
+html = html.replace('<canvas class="hero-canvas" aria-hidden="true"></canvas>', '')
 html = html.replace('__MARK__', datauri('assets/logo-mark.png'))
 html = html.replace('__SUB__', datauri('assets/logo-sub.png'))
 html = inline_assets(html)

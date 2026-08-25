@@ -530,67 +530,101 @@ if(qf) qf.addEventListener('submit', function(e){
 var MOTION = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── L'enseigne se parcourt au défilement ──────────────────
-   Le fauteuil se refait à mesure qu'on descend : la position
-   de défilement pilote directement le temps de la vidéo.
-
-   Une vidéo jamais lue garde son affiche et ne peint pas les
-   recherches : il faut l'amorcer une fois par un play()/pause()
-   muet avant que le parcours devienne visible. */
+   Une séquence d'images plutôt qu'une vidéo : la lecture d'une
+   vidéo dépend du décodage, des politiques de lecture et de la
+   granularité des recherches, dont rien n'est garanti. Trente
+   images préchargées se dessinent instantanément, partout.
+   L'image de base reste visible tant que la toile n'est pas prête,
+   et sous mouvement réduit elle reste seule. */
 (function(){
-  var v = document.querySelector('.hero-video');
-  var hero = document.querySelector('.hero');
-  if(!v || !hero) return;
+  var stage = document.querySelector('.hero-stage');
+  var cv    = document.querySelector('.hero-canvas');
+  var base  = document.querySelector('.hero-base');
+  if(!stage || !cv || !base) return;
 
-  var dur = 0, primed = false, last = 0, pending = 0;
+  var N = 30, PAD = 2;
+  var frames = [], loaded = 0, ready = false;
+  var idx = -1, target = 0, shown = 0, raf = 0;
 
-  function apply(){
-    pending = 0;
-    if(!dur){ dur = v.duration || 0; if(!dur) return; }
-    var h = hero.offsetHeight || window.innerHeight;
-    var y = window.scrollY || window.pageYOffset;
-    var p = Math.max(0, Math.min(1, y / h));
-    var t = p * (dur - 0.05);
-    if(Math.abs(t - v.currentTime) < 0.015) return;
-    try { v.currentTime = t; } catch(e){}
+  function src(i){ return 'assets/seq/f_' + String(i + 1).padStart(PAD, '0') + '.jpg'; }
+
+  var ctx = cv.getContext('2d', { alpha: false });
+  function size(){
+    var r = cv.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width  = Math.max(1, Math.round(r.width  * dpr));
+    cv.height = Math.max(1, Math.round(r.height * dpr));
+    draw(idx < 0 ? 0 : idx, true);
   }
 
-  function prime(){
-    if(primed) return;
-    primed = true;
-    var p;
-    try { p = v.play(); } catch(e){ apply(); return; }
-    function settle(){ v.pause(); v.removeAttribute('poster'); apply(); }
-    if(p && p.then) p.then(settle).catch(function(){ primed = false; apply(); });
-    else settle();
+  /* dessin « cover », aligné sur object-position 50% 45% */
+  function draw(i, force){
+    if(!ready && !force) return;
+    var img = frames[i];
+    if(!img || !img.complete || !img.naturalWidth) return;
+    if(i === idx && !force) return;
+    idx = i;
+    var cw = cv.width, ch = cv.height;
+    var s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+    var w = img.naturalWidth * s, h = img.naturalHeight * s;
+    ctx.drawImage(img, (cw - w) / 2, (ch - h) * 0.45, w, h);
   }
 
-  function meta(){ dur = v.duration || 0; prime(); apply(); }
-  if(v.readyState >= 1) meta();
-  v.addEventListener('loadedmetadata', meta);
-  v.addEventListener('canplay', function(){ dur = v.duration || dur; prime(); });
+  function progress(){
+    var top = stage.offsetTop;
+    var run = stage.offsetHeight - window.innerHeight;   /* la course utile */
+    if(run <= 0) return 0;
+    var y = (window.scrollY || window.pageYOffset) - top;
+    return Math.max(0, Math.min(1, y / run));
+  }
 
-  /* Étranglement à l'horloge plutôt qu'au rAF : un onglet en
-     arrière-plan gèle le rAF et le parcours resterait figé. */
+  /* Amorti : le rendu court après la cible au lieu d'y sauter,
+     ce qui enlève la saccade d'un cran de molette. */
+  function tick(){
+    raf = 0;
+    var d = target - shown;
+    if(Math.abs(d) < 0.0015){ shown = target; }
+    else { shown += d * 0.18; raf = requestAnimationFrame(tick); }
+    draw(Math.round(shown * (N - 1)));
+    var p = shown;
+    var fade = p < 0.72 ? 1 : Math.max(0, 1 - (p - 0.72) / 0.24);
+    stage.style.setProperty('--typeop', fade.toFixed(3));
+    stage.classList.toggle('fading', p >= 0.72);
+  }
   function onScroll(){
-    if(!primed) prime();
-    var now = Date.now();
-    if(now - last >= 32){ last = now; apply(); }
-    else if(!pending){ pending = setTimeout(apply, 40); }
+    target = progress();
+    if(!raf) raf = requestAnimationFrame(tick);
+    /* filet d'horloge : le rAF est gelé dans un onglet d'arrière-plan */
+    if(!onScroll._t){
+      onScroll._t = setTimeout(function(){ onScroll._t = 0; if(!raf){ shown = target; tick(); } }, 120);
+    }
+  }
+
+  if(!MOTION){ return; }   /* mouvement réduit : l'image de base suffit */
+
+  for(var i = 0; i < N; i++){
+    (function(i){
+      var im = new Image();
+      im.decoding = 'async';
+      im.onload = function(){
+        if(++loaded === N){
+          ready = true;
+          size();
+          cv.classList.add('on');
+          onScroll();
+        }
+      };
+      im.onerror = im.onload;
+      im.src = src(i);
+      frames[i] = im;
+    })(i);
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  /* Les politiques de lecture exigent parfois un geste : on amorce
-     au premier contact si le chargement n'a pas suffi. */
-  /* pas de { once } : si la lecture est refusée une première fois,
-     le geste suivant doit pouvoir réamorcer. */
-  ['pointerdown','touchstart','keydown','wheel'].forEach(function(ev){
-    window.addEventListener(ev, prime, { passive: true });
-  });
+  window.addEventListener('resize', size);
   document.addEventListener('visibilitychange', function(){
-    if(document.visibilityState === 'visible'){ dur = v.duration || dur; prime(); apply(); }
+    if(document.visibilityState === 'visible'){ shown = target = progress(); tick(); }
   });
-  apply();
 })();
 
 /* ── entrées échelonnées ─────────────────────────────────── */
@@ -611,12 +645,26 @@ if(MOTION && 'IntersectionObserver' in window){
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
   document.querySelectorAll('.rise').forEach(function(el){ io.observe(el); });
-  setTimeout(function(){
-    document.querySelectorAll('.rise:not(.in)').forEach(function(el){
-      var r = el.getBoundingClientRect();
-      if(r.top < window.innerHeight * 1.2) el.classList.add('in');
-    });
-  }, 2500);
+
+  /* Filet permanent. L'observateur ne se déclenche pas dans un onglet
+     d'arrière-plan, et une section restée à opacité zéro est une page
+     blanche pour le visiteur : on balaie aussi au défilement. */
+  var sweeping = 0;
+  function sweep(){
+    sweeping = 0;
+    var vh = window.innerHeight;
+    var left = document.querySelectorAll('.rise:not(.in)');
+    for(var i = 0; i < left.length; i++){
+      var r = left[i].getBoundingClientRect();
+      if(r.top < vh * 1.15 && r.bottom > -vh * 0.5) left[i].classList.add('in');
+    }
+  }
+  function onSweep(){ if(!sweeping) sweeping = setTimeout(sweep, 120); }
+  window.addEventListener('scroll', onSweep, { passive: true });
+  window.addEventListener('resize', onSweep, { passive: true });
+  document.addEventListener('visibilitychange', sweep);
+  setTimeout(sweep, 1200);
+  setTimeout(sweep, 3000);
 } else {
   document.querySelectorAll('.rise').forEach(function(el){ el.classList.add('in'); });
 }

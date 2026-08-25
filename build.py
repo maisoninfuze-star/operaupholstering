@@ -221,13 +221,11 @@ svc_cards = '\n'.join(
       </article>''' % (en, fr, den, dfr, men, mfr)
  for fr, en, dfr, den, mfr, men in SERVICES_SHORT)
 
-HOME = '''<section class="hero" id="haut">
+HOME = '''<section class="hero-stage" id="haut">
+ <div class="hero">
   <div class="hero-media">
-    <video class="hero-video" muted playsinline preload="auto"
-           poster="assets/chair-before.jpg"
-           aria-label="Un fauteuil ancien dégarni jusqu’à la structure se refait sous les yeux : sangles, ressorts, bourrage, puis velours.">
-      <source src="assets/atelier.mp4" type="video/mp4">
-    </video>
+    <img class="hero-base" src="assets/seq/f_01.jpg" alt="Un fauteuil ancien dégarni jusqu’à la structure, dans l’atelier." fetchpriority="high">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
     <span class="hero-scrim"></span>
   </div>
   <div class="hero-type">
@@ -247,6 +245,7 @@ HOME = '''<section class="hero" id="haut">
       <div class="fig"><b>4,3</b><span data-en="Google · 47 reviews">Google · 47 avis</span></div>
     </div>
   </div>
+</div>
 </section>
 
 <section id="services">
