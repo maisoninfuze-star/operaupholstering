@@ -532,38 +532,65 @@ var MOTION = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ── L'enseigne se parcourt au défilement ──────────────────
    Le fauteuil se refait à mesure qu'on descend : la position
    de défilement pilote directement le temps de la vidéo.
-   Sous mouvement réduit, elle reste sur sa première image. */
+
+   Une vidéo jamais lue garde son affiche et ne peint pas les
+   recherches : il faut l'amorcer une fois par un play()/pause()
+   muet avant que le parcours devienne visible. */
 (function(){
   var v = document.querySelector('.hero-video');
   var hero = document.querySelector('.hero');
   if(!v || !hero) return;
-  v.pause();
-  if(!MOTION) return;
 
-  var dur = 0, ticking = false;
-  function ready(){ dur = v.duration || 0; scrub(); }
-  if(v.readyState >= 1) ready();
-  v.addEventListener('loadedmetadata', ready);
+  var dur = 0, primed = false, last = 0, pending = 0;
 
-  function scrub(){
-    ticking = false;
-    if(!dur) return;
+  function apply(){
+    pending = 0;
+    if(!dur){ dur = v.duration || 0; if(!dur) return; }
     var h = hero.offsetHeight || window.innerHeight;
     var y = window.scrollY || window.pageYOffset;
-    var p = Math.max(0, Math.min(1, y / h));          /* 0 en haut, 1 quand l'enseigne est passée */
+    var p = Math.max(0, Math.min(1, y / h));
     var t = p * (dur - 0.05);
-    if(Math.abs(t - v.currentTime) < 0.02) return;
-    if(v.fastSeek){ try { v.fastSeek(t); } catch(e){ v.currentTime = t; } }
-    else { v.currentTime = t; }
+    if(Math.abs(t - v.currentTime) < 0.015) return;
+    try { v.currentTime = t; } catch(e){}
   }
-  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(scrub); } }
+
+  function prime(){
+    if(primed) return;
+    primed = true;
+    var p;
+    try { p = v.play(); } catch(e){ apply(); return; }
+    function settle(){ v.pause(); v.removeAttribute('poster'); apply(); }
+    if(p && p.then) p.then(settle).catch(function(){ primed = false; apply(); });
+    else settle();
+  }
+
+  function meta(){ dur = v.duration || 0; prime(); apply(); }
+  if(v.readyState >= 1) meta();
+  v.addEventListener('loadedmetadata', meta);
+  v.addEventListener('canplay', function(){ dur = v.duration || dur; prime(); });
+
+  /* Étranglement à l'horloge plutôt qu'au rAF : un onglet en
+     arrière-plan gèle le rAF et le parcours resterait figé. */
+  function onScroll(){
+    if(!primed) prime();
+    var now = Date.now();
+    if(now - last >= 32){ last = now; apply(); }
+    else if(!pending){ pending = setTimeout(apply, 40); }
+  }
+
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
-  /* Un onglet caché suspend le décodage : on resynchronise l'image
-     dès qu'on revient, sans attendre un défilement. */
-  document.addEventListener('visibilitychange', function(){
-    if(document.visibilityState === 'visible'){ dur = v.duration || dur; onScroll(); }
+  /* Les politiques de lecture exigent parfois un geste : on amorce
+     au premier contact si le chargement n'a pas suffi. */
+  /* pas de { once } : si la lecture est refusée une première fois,
+     le geste suivant doit pouvoir réamorcer. */
+  ['pointerdown','touchstart','keydown','wheel'].forEach(function(ev){
+    window.addEventListener(ev, prime, { passive: true });
   });
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'visible'){ dur = v.duration || dur; prime(); apply(); }
+  });
+  apply();
 })();
 
 /* ── entrées échelonnées ─────────────────────────────────── */
