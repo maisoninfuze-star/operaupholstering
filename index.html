@@ -1,12 +1,57 @@
+<!doctype html>
+<html lang="fr">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Opera Upholstering — Rembourrage, restauration et cannage · Montréal</title>
 <meta name="description" content="Atelier de rembourrage sur la Plaza Saint-Hubert depuis 1955. Restauration de meubles anciens, cannage, banquettes, têtes de lit. Des centaines de tissus en magasin.">
+<link rel="canonical" href="https://operaupholstering.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Opera Upholstering">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:locale:alternate" content="en_CA">
+<meta property="og:title" content="Opera Upholstering — Rembourrage, restauration et cannage · Montréal">
+<meta property="og:description" content="Atelier de rembourrage sur la Plaza Saint-Hubert depuis 1955. Restauration de meubles anciens, cannage, banquettes, têtes de lit. Des centaines de tissus en magasin.">
+<meta property="og:url" content="https://operaupholstering.com/">
+<meta property="og:image" content="https://operaupholstering.com/assets/seq/f_30.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#26282C">
 <link rel="icon" href="assets/logo-opera.png">
+<link rel="apple-touch-icon" href="assets/logo-opera.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=388d9a77">
+<link rel="stylesheet" href="assets/site.css?v=b6ae59c3">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+  "name": "Opera Upholstering",
+  "alternateName": "Opéra Rembourrage",
+  "description": "Atelier de rembourrage, restauration de meubles anciens et cannage tissé à la main, rue Saint-Hubert à Montréal depuis 1955.",
+  "url": "https://operaupholstering.com/",
+  "telephone": "+1-514-270-4352",
+  "foundingDate": "1955",
+  "priceRange": "$$",
+  "image": "https://operaupholstering.com/assets/seq/f_30.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "7498 rue Saint-Hubert",
+    "addressLocality": "Montréal",
+    "addressRegion": "QC",
+    "postalCode": "H2R 2N3",
+    "addressCountry": "CA"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 45.5449, "longitude": -73.6161 },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "17:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "17:00" }
+  ],
+  "availableLanguage": ["fr", "en"],
+  "areaServed": ["Montréal", "Laval", "Rive-Sud", "Villeray", "Rosemont", "Outremont", "Westmount"],
+  "knowsAbout": ["rembourrage", "restauration de meubles anciens", "cannage", "banquettes", "têtes de lit", "finition du bois"]
+}
+</script>
 <script>
 /* Avant la premiere peinture : on saute l'ouverture si elle a deja
    ete vue dans cette session ou si le mouvement est desactive.
@@ -20,6 +65,8 @@
   }
 })();
 </script>
+</head>
+<body>
 
 <div class="splash" id="splash" aria-hidden="true">
   <div class="splash-lock">
@@ -46,12 +93,27 @@
       <a href="index.html#soumission" data-en="Contact">Contact</a>
     </nav>
     <div class="navtools">
+      <button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="mobilemenu">
+        <span class="bars" aria-hidden="true"><i></i><i></i></span>
+        <span class="menubtn-t" data-en="Menu">Menu</span>
+      </button>
       <div class="langtog" role="group" aria-label="Langue / Language">
         <button type="button" id="btn-fr" aria-pressed="true">FR</button>
         <button type="button" id="btn-en" aria-pressed="false">EN</button>
       </div>
       <a class="btn" href="index.html#soumission" data-en="Get a quote">Soumission</a>
     </div>
+  </div>
+  <div class="mobilemenu" id="mobilemenu" hidden>
+    <nav aria-label="Menu">
+      <a href="index.html" aria-current="page" data-en="Home">Accueil</a>
+      <a href="a-propos.html" data-en="About">À propos</a>
+      <a href="savoir-faire.html" data-en="Craft">Savoir-faire</a>
+      <a href="cannage.html" data-en="Caning">Cannage</a>
+      <a href="tissus.html" data-en="The fabrics">Les tissus</a>
+      <a href="index.html#soumission" data-en="Contact">Contact</a>
+      <a class="mm-tel" href="tel:+15142704352">(514) 270-4352</a>
+    </nav>
   </div>
 </header>
 <div class="statusbar">
@@ -258,7 +320,7 @@
         <p style="margin-top:14px"><a href="tel:+15142704352">(514) 270-4352</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
       </div>
       <div>
-        <h4 data-en="Services">Services</h4>
+        <p class="flabel" data-en="Services">Services</p>
         <p><a href="index.html#services" data-en="Armchairs &amp; sofas">Fauteuils &amp; sofas</a><br>
         <a href="index.html#services" data-en="Antique restoration">Restauration d’antiquités</a><br>
         <a href="cannage.html" data-en="Cane, rush &amp; wicker">Cannage, jonc &amp; rotin</a><br>
@@ -269,7 +331,7 @@
         <a href="index.html#services" data-en="Frames &amp; springs">Structure &amp; ressorts</a></p>
       </div>
       <div>
-        <h4 data-en="Learn">Comprendre</h4>
+        <p class="flabel" data-en="Learn">Comprendre</p>
         <p><a href="tissus.html" data-en="The fabric library">La bibliothèque de tissus</a><br>
         <a href="tissus.html#performance" data-en="Which cloth survives your household">Quel tissu survit à votre maison</a><br>
         <a href="savoir-faire.html" data-en="What is under the fabric">Ce qu’il y a sous le tissu</a><br>
@@ -278,7 +340,7 @@
         <a href="savoir-faire.html#questions" data-en="Questions">Questions</a></p>
       </div>
       <div>
-        <h4 data-en="Served areas">Secteurs desservis</h4>
+        <p class="flabel" data-en="Served areas">Secteurs desservis</p>
         <p data-en="Villeray · Petite-Patrie · Rosemont · Plateau-Mont-Royal · Outremont · Ahuntsic · Mile End · Saint-Léonard · Westmount · Town of Mount Royal · Laval · South Shore">Villeray · Petite-Patrie · Rosemont · Plateau-Mont-Royal · Outremont · Ahuntsic · Mile End · Saint-Léonard · Westmount · Mont-Royal · Laval · Rive-Sud</p>
       </div>
     </div>
@@ -304,4 +366,7 @@
   <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
 </div>
 
-<script src="assets/site.js?v=020d1ace"></script>
+<script src="assets/site.js?v=3ab1385a"></script>
+
+</body>
+</html>

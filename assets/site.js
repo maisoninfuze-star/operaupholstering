@@ -29,6 +29,22 @@ document.querySelectorAll('#btn-fr').forEach(function(b){ b.addEventListener('cl
 document.querySelectorAll('#btn-en').forEach(function(b){ b.addEventListener('click', function(){ applyLang('en'); }); });
 function t(fr, en){ return LANG === 'en' ? en : fr; }
 
+/* ═══════ 1b · MENU MOBILE ═════════════════════════ */
+(function(){
+  var btn = document.getElementById('menubtn');
+  var panel = document.getElementById('mobilemenu');
+  if(!btn || !panel) return;
+  function set(open){
+    btn.setAttribute('aria-expanded', String(open));
+    panel.hidden = !open;
+  }
+  btn.addEventListener('click', function(){ set(panel.hidden); });
+  panel.addEventListener('click', function(e){ if(e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !panel.hidden){ set(false); btn.focus(); } });
+  /* le panneau appartient au petit écran : on le referme en repassant large */
+  window.addEventListener('resize', function(){ if(window.innerWidth > 1100) set(false); });
+})();
+
 /* ═══════ 2 · LA BIBLIOTHÈQUE ══════════════════════ */
 /* Sélection représentative des collections en magasin.
    Les couleurs à l’écran sont approximatives. */

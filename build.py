@@ -33,17 +33,71 @@ PREPAINT = """<script>
 })();
 </script>"""
 
-def head(title, desc):
-    return f'''<meta charset="utf-8">
+SITE = 'https://operaupholstering.com/'
+OG_IMAGE = SITE + 'assets/seq/f_30.jpg'
+
+SCHEMA = """<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+  "name": "Opera Upholstering",
+  "alternateName": "Op\u00e9ra Rembourrage",
+  "description": "Atelier de rembourrage, restauration de meubles anciens et cannage tiss\u00e9 \u00e0 la main, rue Saint-Hubert \u00e0 Montr\u00e9al depuis 1955.",
+  "url": "https://operaupholstering.com/",
+  "telephone": "+1-514-270-4352",
+  "foundingDate": "1955",
+  "priceRange": "$$",
+  "image": "https://operaupholstering.com/assets/seq/f_30.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "7498 rue Saint-Hubert",
+    "addressLocality": "Montr\u00e9al",
+    "addressRegion": "QC",
+    "postalCode": "H2R 2N3",
+    "addressCountry": "CA"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 45.5449, "longitude": -73.6161 },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "17:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "17:00" }
+  ],
+  "availableLanguage": ["fr", "en"],
+  "areaServed": ["Montr\u00e9al", "Laval", "Rive-Sud", "Villeray", "Rosemont", "Outremont", "Westmount"],
+  "knowsAbout": ["rembourrage", "restauration de meubles anciens", "cannage", "banquettes", "t\u00eates de lit", "finition du bois"]
+}
+</script>"""
+
+def head(title, desc, page):
+    canon = SITE + ('' if page == 'index.html' else page)
+    og = OG_IMAGE
+    return f'''<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+<link rel="canonical" href="{canon}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Opera Upholstering">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:locale:alternate" content="en_CA">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{canon}">
+<meta property="og:image" content="{og}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#26282C">
 <link rel="icon" href="assets/logo-opera.png">
+<link rel="apple-touch-icon" href="assets/logo-opera.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
 <link rel="stylesheet" href="assets/site.css?v={ver('assets/site.css')}">
-{PREPAINT}
+{SCHEMA}
+{{PREPAINT}}
+</head>
+<body>
 '''
 
 def header(current):
@@ -73,12 +127,26 @@ def header(current):
 ''' + '\n'.join(links) + '''
     </nav>
     <div class="navtools">
+      <button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="mobilemenu">
+        <span class="bars" aria-hidden="true"><i></i><i></i></span>
+        <span class="menubtn-t" data-en="Menu">Menu</span>
+      </button>
       <div class="langtog" role="group" aria-label="Langue / Language">
         <button type="button" id="btn-fr" aria-pressed="true">FR</button>
         <button type="button" id="btn-en" aria-pressed="false">EN</button>
       </div>
       <a class="btn" href="index.html#soumission" data-en="Get a quote">Soumission</a>
     </div>
+  </div>
+  <div class="mobilemenu" id="mobilemenu" hidden>
+    <nav aria-label="Menu">
+''' + '\n'.join(
+      '      <a href="%s"%s data-en="%s">%s</a>' % (h, ' aria-current="page"' if h == current else '', e, f)
+      for h, f, e in NAV) + '''
+      <a href="tissus.html" data-en="The fabrics">Les tissus</a>
+      <a href="index.html#soumission" data-en="Contact">Contact</a>
+      <a class="mm-tel" href="tel:+15142704352">(514) 270-4352</a>
+    </nav>
   </div>
 </header>
 '''
@@ -102,7 +170,7 @@ FOOTER = '''<footer>
         <p style="margin-top:14px"><a href="tel:+15142704352">(514) 270-4352</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
       </div>
       <div>
-        <h4 data-en="Services">Services</h4>
+        <p class="flabel" data-en="Services">Services</p>
         <p><a href="index.html#services" data-en="Armchairs &amp; sofas">Fauteuils &amp; sofas</a><br>
         <a href="index.html#services" data-en="Antique restoration">Restauration d’antiquités</a><br>
         <a href="cannage.html" data-en="Cane, rush &amp; wicker">Cannage, jonc &amp; rotin</a><br>
@@ -113,7 +181,7 @@ FOOTER = '''<footer>
         <a href="index.html#services" data-en="Frames &amp; springs">Structure &amp; ressorts</a></p>
       </div>
       <div>
-        <h4 data-en="Learn">Comprendre</h4>
+        <p class="flabel" data-en="Learn">Comprendre</p>
         <p><a href="tissus.html" data-en="The fabric library">La bibliothèque de tissus</a><br>
         <a href="tissus.html#performance" data-en="Which cloth survives your household">Quel tissu survit à votre maison</a><br>
         <a href="savoir-faire.html" data-en="What is under the fabric">Ce qu’il y a sous le tissu</a><br>
@@ -122,7 +190,7 @@ FOOTER = '''<footer>
         <a href="savoir-faire.html#questions" data-en="Questions">Questions</a></p>
       </div>
       <div>
-        <h4 data-en="Served areas">Secteurs desservis</h4>
+        <p class="flabel" data-en="Served areas">Secteurs desservis</p>
         <p data-en="Villeray · Petite-Patrie · Rosemont · Plateau-Mont-Royal · Outremont · Ahuntsic · Mile End · Saint-Léonard · Westmount · Town of Mount Royal · Laval · South Shore">Villeray · Petite-Patrie · Rosemont · Plateau-Mont-Royal · Outremont · Ahuntsic · Mile End · Saint-Léonard · Westmount · Mont-Royal · Laval · Rive-Sud</p>
       </div>
     </div>
@@ -153,7 +221,7 @@ FOOTER = '''<footer>
 
 def page(filename, title, desc, body, statusbar=False):
     footer = FOOTER.replace('{JSVER}', ver('assets/site.js'))
-    html = head(title, desc) + '\n' + header(filename) + (STATUSBAR if statusbar else '') + '\n<main id="contenu">\n' + body + '\n</main>\n\n' + footer
+    html = head(title, desc, filename).replace('{PREPAINT}', PREPAINT) + '\n' + header(filename) + (STATUSBAR if statusbar else '') + '\n<main id="contenu">\n' + body + '\n</main>\n\n' + footer + '\n</body>\n</html>\n'
     pathlib.Path(filename).write_text(html, encoding='utf-8')
     print('wrote', filename, len(html), 'bytes')
 
@@ -322,7 +390,7 @@ APROPOS = '''<section>
   <div class="wrap">
     <div class="sec-head rise">
       <span class="lbl" data-en="About">À propos</span>
-      <h2 data-en="The shop on Saint-Hubert">L’atelier de la rue Saint-Hubert</h2>
+      <h1 data-en="The shop on Saint-Hubert">L’atelier de la rue Saint-Hubert</h1>
       <p class="kicker" data-en="Opera has been upholstering furniture at 7498 rue Saint-Hubert since 1955. Same trade, same street, three generations of customers.">Opera rembourre des meubles au 7498, rue Saint-Hubert depuis 1955. Le même métier, la même rue, trois générations de clients.</p>
     </div>
 
@@ -332,10 +400,20 @@ APROPOS = '''<section>
         <p class="muted" data-en="Everything is done on site: stripping, frame repair, webbing, springs, stuffing, sewing, caning and wood finishing. Nothing is sent out, which is why the estimate holds and the delay is ours to keep.">Tout se fait sur place : dégarnissage, réparation de structure, sangles, ressorts, bourrage, couture, cannage et finition du bois. Rien n’est envoyé ailleurs, et c’est pour ça que l’estimation tient et que le délai nous appartient.</p>
         <p class="muted" data-en="Customers come with a chair from a grandmother, a sofa that has held up for thirty years, or twelve restaurant banquettes that need to be back in service by Friday. The work is the same: open it, look, and rebuild it properly.">Les clients arrivent avec un fauteuil de grand-mère, un sofa qui a tenu trente ans, ou douze banquettes de restaurant à remettre en service pour vendredi. Le travail est le même : ouvrir, regarder, et refaire les choses comme il faut.</p>
       </div>
-      <figure class="fig-wide rise">
-        <img src="assets/etabli.jpg" alt="L’établi de l’atelier : tendeur à sangles, jute, ficelle, semences et une bergère à demi dégarnie." loading="lazy">
-        <figcaption data-en="The bench">L’établi</figcaption>
-      </figure>
+      <div class="cols" data-stagger style="gap:16px">
+        <figure class="fig-sq rise">
+          <img src="assets/etabli.jpg" alt="L’établi de l’atelier : tendeur à sangles, jute, ficelle, semences et une bergère à demi dégarnie." loading="lazy" width="1100" height="1100">
+          <figcaption data-en="The bench">L’établi</figcaption>
+        </figure>
+        <figure class="fig-sq rise">
+          <img src="assets/semences.jpg" alt="Mains plantant des semences d’acier bleui le long de la traverse d’un fauteuil." loading="lazy" width="1100" height="1100">
+          <figcaption data-en="Tacks, set by hand">Semences, posées à la main</figcaption>
+        </figure>
+        <figure class="fig-sq rise">
+          <img src="assets/passementerie.jpg" alt="Galon, cordonnet, frange, glands et clous de laiton sur une table de noyer." loading="lazy" width="1100" height="1100">
+          <figcaption data-en="Trim and brass nails">Passementerie et clous de laiton</figcaption>
+        </figure>
+      </div>
     </div>
 
     <div class="cols rise" style="margin-top:clamp(30px,4vw,52px)">
