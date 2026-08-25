@@ -329,26 +329,15 @@ function renderTray(){
 
 /* ═══════ 3 · CANNAGE : LES MAILLAGES ══════════════ */
 var WEAVES = [
-  {n:'3/4" & 1" Mesh', k:'open',  s:26, d:['Trous très espacés','Widest hole spacing']},
-  {n:'#107 5/8" Mesh', k:'open',  s:21, d:['Le plus courant','The most common']},
-  {n:'#109 1/2" Mesh', k:'open',  s:17, d:['Chaises fines','Fine chair frames']},
-  {n:'#110 7/16" Mesh',k:'open',  s:15, d:['Bergères et bras','Bergères and arms']},
-  {n:'#111 3/8" Mesh', k:'open',  s:13, d:['Le plus serré','The tightest mesh']},
-  {n:'BASS-1',         k:'close', s:9,  d:['Fibre de tilleul','Basswood fibre']},
-  {n:'#402 Fine Close',k:'close', s:7,  d:['Tissage fin serré','Fine close weave']},
-  {n:'#206 Medium Close',k:'close',s:11,d:['Tissage moyen','Medium close weave']},
-  {n:'#207 5 mm Close',k:'close', s:13, d:['Cinq millimètres','Five millimetre']},
-  {n:'403 & HERR-1',   k:'herr',  s:14, d:['Chevron','Herringbone']},
-  {n:'TEA-1',          k:'close', s:8,  d:['Feuille de thé fine','Fine tea leaf']},
-  {n:'TEA-4',          k:'herr',  s:10, d:['Feuille de thé chevron','Tea leaf herringbone']},
-  {n:'Bamboo Tea',     k:'panel', s:16, d:['Bambou tressé','Woven bamboo']},
-  {n:'X-Weave',        k:'close', s:6,  d:['Toile très fine','Very fine cloth weave']},
-  {n:'Hick Panel',     k:'herr',  s:18, d:['Panneau tressé large','Wide woven panel']},
-  {n:'Tatami',         k:'panel', s:24, d:['Latte japonaise','Japanese slat']},
-  {n:'#1036 Wicker',   k:'close', s:12, d:['Osier','Wicker']},
-  {n:'Radio Weave',    k:'close', s:9,  d:['Grille de radio ancienne','Vintage radio grille']},
-  {n:'#506 Modern',    k:'open',  s:16, d:['Maille carrée moderne','Modern square mesh']},
-  {n:'#807 Modern',    k:'open',  s:19, d:['Maille carrée large','Wide square mesh']}
+  /* Les cinq maillages ouverts : c'est l'espacement des trous qui
+     identifie une chaise, et donc la seule chose que le client a
+     besoin de mesurer. Le reste du stock se voit en magasin. */
+  {n:'3/4" & 1" Mesh', k:'open', s:26, d:['Trous très espacés','Widest hole spacing']},
+  {n:'#107 5/8" Mesh', k:'open', s:21, d:['Le plus courant','The most common']},
+  {n:'#109 1/2" Mesh', k:'open', s:17, d:['Chaises fines','Fine chair frames']},
+  {n:'#110 7/16" Mesh',k:'open', s:15, d:['Bergères et bras','Bergères and arms']},
+  {n:'#111 3/8" Mesh', k:'open', s:13, d:['Le plus serré','The tightest mesh']},
+  {n:'403 & HERR-1',   k:'herr', s:14, d:['Chevron, en feuille','Herringbone, sheet cane']}
 ];
 function meshStyle(w){
   var s = w.s;
