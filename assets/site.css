@@ -167,8 +167,8 @@ h4{font-size:.98rem;line-height:1.3;letter-spacing:0}
 .hero-scrim{
   position:absolute;inset:0;pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(14,15,17,.94) 0%,rgba(14,15,17,.86) 30%,rgba(14,15,17,.55) 58%,rgba(14,15,17,.30) 100%),
-    linear-gradient(0deg,rgba(14,15,17,.55) 0%,transparent 38%);
+    radial-gradient(ellipse 80% 90% at 50% 48%,rgba(14,15,17,.78),rgba(14,15,17,.48) 62%,rgba(14,15,17,.34) 100%),
+    linear-gradient(0deg,rgba(14,15,17,.55) 0%,transparent 34%);
 }
 @media(max-width:940px){
   .hero-scrim{background:linear-gradient(0deg,rgba(14,15,17,.95) 18%,rgba(14,15,17,.72) 55%,rgba(14,15,17,.45) 100%)}
@@ -176,21 +176,23 @@ h4{font-size:.98rem;line-height:1.3;letter-spacing:0}
 .hero-type{
   position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;
   padding:0 clamp(20px,4vw,44px);color:var(--noir-ink);
+  display:flex;flex-direction:column;align-items:center;text-align:center;
 }
 .hero h1{color:var(--noir-ink);margin:22px 0 0;font-size:clamp(2.1rem,4.4vw,3.7rem);text-transform:none;letter-spacing:-.028em;max-width:15ch}
 .hero-sub{
   font-family:'Jost',sans-serif;font-weight:300;font-size:clamp(.62rem,1vw,.78rem);
   letter-spacing:.3em;text-transform:uppercase;color:var(--noir-muted);
-  margin:18px 0 0;padding-top:16px;border-top:1px solid rgba(244,242,237,.18);width:fit-content;white-space:nowrap;
+  margin:18px auto 0;padding-top:16px;border-top:1px solid rgba(244,242,237,.18);width:fit-content;white-space:nowrap;
 }
 .hero .tagline{
   font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:300;
   font-size:clamp(1rem,1.6vw,1.28rem);color:var(--noir-ink);margin:18px 0 0;max-width:26ch;line-height:1.35;
 }
 .hero .lede{color:var(--noir-muted);margin:16px 0 0;max-width:46ch;font-size:.98rem}
-.hero-cta{display:flex;flex-wrap:wrap;gap:11px;margin-top:26px}
-.hero-figures{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:clamp(14px,3vw,44px);margin-top:32px;padding-top:20px;border-top:1px solid rgba(244,242,237,.16)}
+.hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:11px;margin-top:26px}
+.hero-figures{display:grid;grid-template-columns:repeat(4,auto);justify-content:center;gap:clamp(14px,3vw,44px);margin-top:32px;padding-top:20px;border-top:1px solid rgba(244,242,237,.16)}
 @media(max-width:620px){.hero-figures{grid-template-columns:repeat(2,1fr);gap:16px}}
+.fig{text-align:center}
 .fig b{display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:1.7rem;line-height:1;color:var(--noir-ink);font-variant-numeric:tabular-nums}
 .fig span{display:block;font-family:'Jost',sans-serif;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--noir-muted);margin-top:7px;line-height:1.4}
 /* le texte s'efface sur la fin pour laisser voir la pièce terminée */
@@ -201,7 +203,7 @@ h4{font-size:.98rem;line-height:1.3;letter-spacing:0}
 /* ── l'enseigne porte la marque elle-même ────────────────
    Le logotype remplace la phrase d'accroche : la page dit qui
    parle avant de dire quoi que ce soit d'autre. */
-.hero-logo{display:flex;flex-direction:column;align-items:flex-start;margin:22px 0 0;gap:0}
+.hero-logo{display:flex;flex-direction:column;align-items:center;margin:22px 0 0;gap:0}
 .hero-logo img{width:min(46vw,420px);height:auto;filter:invert(1) brightness(1.9)}
 .hero-logo-fr,.hero-logo-en{
   font-family:'Jost',sans-serif;font-weight:400;text-transform:uppercase;

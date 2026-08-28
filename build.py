@@ -484,10 +484,7 @@ HOME = ('''<section class="hero" id="haut">
 
 <section class="sunk" id="cannage-teaser">
   <div class="wrap">
-    <div class="cols-2 rise">
-      <figure class="fig-wide">
-        <img src="assets/cannage/chaise-corde-danoise.jpg" alt="Chaise basse en bois clair, dossier et assise entièrement tissés en corde danoise à l’atelier." loading="lazy" width="900" height="900">
-      </figure>
+    <div class="rise" style="max-width:72ch">
       <div>
         <span class="lbl" data-en="Caning">Cannage</span>
         <h2 style="margin-top:12px" data-en="Hand-woven caning">Cannage tissé à la main</h2>
