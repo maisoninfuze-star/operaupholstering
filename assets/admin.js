@@ -331,12 +331,23 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ site: DATA, textes: TXT, images: imgs })
     })
-    .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, j: j }; }); })
+    .then(function(r){
+      return r.text().then(function(t){
+        var j = null; try { j = JSON.parse(t); } catch(e){}
+        return { ok: r.ok, status: r.status, j: j, raw: t.slice(0, 200) };
+      });
+    })
     .then(function(res){
       setBusy(false);
       if(!res.ok){
-        if(res.j && /Session/.test(res.j.error || '')) return gate(true);
-        $('#state').textContent = (res.j && res.j.error) || 'Échec de la publication.';
+        var m = errText(res.j) || res.raw || '';
+        /* 401 seulement : rouvrir la boîte pour autre chose donnait
+           l'impression que le mot de passe avait été refusé. */
+        if(res.status === 401 && /session/i.test(m)) return gate(true);
+        if(/protected|authenticate|sso/i.test(m)){
+          m = 'Ce déploiement est protégé par Vercel. Ouvrez l’adresse de production (sans -git-…).';
+        }
+        $('#state').textContent = m ? ('Échec : ' + m) : ('Échec de la publication (' + res.status + ').');
         $('#state').className = 'adm-state dirty';
         return;
       }
@@ -401,6 +412,8 @@
         $('#gatemsg').textContent = '';        /* sinon « Vérification… » reste collé */
         $('#gate').hidden = true;
         $('#pass').value = '';
+        $('#state').textContent = 'Connecté.';   /* on distingue « mot de passe refusé » de « publication échouée » */
+        $('#state').className = 'adm-state ok';
         publish();
         return;
       }
