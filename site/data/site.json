@@ -1,0 +1,174 @@
+{
+  "_lisez_moi": "Modifié depuis /admin.html. Après import : python3 build.py",
+  "entreprise": {
+    "nom": "Opera Upholstering",
+    "nom_fr": "Opéra Rembourrage",
+    "telephone": "(514) 270-4352",
+    "telephone_lien": "+15142704352",
+    "adresse": "7498 rue Saint-Hubert",
+    "ville": "Montréal (Québec) H2R 2N3",
+    "ville_courte": "Montréal",
+    "fondation": "1955"
+  },
+  "heures": {
+    "0": null,
+    "1": [
+      "9",
+      "17"
+    ],
+    "2": [
+      "9",
+      "17"
+    ],
+    "3": [
+      "9",
+      "17"
+    ],
+    "4": [
+      "9",
+      "17"
+    ],
+    "5": [
+      "9",
+      "17"
+    ],
+    "6": [
+      "10",
+      "17"
+    ]
+  },
+  "enseigne": {
+    "surtitre_fr": "Rue Saint-Hubert · Montréal",
+    "surtitre_en": "Rue Saint-Hubert · Montréal",
+    "sous_titre_fr": "Rembourrage · Cuir · Restauration · Cannage",
+    "sous_titre_en": "Upholstering · Leather · Restoration · Caning",
+    "accroche_fr": "On ouvre la structure avant de parler de tissu.",
+    "accroche_en": "The frame is opened before any fabric is discussed.",
+    "texte_fr": "Rembourrage complet en tissu et en cuir, restauration de meubles anciens et cannage tissé à la main, au 7498, rue Saint-Hubert depuis 1955. Les estimations se font sur photographies et reviennent le jour ouvrable suivant.",
+    "texte_en": "Full reupholstery in fabric and leather, antique restoration and hand caning at 7498 rue Saint-Hubert since 1955. Estimates are made from photographs and returned the next business day.",
+    "bouton1_fr": "Demander une estimation",
+    "bouton1_en": "Request an estimate",
+    "bouton2_fr": "Voir les réalisations",
+    "bouton2_en": "See the work"
+  },
+  "chiffres": [
+    {
+      "valeur": "71",
+      "label_fr": "ans d’expérience",
+      "label_en": "years of experience"
+    },
+    {
+      "valeur": "4 000+",
+      "label_fr": "tissus en magasin",
+      "label_en": "fabrics in stock"
+    },
+    {
+      "valeur": "20",
+      "label_fr": "maillages de cannage",
+      "label_en": "cane weaves"
+    },
+    {
+      "valeur": "4,3",
+      "label_fr": "Google · 47 avis",
+      "label_en": "Google · 47 reviews"
+    }
+  ],
+  "services": [
+    {
+      "fr": "Fauteuils & sofas",
+      "en": "Armchairs & sofas",
+      "desc_fr": "La pièce est dégarnie jusqu’à la structure. Sangles, ressorts et bourrage sont refaits avant la pose du tissu.",
+      "desc_en": "The piece is stripped to the frame. Webbing, springs and stuffing are rebuilt before the cloth is fitted.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Restauration d’antiquités",
+      "en": "Antique restoration",
+      "desc_fr": "Sangles de jute, crin conservé, ressorts guindés à la main et semences sur les structures d’époque.",
+      "desc_en": "Jute webbing, horsehair kept, hand-tied springs and tacks on period frames.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Cannage & rotin",
+      "en": "Cane & rattan",
+      "desc_fr": "Cannage tissé à la main, trou par trou, ou cannage en feuille posé en rainure. Vingt maillages en stock.",
+      "desc_en": "Cane woven by hand, hole by hole, or sheet cane set into a spline groove. Twenty meshes in stock.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Chaises de salle à manger",
+      "en": "Dining chairs",
+      "desc_fr": "Traitées en lot et chiffrées par ensemble. Un tissu performance convient mieux à une salle à manger.",
+      "desc_en": "Handled as a batch and priced by the set. A performance fabric suits a dining room better.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Têtes de lit",
+      "en": "Headboards",
+      "desc_fr": "Toute hauteur et toute forme : unie, à cannelures ou capitonnée, fixée au mur ou au sommier.",
+      "desc_en": "Any height and any shape: plain, channelled or deep-buttoned, wall or bed mounted.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Coussins & extérieur",
+      "en": "Cushions & outdoor",
+      "desc_fr": "Sunbrella et acryliques teints dans la masse, coupés au gabarit, fil de qualité marine.",
+      "desc_en": "Sunbrella and solution-dyed acrylics, cut to template, marine-grade thread.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Banquettes & contrat",
+      "en": "Banquettes & contract",
+      "desc_fr": "Restaurants, cliniques et hôtellerie. Chiffré au pied linéaire, cotes d’abrasion et d’ignifugation vérifiées.",
+      "desc_en": "Restaurants, clinics and hospitality. Quoted per linear foot, abrasion and fire ratings verified.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Structure & ressorts",
+      "en": "Frames & springs",
+      "desc_fr": "Traverses fendues, blocs de coin remplacés, sièges affaissés, mécanismes d’inclinaison entretenus.",
+      "desc_en": "Cracked rails, corner blocks replaced, sagging seats, recliner mechanisms serviced.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Cuir",
+      "en": "Leather",
+      "desc_fr": "Cuir pleine fleur cousu et tendu à la main : fauteuils, banquettes, capitonnage et sièges d’auto anciens.",
+      "desc_en": "Full-grain leather, sewn and stretched by hand: armchairs, banquettes, buttoning and vintage car seats.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Décapage & finition du bois",
+      "en": "Wood stripping & finishing",
+      "desc_fr": "Le bois apparent est décapé, poncé, teint et refini : vernis, huile ou cire, selon la pièce.",
+      "desc_en": "Show-wood is stripped, sanded, stained and refinished — varnish, oil or wax, to suit the piece.",
+      "meta_fr": "",
+      "meta_en": ""
+    },
+    {
+      "fr": "Cueillette & livraison",
+      "en": "Pick-up & delivery",
+      "desc_fr": "On vient chercher la pièce et on la rapporte, sur l’île de Montréal et en proche banlieue.",
+      "desc_en": "We collect the piece and bring it back, across the island of Montreal and the near suburbs.",
+      "meta_fr": "Sur demande",
+      "meta_en": "On request"
+    },
+    {
+      "fr": "Mousse & coussins",
+      "en": "Foam & cushions",
+      "desc_fr": "Mousse haute densité, enveloppe de duvet ou noyau à ressorts : l’assise se choisit ferme, moyenne ou enveloppante.",
+      "desc_en": "High-density foam, a down wrap or a spring-down core — the seat is chosen firm, medium or sink-in.",
+      "meta_fr": "",
+      "meta_en": ""
+    }
+  ]
+}

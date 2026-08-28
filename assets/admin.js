@@ -359,20 +359,65 @@
     $('#gatemsg').textContent = expired ? 'Session expirée. Entrez le mot de passe.' : '';
     $('#pass').focus();
   }
+  /* Un message d'erreur peut arriver de nous ({error:"…"}) ou d'un
+     intermédiaire — Vercel renvoie {error:{message:"…"}} sur les
+     déploiements de préproduction. On aplatit les deux. */
+  function errText(j){
+    if(!j) return '';
+    var e = j.error;
+    if(typeof e === 'string') return e;
+    if(e && typeof e.message === 'string') return e.message;
+    return '';
+  }
+
   function signIn(){
     var pw = $('#pass').value;
     if(!pw) return;
     $('#gatemsg').textContent = 'Vérification…';
+
+    /* Sans cela, une requête qui n'aboutit jamais laisse « Vérification… »
+       à l'écran indéfiniment. */
+    var done = false;
+    var timer = setTimeout(function(){
+      if(done) return;
+      done = true;
+      $('#gatemsg').textContent = 'Pas de réponse. Vérifiez que vous êtes bien sur l’adresse de production.';
+    }, 12000);
+
     fetch('/api/login', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ passcode: pw })
     })
-    .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, j: j }; }); })
-    .then(function(res){
-      if(res.ok){ $('#gate').hidden = true; $('#pass').value = ''; publish(); }
-      else $('#gatemsg').textContent = (res.j && res.j.error) || 'Refusé.';
+    .then(function(r){
+      return r.text().then(function(t){
+        var j = null;
+        try { j = JSON.parse(t); } catch(e){}
+        return { ok: r.ok, status: r.status, j: j, raw: t };
+      });
     })
-    .catch(function(){ $('#gatemsg').textContent = 'Les fonctions ne répondent pas.'; });
+    .then(function(res){
+      if(done) return; done = true; clearTimeout(timer);
+      if(res.ok){
+        $('#gatemsg').textContent = '';        /* sinon « Vérification… » reste collé */
+        $('#gate').hidden = true;
+        $('#pass').value = '';
+        publish();
+        return;
+      }
+      var msg = errText(res.j);
+      /* La protection de déploiement de Vercel intercepte avant nos
+         fonctions : le mot de passe n'y est pour rien, l'adresse si. */
+      if(/protected|authenticate|sso/i.test(msg + res.raw)){
+        msg = 'Ce déploiement est protégé par Vercel. Ouvrez l’adresse de production (sans -git-…) pour vous connecter.';
+      } else if(!msg){
+        msg = 'Refusé (' + res.status + ').';
+      }
+      $('#gatemsg').textContent = msg;
+    })
+    .catch(function(){
+      if(done) return; done = true; clearTimeout(timer);
+      $('#gatemsg').textContent = 'Les fonctions ne répondent pas.';
+    });
   }
 
   /* ── Démarrage ────────────────────────────────────────── */
