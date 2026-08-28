@@ -55,6 +55,16 @@
 </script>
 <script id="opera-hours" type="application/json">{"0": null, "1": ["9", "17"], "2": ["9", "17"], "3": ["9", "17"], "4": ["9", "17"], "5": ["9", "17"], "6": ["10", "17"]}</script>
 <script>
+/* Avant la première peinture : une adresse de préproduction ne peut pas
+   authentifier, Vercel intercepte en amont. On y renvoie tout de suite. */
+(function(){
+  var h = location.hostname;
+  if(/-git-/.test(h) || /^operaupholstering-[a-z0-9]{6,}/.test(h)){
+    location.replace('https://operaupholstering.vercel.app' + location.pathname + location.search);
+  }
+})();
+</script>
+<script>
 /* Avant la premiere peinture : on saute l'ouverture si elle a deja
    ete vue dans cette session ou si le mouvement est desactive.
    #intro la rejoue, #introhold la fige pour la revue. */
@@ -198,7 +208,7 @@
 </section>
 
 <script src="assets/admin-zip.js"></script>
-<script src="assets/admin.js?v=c42dcecb"></script>
+<script src="assets/admin.js?v=d7392b1e"></script>
 </main>
 
 <footer>

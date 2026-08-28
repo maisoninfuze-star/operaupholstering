@@ -442,22 +442,19 @@
     ['Photographies', paneImages]
   ];
 
-  /* Les adresses de préproduction (-git-…, -inder2…) passent par la
-     protection Vercel : la connexion y échoue quoi qu'on tape. Autant
-     le dire en arrivant plutôt qu'après trois essais. */
-  function warnPreview(){
-    var h = location.hostname;
-    if(!/-git-|-[a-z0-9]{9,}\.vercel\.app$/.test(h)) return;
-    var prod = 'https://operaupholstering.vercel.app' + location.pathname;
-    var b = el('div', 'adm-preview');
-    b.innerHTML = 'Vous êtes sur une adresse de préproduction : la connexion y est bloquée par Vercel. ' +
-                  '<a href="' + prod + '">Ouvrir l’adresse de production</a>';
-    var bar = $('.adm-bar');
-    bar.parentNode.insertBefore(b, bar);
+  /* Les adresses de préproduction (-git-…) passent par la protection
+     Vercel : aucune connexion n'y aboutit, quel que soit le mot de
+     passe. Plutôt que de le signaler et laisser essayer, on renvoie
+     directement vers la production. */
+  var PROD = 'https://operaupholstering.vercel.app';
+  function isPreview(h){
+    return /-git-/.test(h) || /^operaupholstering-[a-z0-9]{6,}/.test(h);
+  }
+  if(isPreview(location.hostname)){
+    location.replace(PROD + location.pathname + location.search);
   }
 
   function boot(d, t, i){
-    warnPreview();
     DATA = d; TXT = t; IMGS = i;
     var tabs = $('#tabs'), body = $('#pane');
     TABS.forEach(function(t, i){

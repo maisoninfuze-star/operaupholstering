@@ -108,6 +108,16 @@ def head(title, desc, page, noindex=False):
 <link rel="stylesheet" href="assets/site.css?v={ver('assets/site.css')}">
 {SCHEMA}
 <script id="opera-hours" type="application/json">{HOURS_JSON}</script>
+<script>
+/* Avant la première peinture : une adresse de préproduction ne peut pas
+   authentifier, Vercel intercepte en amont. On y renvoie tout de suite. */
+(function(){{
+  var h = location.hostname;
+  if(/-git-/.test(h) || /^operaupholstering-[a-z0-9]{{6,}}/.test(h)){{
+    location.replace('https://operaupholstering.vercel.app' + location.pathname + location.search);
+  }}
+}})();
+</script>
 {{PREPAINT}}
 </head>
 <body>
