@@ -52,7 +52,7 @@ SCHEMA = """<script type="application/ld+json">
   "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
   "name": "Opera Upholstering",
   "alternateName": "Op\u00e9ra Rembourrage",
-  "description": "Atelier de rembourrage, restauration de meubles anciens et cannage tiss\u00e9 \u00e0 la main, rue Saint-Hubert \u00e0 Montr\u00e9al depuis 1955.",
+  "description": "Atelier de rembourrage, restauration de meubles anciens et cannage tiss\u00e9 \u00e0 la main \u00e0 Montr\u00e9al depuis 1955, aujourd\u2019hui rue Saint-Hubert.",
   "url": "https://operaupholstering.com/",
   "telephone": "+1-514-270-4352",
   "email": "contact@operarembourrage.ca",
@@ -188,7 +188,7 @@ FOOTER = '''<footer>
     <div class="cols">
       <div>
         <div class="flogo"><img src="assets/logo-opera.png" alt="Opera Upholstering"></div>
-        <p style="margin-top:16px;max-width:34ch" data-en="Upholstery, antique restoration and hand caning on rue Saint-Hubert since 1955.">Rembourrage, restauration d’antiquités et cannage tissé à la main sur la rue Saint-Hubert depuis 1955.</p>
+        <p style="margin-top:16px;max-width:34ch" data-en="Upholstery, antique restoration and hand caning in Montréal since 1955.">Rembourrage, restauration d’antiquités et cannage tissé à la main à Montréal depuis 1955.</p>
         <p style="margin-top:14px"><a href="tel:{BIZ[telephone_lien]}">{BIZ[telephone]}</a><br><a class="mail-swap" data-mail-fr="{BIZ[courriel_fr]}" data-mail-en="{BIZ[courriel_en]}" href="mailto:{BIZ[courriel_fr]}">{BIZ[courriel_fr]}</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
       </div>
       <div>
@@ -486,7 +486,7 @@ HOME = ('''<section class="hero" id="haut">
   <div class="wrap">
     <div class="cols-2 rise">
       <figure class="fig-wide">
-        <img src="assets/travaux/rocking-cannage.jpg" alt="Chaise berçante en rotin recannée à la main à l’atelier." loading="lazy" width="1100" height="1100">
+        <img src="assets/cannage/chaise-corde-danoise.jpg" alt="Chaise basse en bois clair, dossier et assise entièrement tissés en corde danoise à l’atelier." loading="lazy" width="900" height="900">
       </figure>
       <div>
         <span class="lbl" data-en="Caning">Cannage</span>
@@ -503,7 +503,7 @@ HOME = ('''<section class="hero" id="haut">
 
 page('index.html',
      'Opera Upholstering — Rembourrage, restauration et cannage · Montréal',
-     'Atelier de rembourrage sur la rue Saint-Hubert depuis 1955. Restauration de meubles anciens, cannage, banquettes, têtes de lit. Des centaines de tissus en magasin.',
+     'Atelier de rembourrage à Montréal depuis 1955, aujourd’hui rue Saint-Hubert. Restauration de meubles anciens, cannage, banquettes, têtes de lit.',
      HOME, statusbar=True)
 
 # ═════════════════════════ SOUS-PAGES ═════════════════════════
@@ -513,12 +513,12 @@ APROPOS = '''<section>
     <div class="sec-head rise">
       <span class="lbl" data-en="About">À propos</span>
       <h1 data-en="The shop on Saint-Hubert">L’atelier de la rue Saint-Hubert</h1>
-      <p class="kicker" data-en="Opera has been upholstering furniture at 7498 rue Saint-Hubert since 1955. Same trade, same street, three generations of customers.">Opera rembourre des meubles au 7498, rue Saint-Hubert depuis 1955. Le même métier, la même rue, trois générations de clients.</p>
+      <p class="kicker" data-en="Three generations of customers have passed through the shop’s doors. The same trade, done the same way, now at 7498 rue Saint-Hubert.">Trois générations de clients ont passé la porte de l’atelier. Le même métier, fait de la même façon, aujourd’hui au 7498, rue Saint-Hubert.</p>
     </div>
 
     <div class="cols-2 rise">
       <div>
-        <p class="muted" data-en="The shop opened when rue Saint-Hubert was still lined with tailors and furriers. Most of those trades have gone. Upholstery stayed, because a well-built chair is worth repairing and because someone has to know how.">L’atelier a ouvert quand la rue Saint-Hubert comptait encore des tailleurs et des fourreurs. La plupart de ces métiers ont disparu. Le rembourrage est resté, parce qu’un fauteuil bien bâti mérite d’être réparé et parce qu’il faut bien que quelqu’un sache le faire.</p>
+        <p class="muted" data-en="Rue Saint-Hubert once counted tailors and furriers by the dozen. Most of those trades have gone. Upholstery stayed, because a well-built chair is worth repairing and because someone has to know how.">La rue Saint-Hubert a compté des tailleurs et des fourreurs par dizaines. La plupart de ces métiers ont disparu. Le rembourrage est resté, parce qu’un fauteuil bien bâti mérite d’être réparé et parce qu’il faut bien que quelqu’un sache le faire.</p>
         <p class="muted" data-en="Everything is done on site: stripping, frame repair, webbing, springs, stuffing, sewing, caning and wood finishing. Nothing is sent out, which is why the estimate holds and the delay is ours to keep.">Tout se fait sur place : dégarnissage, réparation de structure, sangles, ressorts, bourrage, couture, cannage et finition du bois. Rien n’est envoyé ailleurs, et c’est pour ça que l’estimation tient et que le délai nous appartient.</p>
         <p class="muted" data-en="Customers come with a chair from a grandmother, a sofa that has held up for thirty years, or twelve restaurant banquettes that need to be back in service by Friday. The work is the same: open it, look, and rebuild it properly.">Les clients arrivent avec un fauteuil de grand-mère, un sofa qui a tenu trente ans, ou douze banquettes de restaurant à remettre en service pour vendredi. Le travail est le même : ouvrir, regarder, et refaire les choses comme il faut.</p>
       </div>
@@ -539,7 +539,7 @@ APROPOS = '''<section>
     </div>
 
     <div class="cols rise" style="margin-top:clamp(30px,4vw,52px)">
-      <div><h3 data-en="Since 1955">Depuis 1955</h3><p class="muted small" data-en="Seventy-one years at the same address, through the whole life of the street and its marquee.">Soixante et onze ans à la même adresse, à travers toute la vie de la rue et de sa marquise.</p></div>
+      <div><h3 data-en="Since 1955">Depuis 1955</h3><p class="muted small" data-en="A trade practised without interruption, from one generation of customers to the next.">Un métier exercé sans interruption, d’une génération de clients à la suivante.</p></div>
       <div><h3 data-en="Everything under one roof">Tout sous un même toit</h3><p class="muted small" data-en="Upholstery, antique restoration, caning, wood finishing, commercial banquettes, pick-up and delivery.">Rembourrage, restauration d’antiquités, cannage, finition du bois, banquettes commerciales, cueillette et livraison.</p></div>
       <div><h3 data-en="French and English">Français et anglais</h3><p class="muted small" data-en="At the counter and on the phone, whichever you are more comfortable in.">Au comptoir et au téléphone, dans la langue qui vous convient.</p></div>
       <div><h3 data-en="Free estimates">Estimation gratuite</h3><p class="muted small" data-en="Send three photographs and a written figure comes back the next business day.">Envoyez trois photographies et un chiffre écrit revient le jour ouvrable suivant.</p></div>
@@ -553,8 +553,8 @@ APROPOS = '''<section>
 </section>'''
 
 page('a-propos.html',
-     'À propos — Opera Upholstering, rue Saint-Hubert depuis 1955',
-     'Atelier de rembourrage au 7498, rue Saint-Hubert depuis 1955. Rembourrage, restauration d’antiquités, cannage et finition du bois, tout sur place.',
+     'À propos — Opera Upholstering, Montréal',
+     'Rembourrage, restauration d’antiquités, cannage et finition du bois, tout sur place, au 7498, rue Saint-Hubert à Montréal.',
      APROPOS)
 
 # ═════════════════════════ ADMIN ═════════════════════════
