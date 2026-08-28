@@ -482,18 +482,6 @@
       /* on tente directement : si la session manque, /api/save répond 401 */
       publish();
     });
-    var lo = $('#logout');
-    if(lo) lo.addEventListener('click', function(){
-      fetch('/api/session', { method: 'DELETE' })
-        .then(function(){ location.reload(); })
-        .catch(function(){ location.reload(); });
-    });
-    var sb = $('#signin');
-    if(sb){
-      sb.addEventListener('click', signIn);
-      $('#pass').addEventListener('keydown', function(e){ if(e.key === 'Enter') signIn(); });
-      $('#gatecancel').addEventListener('click', function(){ $('#gate').hidden = true; });
-    }
     $('#copy').addEventListener('click', copy);
     window.addEventListener('beforeunload', function(e){
       if(DIRTY){ e.preventDefault(); e.returnValue = ''; }
@@ -518,6 +506,24 @@
      — pas de fonctions du tout (serveur local, python3 serve.py)
                                -> l'éditeur s'ouvre en mode dossier .zip,
                                   puisqu'aucune publication n'est possible. */
+  /* La boîte d'entrée se câble ici, pas dans boot() : verrouillée,
+     la page n'a encore rien chargé, et un bouton Entrer inerte est
+     une porte sans poignée. */
+  (function(){
+    var sb = $('#signin');
+    if(sb){
+      sb.addEventListener('click', signIn);
+      $('#pass').addEventListener('keydown', function(e){ if(e.key === 'Enter') signIn(); });
+      $('#gatecancel').addEventListener('click', function(){ $('#gate').hidden = true; });
+    }
+    var lo = $('#logout');
+    if(lo) lo.addEventListener('click', function(){
+      fetch('/api/session', { method: 'DELETE' })
+        .then(function(){ location.reload(); })
+        .catch(function(){ location.reload(); });
+    });
+  })();
+
   document.body.classList.add('adm-locked');
   fetch('/api/session', { cache: 'no-store' })
     .then(function(r){
