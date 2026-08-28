@@ -180,6 +180,18 @@
     </div>
     <p class="muted small">Recommandation : garder <code>BUILD_ADMIN = False</code> pour la mise en ligne, et remettre <code>True</code> quand vous travaillez sur le site en local.</p>
 
+    <h2 style="margin-top:34px">Essayer la connexion en local</h2>
+    <p class="muted" style="max-width:70ch">Le serveur local ne sait qu’envoyer des fichiers : il n’exécute pas <code>api/login.js</code>, donc le mot de passe n’a rien à interroger et « Publier en ligne » ne peut pas aboutir. C’est normal, et le bouton le dit plutôt que d’échouer sans explication.</p>
+    <div class="tablewrap" style="margin:14px 0 0">
+      <table>
+        <thead><tr><th>Pour</th><th>Lancer</th><th>Ce qui marche</th></tr></thead>
+        <tbody>
+          <tr><td>Écrire et relire</td><td><code>python3 serve.py</code></td><td>Tout l’éditeur, et « Enregistrer le dossier ».</td></tr>
+          <tr><td>Essayer la connexion</td><td><code>vercel dev</code></td><td>Le mot de passe et la publication, avec les valeurs du fichier <code>.env</code>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2 style="margin-top:34px">Ce qui ne se modifie pas ici</h2>
     <p class="muted" style="max-width:70ch">Les textes contenant des liens ou de la mise en forme restent dans <code>content.json</code>, et l’apparence dans <code>assets/site.css</code>. Ils se modifient dans un éditeur de texte. Un vrai panneau où l’on écrit tout depuis le navigateur, sans fichier à déplacer, demanderait un hébergement avec base de données — ce site est fait de fichiers immobiles, ce qui le rend rapide et gratuit à héberger.</p>
   </div>
