@@ -7,6 +7,13 @@
 import { verifySession, readCookie, SESSION_COOKIE, authConfigured } from './_auth.js';
 
 export default async function handler(req, res) {
+  /* DELETE : se déconnecter — le cookie est annulé côté serveur,
+     seul endroit d'où un cookie HttpOnly peut l'être. */
+  if (req.method === 'DELETE') {
+    res.setHeader('Set-Cookie',
+      `${SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`);
+    return res.status(200).json({ ok: true });
+  }
   if (req.method !== 'GET') return res.status(405).json({ error: 'méthode' });
   if (!authConfigured()) {
     return res.status(503).json({ error: "ADMIN_PASSCODE et ADMIN_SESSION_SECRET ne sont pas réglés." });

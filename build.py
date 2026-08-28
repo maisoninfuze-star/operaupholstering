@@ -569,6 +569,7 @@ ADMIN_BODY = '''<section>
       <button class="adm-btn ghost" id="copy" type="button">Copier</button>
       <button class="adm-btn ghost" id="save" type="button" disabled>Enregistrer le dossier</button>
       <button class="adm-btn" id="publish" type="button">Publier en ligne</button>
+      <button class="adm-btn ghost" id="logout" type="button" title="Fermer la session">Sortir</button>
     </div>
 
     <div class="adm-gate" id="gate" hidden>

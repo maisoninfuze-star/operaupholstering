@@ -482,6 +482,12 @@
       /* on tente directement : si la session manque, /api/save répond 401 */
       publish();
     });
+    var lo = $('#logout');
+    if(lo) lo.addEventListener('click', function(){
+      fetch('/api/session', { method: 'DELETE' })
+        .then(function(){ location.reload(); })
+        .catch(function(){ location.reload(); });
+    });
     var sb = $('#signin');
     if(sb){
       sb.addEventListener('click', signIn);
