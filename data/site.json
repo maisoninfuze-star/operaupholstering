@@ -8,7 +8,9 @@
     "adresse": "7498 rue Saint-Hubert",
     "ville": "Montréal (Québec) H2R 2N3",
     "ville_courte": "Montréal",
-    "fondation": "1955"
+    "fondation": "1955",
+    "courriel_fr": "contact@operarembourrage.ca",
+    "courriel_en": "contact@operaupholstering.ca"
   },
   "heures": {
     "0": null,

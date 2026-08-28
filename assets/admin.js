@@ -54,6 +54,8 @@
     var g = el('div', 'adm-grid');
     g.appendChild(field(b, 'telephone', 'Téléphone affiché'));
     g.appendChild(field(b, 'telephone_lien', 'Téléphone cliquable', {hint:'Format international, sans espaces : +15142704352'}));
+    g.appendChild(field(b, 'courriel_fr', 'Courriel · version française'));
+    g.appendChild(field(b, 'courriel_en', 'Courriel · version anglaise'));
     g.appendChild(field(b, 'adresse', 'Adresse'));
     g.appendChild(field(b, 'ville', 'Ville et code postal'));
     g.appendChild(field(b, 'ville_courte', 'Ville (bandeau)'));

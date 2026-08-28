@@ -55,6 +55,7 @@ SCHEMA = """<script type="application/ld+json">
   "description": "Atelier de rembourrage, restauration de meubles anciens et cannage tiss\u00e9 \u00e0 la main, rue Saint-Hubert \u00e0 Montr\u00e9al depuis 1955.",
   "url": "https://operaupholstering.com/",
   "telephone": "+1-514-270-4352",
+  "email": "contact@operarembourrage.ca",
   "foundingDate": "1955",
   "priceRange": "$$",
   "image": "https://operaupholstering.com/assets/hero.jpg",
@@ -188,7 +189,7 @@ FOOTER = '''<footer>
       <div>
         <div class="flogo"><img src="assets/logo-opera.png" alt="Opera Upholstering"></div>
         <p style="margin-top:16px;max-width:34ch" data-en="Upholstery, antique restoration and hand caning on rue Saint-Hubert since 1955.">Rembourrage, restauration d’antiquités et cannage tissé à la main sur la rue Saint-Hubert depuis 1955.</p>
-        <p style="margin-top:14px"><a href="tel:{BIZ[telephone_lien]}">{BIZ[telephone]}</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
+        <p style="margin-top:14px"><a href="tel:{BIZ[telephone_lien]}">{BIZ[telephone]}</a><br><a class="mail-swap" data-mail-fr="{BIZ[courriel_fr]}" data-mail-en="{BIZ[courriel_en]}" href="mailto:{BIZ[courriel_fr]}">{BIZ[courriel_fr]}</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
       </div>
       <div>
         <p class="flabel" data-en="Services">Services</p>

@@ -24,10 +24,21 @@ function applyLang(lang){
   if(be) be.setAttribute('aria-pressed', String(lang === 'en'));
   try{ localStorage.setItem('opera-lang', lang); }catch(e){}
   renderFilters(); renderSwatches(); renderWeaves(); renderTray(); buildPieceSelect(); calc(); openState();
+  syncMails();
 }
 document.querySelectorAll('#btn-fr').forEach(function(b){ b.addEventListener('click', function(){ applyLang('fr'); }); });
 document.querySelectorAll('#btn-en').forEach(function(b){ b.addEventListener('click', function(){ applyLang('en'); }); });
 function t(fr, en){ return LANG === 'en' ? en : fr; }
+
+/* Deux adresses, une par langue : les liens marqués data-mail-*
+   basculent avec le reste de la page. */
+function syncMails(){
+  document.querySelectorAll('[data-mail-fr]').forEach(function(a){
+    var m = LANG === 'en' ? a.getAttribute('data-mail-en') : a.getAttribute('data-mail-fr');
+    if(!m) return;
+    if(a.tagName === 'A'){ a.href = 'mailto:' + m; a.textContent = m; }
+  });
+}
 
 /* ═══════ 1b · MENU MOBILE ═════════════════════════ */
 (function(){
@@ -547,7 +558,9 @@ if(qf) qf.addEventListener('submit', function(e){
   lines.push('', t('(Trois photos jointes : la pièce, l’usure, une main pour l’échelle.)',
                    '(Three photos attached: the piece, the wear, a hand for scale.)'));
   var subject = t('Demande de soumission — ', 'Quote request — ') + (g('q-piece') || t('rembourrage', 'upholstery'));
-  window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+  var form = document.getElementById('quoteform');
+  var dest = (LANG === 'en' ? form.getAttribute('data-mail-en') : form.getAttribute('data-mail-fr')) || '';
+  window.location.href = 'mailto:' + dest + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
 });
 
 /* ═══════ 8 · RÉVÉLATION AU DÉFILEMENT ═════════════ */
@@ -690,6 +703,7 @@ renderWeaves();
 renderTray();
 calc();
 openState();
+syncMails();
 setInterval(openState, 60000);
 
 var moreBtn = document.getElementById('loadmore');
