@@ -20,16 +20,18 @@ export default async function handler(req, res) {
   const done = [];
 
   try {
-    if (site)   { await commitFile('site/data/site.json',   jsonToB64(site),
+    // La racine du dépôt EST site/ : pas de préfixe, sinon on crée un
+    // site/site/ imbriqué que l'action ne regarde même pas.
+    if (site)   { await commitFile('data/site.json',   jsonToB64(site),
                     'Contenu : réglages et services'); done.push('data/site.json'); }
-    if (textes) { await commitFile('site/data/textes.json', jsonToB64(textes),
+    if (textes) { await commitFile('data/textes.json', jsonToB64(textes),
                     'Contenu : textes des pages'); done.push('data/textes.json'); }
 
     for (const [path, b64] of Object.entries(images || {})) {
       if (!IMG_DIR.test(path)) {
         return res.status(400).json({ error: `Chemin d'image refusé : ${path}` });
       }
-      await commitFile('site/' + path, b64, `Photographie : ${path.split('/').pop()}`);
+      await commitFile(path, b64, `Photographie : ${path.split('/').pop()}`);
       done.push(path);
     }
   } catch (e) {
