@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=b5ca54f3">
+<link rel="stylesheet" href="assets/site.css?v=3fc11a2a">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,6 +53,7 @@
   "knowsAbout": ["rembourrage", "restauration de meubles anciens", "cannage", "banquettes", "têtes de lit", "finition du bois"]
 }
 </script>
+<script id="opera-hours" type="application/json">{"1": ["9", "17"], "2": ["9", "17"], "3": ["9", "17"], "4": ["9", "17"], "5": ["9", "17"], "6": ["10", "17"], "0": null}</script>
 <script>
 /* Avant la premiere peinture : on saute l'ouverture si elle a deja
    ete vue dans cette session ou si le mouvement est desactive.
@@ -120,45 +121,46 @@
 
 <main id="contenu">
 <section>
-  <div class="wrap narrow">
+  <div class="wrap">
     <div class="sec-head">
       <span class="lbl">Interne</span>
-      <h1>Tenir le site à jour</h1>
-      <p class="kicker">Cette page n’est pas dans le menu, n’est pas indexée et n’apparaît pas dans le plan du site. Elle sert à l’atelier.</p>
+      <h1>Modifier le site</h1>
+      <p class="kicker">Changez ce que vous voulez, puis enregistrez le fichier et remettez-le dans <code>site/data/</code>. Rien n’est envoyé d’ici : la page ne fait qu’écrire un fichier que vous récupérez.</p>
     </div>
 
-    <h3>Changer un texte ou une photo</h3>
-    <p class="muted">Tout le site est construit par un script à partir de deux fichiers. On ne modifie jamais les pages <code>.html</code> directement : elles sont réécrites au prochain build et les changements seraient perdus.</p>
-    <div class="tablewrap" style="margin:16px 0 26px">
-      <table>
-        <thead><tr><th>Fichier</th><th>Ce qu’il contient</th></tr></thead>
-        <tbody>
-          <tr><td>build.py</td><td>L’enseigne, les services, l’atelier, les réalisations, le pied de page, le contact.</td></tr>
-          <tr><td>content.json</td><td>Les tissus, le cannage, le procédé, les prix, les questions.</td></tr>
-          <tr><td>assets/site.css</td><td>Toute la mise en forme.</td></tr>
-          <tr><td>assets/site.js</td><td>La langue, les filtres, les heures d’ouverture.</td></tr>
-          <tr><td>assets/travaux/</td><td>Les pièces sorties de l’atelier.</td></tr>
-          <tr><td>assets/tissus/ · assets/cannage/</td><td>Les étoffes et le travail de cannage.</td></tr>
-        </tbody>
-      </table>
+    <div class="adm-bar">
+      <span class="adm-state" id="state">Chargement…</span>
+      <button class="adm-btn ghost" id="copy" type="button">Copier</button>
+      <button class="adm-btn" id="save" type="button" disabled>Enregistrer le fichier</button>
     </div>
-    <p class="muted small">Après toute modification : <code>python3 build.py</code> depuis le dossier <code>site/</code>, puis <code>git add -A &amp;&amp; git commit &amp;&amp; git push</code>.</p>
 
-    <h3 style="margin-top:34px">Les heures d’ouverture</h3>
-    <p class="muted">Elles sont écrites une seule fois, dans <code>assets/site.js</code>, dans la table <code>HOURS</code>. Le bandeau « ouvert / fermé » et le tableau de la page contact s’y accordent tout seuls.</p>
+    <div id="tabs"></div>
+    <div id="pane"></div>
+    <textarea id="raw" hidden readonly aria-label="Contenu du fichier"></textarea>
 
-    <h3 style="margin-top:34px">À confirmer avant la mise en ligne</h3>
+    <h2 style="margin-top:44px">Mettre les changements en ligne</h2>
+    <ol class="muted" style="max-width:70ch">
+      <li>Enregistrer le fichier ci-dessus — il s’appelle <code>site.json</code>.</li>
+      <li>Le déposer dans <code>site/data/</code>, en remplaçant l’ancien.</li>
+      <li>Dans le dossier <code>site/</code> : <code>python3 build.py</code></li>
+      <li>Puis : <code>git add -A &amp;&amp; git commit -m "contenu" &amp;&amp; git push</code></li>
+    </ol>
+    <p class="muted small">Sans la dernière étape, les changements ne vivent que sur cet ordinateur.</p>
+
+    <h2 style="margin-top:34px">Ce qui ne se modifie pas ici</h2>
+    <p class="muted" style="max-width:70ch">Les longs textes des pages Les tissus, Cannage et Savoir-faire vivent dans <code>content.json</code>, et la mise en forme dans <code>assets/site.css</code>. Ils se modifient dans un éditeur de texte. Un vrai panneau où l’on écrit tout depuis le navigateur, sans fichier à déplacer, demanderait un hébergement avec base de données — ce site est fait de fichiers immobiles, ce qui le rend rapide et gratuit à héberger.</p>
+
+    <h2 style="margin-top:34px">À confirmer</h2>
     <ul class="muted">
       <li>L’année de fondation (1955) — aucune source publique ne la confirme.</li>
       <li>Les heures d’ouverture — les annuaires se contredisent.</li>
       <li>La fiche Google, non revendiquée et dédoublée par une seconde adresse.</li>
       <li>Le domaine operaupholstering.com, pas encore pointé sur le site.</li>
     </ul>
-
-    <h3 style="margin-top:34px">Ce que le site ne fait pas</h3>
-    <p class="muted">Il n’y a ni base de données ni connexion : le formulaire de soumission ouvre l’application de courriel du visiteur, rien n’est transmis par la page. Un vrai panneau d’administration — modifier les textes depuis le navigateur — demanderait un hébergement différent.</p>
   </div>
 </section>
+
+<script src="assets/admin.js?v=33f5ace3"></script>
 </main>
 
 <footer>
@@ -215,7 +217,7 @@
   <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
 </div>
 
-<script src="assets/site.js?v=6067adcd"></script>
+<script src="assets/site.js?v=eb71cd11"></script>
 
 </body>
 </html>

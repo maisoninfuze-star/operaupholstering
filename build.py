@@ -6,6 +6,11 @@ import json, re, pathlib
 
 S = json.loads(pathlib.Path('content.json').read_text(encoding='utf-8'))
 
+# Contenu modifiable depuis /admin.html — ne jamais écrire ces valeurs
+# en dur ici, elles seraient perdues au prochain import.
+D  = json.loads(pathlib.Path('data/site.json').read_text(encoding='utf-8'))
+BIZ, HERO = D['entreprise'], D['enseigne']
+
 NAV = [
     ('index.html',        'Accueil',      'Home'),
     ('a-propos.html',     'À propos',     'About'),
@@ -70,6 +75,7 @@ SCHEMA = """<script type="application/ld+json">
 def head(title, desc, page, noindex=False):
     canon = SITE + ('' if page == 'index.html' else page)
     og = OG_IMAGE
+    HOURS_JSON = json.dumps(D['heures'])
     ROBOTS = '\n<meta name="robots" content="noindex, nofollow">' if noindex else ''
     return f'''<!doctype html>
 <html lang="fr">
@@ -96,6 +102,7 @@ def head(title, desc, page, noindex=False):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
 <link rel="stylesheet" href="assets/site.css?v={ver('assets/site.css')}">
 {SCHEMA}
+<script id="opera-hours" type="application/json">{HOURS_JSON}</script>
 {{PREPAINT}}
 </head>
 <body>
@@ -146,7 +153,7 @@ def header(current):
       for h, f, e in NAV) + '''
       <a href="tissus.html" data-en="The fabrics">Les tissus</a>
       <a href="index.html#soumission" data-en="Contact">Contact</a>
-      <a class="mm-tel" href="tel:+15142704352">(514) 270-4352</a>
+      <a class="mm-tel" href="tel:{BIZ[telephone_lien]}">{BIZ[telephone]}</a>
     </nav>
   </div>
 </header>
@@ -154,8 +161,8 @@ def header(current):
 
 STATUSBAR = '''<div class="statusbar">
   <div class="wrap bar">
-    <span class="sb-left">7498 rue Saint-Hubert, Montréal</span>
-    <a class="sb-right" href="tel:+15142704352">(514) 270-4352</a>
+    <span class="sb-left">{BIZ[adresse]}, {BIZ[ville_courte]}</span>
+    <a class="sb-right" href="tel:{BIZ[telephone_lien]}">{BIZ[telephone]}</a>
   </div>
 </div>
 '''
@@ -166,7 +173,7 @@ FOOTER = '''<footer>
       <div>
         <div class="flogo"><img src="assets/logo-opera.png" alt="Opera Upholstering"></div>
         <p style="margin-top:16px;max-width:34ch" data-en="Upholstery, antique restoration and hand caning on rue Saint-Hubert since 1955.">Rembourrage, restauration d’antiquités et cannage tissé à la main sur la rue Saint-Hubert depuis 1955.</p>
-        <p style="margin-top:14px"><a href="tel:+15142704352">(514) 270-4352</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
+        <p style="margin-top:14px"><a href="tel:{BIZ[telephone_lien]}">{BIZ[telephone]}</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
       </div>
       <div>
         <p class="flabel" data-en="Services">Services</p>
@@ -210,17 +217,45 @@ FOOTER = '''<footer>
 </div>
 
 <div class="mobilebar">
-  <a class="btn light" href="tel:+15142704352" data-en="Call">Appeler</a>
+  <a class="btn light" href="tel:{BIZ[telephone_lien]}" data-en="Call">Appeler</a>
   <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
 </div>
 
 <script src="assets/site.js?v={JSVER}"></script>
 '''
 
+
+
+JOURS_FR = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi']
+JOURS_EN = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+
+def hours_rows():
+    """Le tableau de la page contact et le bandeau « ouvert / fermé »
+       doivent lire la même source, sinon ils se contredisent."""
+    out = []
+    for d in [1, 2, 3, 4, 5, 6, 0]:
+        v = D['heures'].get(str(d))
+        if v:
+            fr = '%s h – %s h' % (v[0], v[1])
+            en = '%s – %s' % (v[0], v[1])
+            cell = '<td data-en="%s">%s</td>' % (en, fr)
+        else:
+            cell = '<td data-en="Closed">Fermé</td>'
+        out.append('          <tr data-day="%d"><td data-en="%s">%s</td>%s</tr>'
+                   % (d, JOURS_EN[d], JOURS_FR[d], cell))
+    return '\n'.join(out)
+
+def fill(html):
+    """Les partials (en-tête, bandeau, pied) portent des jetons
+       {BIZ[cle]} ; on les remplace ici plutôt qu'avec .format(), qui
+       trébucherait sur les accolades du JSON-LD et du CSS."""
+    html = html.replace('{HOURS_ROWS}', hours_rows())
+    return re.sub(r'\{BIZ\[([a-z_]+)\]\}', lambda m: esc(str(BIZ.get(m.group(1), ''))), html)
+
 def page(filename, title, desc, body, statusbar=False, noindex=False):
     footer = FOOTER.replace('{JSVER}', ver('assets/site.js'))
     html = head(title, desc, filename, noindex).replace('{PREPAINT}', PREPAINT) + '\n' + header(filename) + (STATUSBAR if statusbar else '') + '\n<main id="contenu">\n' + body + '\n</main>\n\n' + footer + '\n</body>\n</html>\n'
-    pathlib.Path(filename).write_text(html, encoding='utf-8')
+    pathlib.Path(filename).write_text(fill(html), encoding='utf-8')
     print('wrote', filename, len(html), 'bytes')
 
 def sec(sid, extra_class='', keep_id=None):
@@ -246,44 +281,14 @@ for k in [k for k in ('cannage','calculateur','prix','questions','anatomie','pro
 print('sections loaded')
 
 # ═════════════════════════ ACCUEIL ═════════════════════════
-SERVICES_SHORT = [
- ('Fauteuils &amp; sofas','Armchairs &amp; sofas',
-  'La pièce est dégarnie jusqu’à la structure. Sangles, ressorts et bourrage sont refaits avant la pose du tissu.',
-  'The piece is stripped to the frame. Webbing, springs and stuffing are rebuilt before the cloth is fitted.','',''),
- ('Restauration d’antiquités','Antique restoration',
-  'Sangles de jute, crin conservé, ressorts guindés à la main et semences sur les structures d’époque.',
-  'Jute webbing, horsehair kept, hand-tied springs and tacks on period frames.','',''),
- ('Cannage &amp; rotin','Cane &amp; rattan',
-  'Cannage tissé à la main, trou par trou, ou cannage en feuille posé en rainure. Vingt maillages en stock.',
-  'Cane woven by hand, hole by hole, or sheet cane set into a spline groove. Twenty meshes in stock.','',''),
- ('Chaises de salle à manger','Dining chairs',
-  'Traitées en lot et chiffrées par ensemble. Un tissu performance convient mieux à une salle à manger.',
-  'Handled as a batch and priced by the set. A performance fabric suits a dining room better.','',''),
- ('Têtes de lit','Headboards',
-  'Toute hauteur et toute forme : unie, à cannelures ou capitonnée, fixée au mur ou au sommier.',
-  'Any height and any shape: plain, channelled or deep-buttoned, wall or bed mounted.','',''),
- ('Coussins &amp; extérieur','Cushions &amp; outdoor',
-  'Sunbrella et acryliques teints dans la masse, coupés au gabarit, fil de qualité marine.',
-  'Sunbrella and solution-dyed acrylics, cut to template, marine-grade thread.','',''),
- ('Banquettes &amp; contrat','Banquettes &amp; contract',
-  'Restaurants, cliniques et hôtellerie. Chiffré au pied linéaire, cotes d’abrasion et d’ignifugation vérifiées.',
-  'Restaurants, clinics and hospitality. Quoted per linear foot, abrasion and fire ratings verified.','',''),
- ('Structure &amp; ressorts','Frames &amp; springs',
-  'Traverses fendues, blocs de coin remplacés, sièges affaissés, mécanismes d’inclinaison entretenus.',
-  'Cracked rails, corner blocks replaced, sagging seats, recliner mechanisms serviced.','',''),
- ('Cuir','Leather',
-  'Cuir pleine fleur cousu et tendu à la main : fauteuils, banquettes, capitonnage et sièges d’auto anciens.',
-  'Full-grain leather, sewn and stretched by hand: armchairs, banquettes, buttoning and vintage car seats.','',''),
- ('Décapage &amp; finition du bois','Wood stripping &amp; finishing',
-  'Le bois apparent est décapé, poncé, teint et refini : vernis, huile ou cire, selon la pièce.',
-  'Show-wood is stripped, sanded, stained and refinished — varnish, oil or wax, to suit the piece.','',''),
- ('Cueillette &amp; livraison','Pick-up &amp; delivery',
-  'On vient chercher la pièce et on la rapporte, sur l’île de Montréal et en proche banlieue.',
-  'We collect the piece and bring it back, across the island of Montreal and the near suburbs.','Sur demande','On request'),
- ('Mousse &amp; coussins','Foam &amp; cushions',
-  'Mousse haute densité, enveloppe de duvet ou noyau à ressorts : l’assise se choisit ferme, moyenne ou enveloppante.',
-  'High-density foam, a down wrap or a spring-down core — the seat is chosen firm, medium or sink-in.','',''),
-]
+def esc(t):
+    """Le contenu vient d'un formulaire : on l'échappe ici plutôt que
+       d'obliger l'atelier à taper des entités HTML dans l'éditeur."""
+    return (t or '').replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+SERVICES_SHORT = [(esc(x['fr']), esc(x['en']), esc(x['desc_fr']), esc(x['desc_en']),
+                   esc(x['meta_fr']), esc(x['meta_en'])) for x in D['services']]
+
 
 def _svc_card(fr, en, dfr, den, mfr, men):
     """La ligne « meta » ne s'affiche que si le service en a une —
@@ -297,30 +302,35 @@ def _svc_card(fr, en, dfr, den, mfr, men):
 
 svc_cards = '\n'.join(_svc_card(*row) for row in SERVICES_SHORT)
 
-HOME = '''<section class="hero" id="haut">
+FIGS = '\n'.join(
+ '      <div class="fig"><b>%s</b><span data-en="%s">%s</span></div>'
+ % (f['valeur'], f['label_en'], f['label_fr']) for f in D['chiffres'])
+
+for _k in HERO: HERO[_k] = esc(HERO[_k])
+for _f in D['chiffres']:
+    for _k in ('valeur','label_fr','label_en'): _f[_k] = esc(_f[_k])
+
+HOME = ('''<section class="hero" id="haut">
   <div class="hero-media">
     <img class="hero-photo" src="assets/hero.jpg" alt="Un sofa haut de gamme retapissé dans un tissu à motif floral aquarelle, dans une pièce sombre éclairée par un rideau voilé et une lampe sur pied." fetchpriority="high" width="2000" height="1116">
     <span class="hero-scrim"></span>
   </div>
   <div class="hero-type">
-    <span class="lbl" data-en="Rue Saint-Hubert · Montréal">Rue Saint-Hubert · Montréal</span>
+    <span class="lbl" data-en="{HERO[surtitre_en]}">{HERO[surtitre_fr]}</span>
     <h1 class="hero-logo">
       <span class="hero-logo-fr">Rembourrage</span>
       <img src="assets/logo-mark.png" alt="Opera" width="511" height="140">
       <span class="hero-logo-en">Upholstering</span>
     </h1>
-    <p class="hero-sub" data-en="Upholstering · Leather · Restoration · Caning">Rembourrage · Cuir · Restauration · Cannage</p>
-    <p class="tagline" data-en="The frame is opened before any fabric is discussed.">On ouvre la structure avant de parler de tissu.</p>
-    <p class="lede" data-en="Full reupholstery in fabric and leather, antique restoration and hand caning at 7498 rue Saint-Hubert since 1955. Estimates are made from photographs and returned the next business day.">Rembourrage complet en tissu et en cuir, restauration de meubles anciens et cannage tissé à la main, au 7498, rue Saint-Hubert depuis 1955. Les estimations se font sur photographies et reviennent le jour ouvrable suivant.</p>
+    <p class="hero-sub" data-en="{HERO[sous_titre_en]}">{HERO[sous_titre_fr]}</p>
+    <p class="tagline" data-en="{HERO[accroche_en]}">{HERO[accroche_fr]}</p>
+    <p class="lede" data-en="{HERO[texte_en]}">{HERO[texte_fr]}</p>
     <div class="hero-cta">
-      <a class="btn light" href="#soumission" data-en="Request an estimate">Demander une estimation</a>
-      <a class="btn outline-light" href="#realisations" data-en="See the work">Voir les réalisations</a>
+      <a class="btn light" href="#soumission" data-en="{HERO[bouton1_en]}">{HERO[bouton1_fr]}</a>
+      <a class="btn outline-light" href="#realisations" data-en="{HERO[bouton2_en]}">{HERO[bouton2_fr]}</a>
     </div>
     <div class="hero-figures">
-      <div class="fig"><b>71</b><span data-en="years of experience">ans d’expérience</span></div>
-      <div class="fig"><b>4 000+</b><span data-en="fabrics in stock">tissus en magasin</span></div>
-      <div class="fig"><b>20</b><span data-en="cane weaves">maillages de cannage</span></div>
-      <div class="fig"><b>4,3</b><span data-en="Google · 47 reviews">Google · 47 avis</span></div>
+{FIGS}
     </div>
   </div>
 </section>
@@ -441,7 +451,7 @@ HOME = '''<section class="hero" id="haut">
   </div>
 </section>
 
-''' + sec('soumission')
+''').format(HERO=HERO, BIZ=BIZ, FIGS=FIGS) + sec('soumission')
 
 page('index.html',
      'Opera Upholstering — Rembourrage, restauration et cannage · Montréal',
@@ -502,45 +512,46 @@ page('a-propos.html',
 # ═════════════════════════ ADMIN ═════════════════════════
 # Page interne : hors navigation, hors index, hors plan de site.
 ADMIN_BODY = '''<section>
-  <div class="wrap narrow">
+  <div class="wrap">
     <div class="sec-head">
       <span class="lbl">Interne</span>
-      <h1>Tenir le site à jour</h1>
-      <p class="kicker">Cette page n’est pas dans le menu, n’est pas indexée et n’apparaît pas dans le plan du site. Elle sert à l’atelier.</p>
+      <h1>Modifier le site</h1>
+      <p class="kicker">Changez ce que vous voulez, puis enregistrez le fichier et remettez-le dans <code>site/data/</code>. Rien n’est envoyé d’ici : la page ne fait qu’écrire un fichier que vous récupérez.</p>
     </div>
 
-    <h3>Changer un texte ou une photo</h3>
-    <p class="muted">Tout le site est construit par un script à partir de deux fichiers. On ne modifie jamais les pages <code>.html</code> directement : elles sont réécrites au prochain build et les changements seraient perdus.</p>
-    <div class="tablewrap" style="margin:16px 0 26px">
-      <table>
-        <thead><tr><th>Fichier</th><th>Ce qu’il contient</th></tr></thead>
-        <tbody>
-          <tr><td>build.py</td><td>L’enseigne, les services, l’atelier, les réalisations, le pied de page, le contact.</td></tr>
-          <tr><td>content.json</td><td>Les tissus, le cannage, le procédé, les prix, les questions.</td></tr>
-          <tr><td>assets/site.css</td><td>Toute la mise en forme.</td></tr>
-          <tr><td>assets/site.js</td><td>La langue, les filtres, les heures d’ouverture.</td></tr>
-          <tr><td>assets/travaux/</td><td>Les pièces sorties de l’atelier.</td></tr>
-          <tr><td>assets/tissus/ · assets/cannage/</td><td>Les étoffes et le travail de cannage.</td></tr>
-        </tbody>
-      </table>
+    <div class="adm-bar">
+      <span class="adm-state" id="state">Chargement…</span>
+      <button class="adm-btn ghost" id="copy" type="button">Copier</button>
+      <button class="adm-btn" id="save" type="button" disabled>Enregistrer le fichier</button>
     </div>
-    <p class="muted small">Après toute modification : <code>python3 build.py</code> depuis le dossier <code>site/</code>, puis <code>git add -A &amp;&amp; git commit &amp;&amp; git push</code>.</p>
 
-    <h3 style="margin-top:34px">Les heures d’ouverture</h3>
-    <p class="muted">Elles sont écrites une seule fois, dans <code>assets/site.js</code>, dans la table <code>HOURS</code>. Le bandeau « ouvert / fermé » et le tableau de la page contact s’y accordent tout seuls.</p>
+    <div id="tabs"></div>
+    <div id="pane"></div>
+    <textarea id="raw" hidden readonly aria-label="Contenu du fichier"></textarea>
 
-    <h3 style="margin-top:34px">À confirmer avant la mise en ligne</h3>
+    <h2 style="margin-top:44px">Mettre les changements en ligne</h2>
+    <ol class="muted" style="max-width:70ch">
+      <li>Enregistrer le fichier ci-dessus — il s’appelle <code>site.json</code>.</li>
+      <li>Le déposer dans <code>site/data/</code>, en remplaçant l’ancien.</li>
+      <li>Dans le dossier <code>site/</code> : <code>python3 build.py</code></li>
+      <li>Puis : <code>git add -A &amp;&amp; git commit -m "contenu" &amp;&amp; git push</code></li>
+    </ol>
+    <p class="muted small">Sans la dernière étape, les changements ne vivent que sur cet ordinateur.</p>
+
+    <h2 style="margin-top:34px">Ce qui ne se modifie pas ici</h2>
+    <p class="muted" style="max-width:70ch">Les longs textes des pages Les tissus, Cannage et Savoir-faire vivent dans <code>content.json</code>, et la mise en forme dans <code>assets/site.css</code>. Ils se modifient dans un éditeur de texte. Un vrai panneau où l’on écrit tout depuis le navigateur, sans fichier à déplacer, demanderait un hébergement avec base de données — ce site est fait de fichiers immobiles, ce qui le rend rapide et gratuit à héberger.</p>
+
+    <h2 style="margin-top:34px">À confirmer</h2>
     <ul class="muted">
       <li>L’année de fondation (1955) — aucune source publique ne la confirme.</li>
       <li>Les heures d’ouverture — les annuaires se contredisent.</li>
       <li>La fiche Google, non revendiquée et dédoublée par une seconde adresse.</li>
       <li>Le domaine operaupholstering.com, pas encore pointé sur le site.</li>
     </ul>
-
-    <h3 style="margin-top:34px">Ce que le site ne fait pas</h3>
-    <p class="muted">Il n’y a ni base de données ni connexion : le formulaire de soumission ouvre l’application de courriel du visiteur, rien n’est transmis par la page. Un vrai panneau d’administration — modifier les textes depuis le navigateur — demanderait un hébergement différent.</p>
   </div>
-</section>'''
+</section>
+
+<script src="assets/admin.js?v={ADMINVER}"></script>'''.replace('{ADMINVER}', ver('assets/admin.js'))
 
 page('admin.html', 'Admin — Opera Upholstering',
      'Page interne de gestion du site.', ADMIN_BODY, noindex=True)

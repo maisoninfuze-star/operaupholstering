@@ -474,7 +474,22 @@ function calc(){
 });
 
 /* ═══════ 6 · HEURES D’OUVERTURE ═══════════════════ */
+/* Les heures viennent de data/site.json, injectées dans la page par
+   build.py : l'atelier les change depuis /admin.html sans toucher au
+   code. La table ci-dessous n'est qu'un filet si le bloc manque. */
 var HOURS = { 0:null, 1:[9,17], 2:[9,17], 3:[9,17], 4:[9,17], 5:[9,17], 6:[10,17] };
+(function(){
+  var el = document.getElementById('opera-hours');
+  if(!el) return;
+  try {
+    var raw = JSON.parse(el.textContent), out = {};
+    for(var d = 0; d < 7; d++){
+      var v = raw[String(d)];
+      out[d] = (v && v.length === 2) ? [parseInt(v[0],10), parseInt(v[1],10)] : null;
+    }
+    HOURS = out;
+  } catch(e){}
+})();
 var DAYS_FR = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
 var DAYS_EN = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 function montrealNow(){
