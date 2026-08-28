@@ -39,6 +39,11 @@ PREPAINT = """<script>
 </script>"""
 
 SITE = 'https://operaupholstering.com/'
+
+# Mettre à False avant de publier si la page d'édition ne doit pas
+# exister en ligne du tout — c'est la protection la plus sûre, elle ne
+# dépend d'aucun réglage d'hébergeur.
+BUILD_ADMIN = True
 OG_IMAGE = SITE + 'assets/hero.jpg'
 
 SCHEMA = """<script type="application/ld+json">
@@ -269,6 +274,14 @@ _TXT_PAT = re.compile(r'<(\w+)([^>]*\sdata-en="([^"]*)"[^>]*)>(.*?)</\1>', re.S)
 def apply_textes(key, html):
     edits = TXT.get(key)
     if not edits:
+        return html
+    # Garde-fou : l'index ordinal n'a de sens que si la structure n'a pas
+    # bougé. Si une figure ou un champ a été ajouté au balisage, on refuse
+    # d'appliquer plutôt que de décaler tous les textes d'un cran.
+    live = [m for m in _TXT_PAT.finditer(html) if '<' not in m.group(4)]
+    if len(live) != len(edits):
+        print('  ! %s : %d champs dans le balisage, %d dans textes.json — '
+              'overlay ignoré, relancer l\'extraction' % (key, len(live), len(edits)))
         return html
     i = [0]
     def swap(m):
@@ -564,24 +577,32 @@ ADMIN_BODY = '''<section>
     </ol>
     <p class="muted small">Sans la dernière étape, les changements ne vivent que sur cet ordinateur.</p>
 
+    <h2 style="margin-top:34px">Accès et protection</h2>
+    <p class="muted" style="max-width:70ch">Cette page ne peut rien changer en ligne : elle lit des fichiers, en écrit un que vous récupérez, et n’envoie rien nulle part. Quelqu’un qui tomberait dessus ne pourrait pas toucher au site — il verrait le contenu, qui est déjà public.</p>
+    <p class="muted" style="max-width:70ch">Elle est tout de même exclue des moteurs de recherche (<code>noindex</code> et <code>robots.txt</code>) et absente du plan du site et du menu. Trois façons de la fermer davantage, de la plus sûre à la plus commode :</p>
+    <div class="tablewrap" style="margin:16px 0 8px">
+      <table>
+        <thead><tr><th>Moyen</th><th>Comment</th><th>Solidité</th></tr></thead>
+        <tbody>
+          <tr><td>Ne pas la publier</td><td>Mettre <code>BUILD_ADMIN = False</code> en haut de <code>build.py</code>. Elle n’existe alors qu’ici, sur cet ordinateur, servie par <code>python3 -m http.server</code>.</td><td>Totale</td></tr>
+          <tr><td>Mot de passe de l’hébergeur</td><td>Sur Netlify, une ligne dans <code>_headers</code>; sur Cloudflare, une règle Access; sur un serveur classique, un <code>.htaccess</code>. Le mot de passe est vérifié avant que la page ne parte.</td><td>Solide</td></tr>
+          <tr><td>Mot de passe dans la page</td><td>Déconseillé : le code de la page est lisible par tous, donc le mot de passe aussi. Cela n’écarte que les curieux.</td><td>Apparente</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted small">Recommandation : garder <code>BUILD_ADMIN = False</code> pour la mise en ligne, et remettre <code>True</code> quand vous travaillez sur le site en local.</p>
+
     <h2 style="margin-top:34px">Ce qui ne se modifie pas ici</h2>
     <p class="muted" style="max-width:70ch">Les textes contenant des liens ou de la mise en forme restent dans <code>content.json</code>, et l’apparence dans <code>assets/site.css</code>. Ils se modifient dans un éditeur de texte. Un vrai panneau où l’on écrit tout depuis le navigateur, sans fichier à déplacer, demanderait un hébergement avec base de données — ce site est fait de fichiers immobiles, ce qui le rend rapide et gratuit à héberger.</p>
-
-    <h2 style="margin-top:34px">À confirmer</h2>
-    <ul class="muted">
-      <li>L’année de fondation (1955) — aucune source publique ne la confirme.</li>
-      <li>Les heures d’ouverture — les annuaires se contredisent.</li>
-      <li>La fiche Google, non revendiquée et dédoublée par une seconde adresse.</li>
-      <li>Le domaine operaupholstering.com, pas encore pointé sur le site.</li>
-    </ul>
   </div>
 </section>
 
 <script src="assets/admin-zip.js"></script>
 <script src="assets/admin.js?v={ADMINVER}"></script>'''.replace('{ADMINVER}', ver('assets/admin.js'))
 
-page('admin.html', 'Admin — Opera Upholstering',
-     'Page interne de gestion du site.', ADMIN_BODY, noindex=True)
+if BUILD_ADMIN:
+    page('admin.html', 'Admin — Opera Upholstering',
+         'Page interne de gestion du site.', ADMIN_BODY, noindex=True)
 
 page('tissus.html',
      'La bibliothèque de tissus — Opera Upholstering',
