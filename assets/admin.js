@@ -94,8 +94,6 @@
     p.appendChild(el('p', 'adm-note', 'Ce que le visiteur lit avant tout le reste. Le logotype lui-même ne se change pas ici.'));
     p.appendChild(pair(h, 'surtitre_fr', 'surtitre_en', 'Ligne au-dessus du logo'));
     p.appendChild(pair(h, 'sous_titre_fr', 'sous_titre_en', 'Ligne sous le logo'));
-    p.appendChild(pair(h, 'accroche_fr', 'accroche_en', 'Phrase en italique'));
-    p.appendChild(pair(h, 'texte_fr', 'texte_en', 'Paragraphe', {long:true, rows:4}));
     p.appendChild(pair(h, 'bouton1_fr', 'bouton1_en', 'Premier bouton'));
     p.appendChild(pair(h, 'bouton2_fr', 'bouton2_en', 'Second bouton'));
 

@@ -372,8 +372,6 @@ HOME = ('''<section class="hero" id="haut">
       <span class="hero-logo-en">Upholstering</span>
     </h1>
     <p class="hero-sub" data-en="{HERO[sous_titre_en]}">{HERO[sous_titre_fr]}</p>
-    <p class="tagline" data-en="{HERO[accroche_en]}">{HERO[accroche_fr]}</p>
-    <p class="lede" data-en="{HERO[texte_en]}">{HERO[texte_fr]}</p>
     <div class="hero-cta">
       <a class="btn light" href="#soumission" data-en="{HERO[bouton1_en]}">{HERO[bouton1_fr]}</a>
       <a class="btn outline-light" href="#realisations" data-en="{HERO[bouton2_en]}">{HERO[bouton2_fr]}</a>
