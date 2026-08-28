@@ -1,0 +1,212 @@
+[
+  {
+    "chemin": "assets/cannage/cannage-tisse.jpg",
+    "role": "Travail de cannage",
+    "largeur": 900,
+    "hauteur": 900,
+    "poids_ko": 106
+  },
+  {
+    "chemin": "assets/cannage/panneau-encadre.jpg",
+    "role": "Travail de cannage",
+    "largeur": 900,
+    "hauteur": 900,
+    "poids_ko": 150
+  },
+  {
+    "chemin": "assets/cannage/panneaux-tresses.jpg",
+    "role": "Travail de cannage",
+    "largeur": 900,
+    "hauteur": 900,
+    "poids_ko": 137
+  },
+  {
+    "chemin": "assets/etabli.jpg",
+    "role": "L’établi — page À propos",
+    "largeur": 1100,
+    "hauteur": 613,
+    "poids_ko": 104
+  },
+  {
+    "chemin": "assets/hero.jpg",
+    "role": "La grande image de la page d’accueil",
+    "largeur": 2000,
+    "hauteur": 1116,
+    "poids_ko": 315
+  },
+  {
+    "chemin": "assets/logo-mark.png",
+    "role": "Le mot OPERA seul (enseigne, ouverture)",
+    "largeur": 511,
+    "hauteur": 140,
+    "poids_ko": 7
+  },
+  {
+    "chemin": "assets/logo-opera.png",
+    "role": "Le logotype complet (en-tête, pied de page)",
+    "largeur": 511,
+    "hauteur": 180,
+    "poids_ko": 11
+  },
+  {
+    "chemin": "assets/logo-sub.png",
+    "role": "Le mot UPHOLSTERING seul (ouverture)",
+    "largeur": 511,
+    "hauteur": 30,
+    "poids_ko": 2
+  },
+  {
+    "chemin": "assets/motif-aquarelle.jpg",
+    "role": "Image du site",
+    "largeur": 1100,
+    "hauteur": 1100,
+    "poids_ko": 172
+  },
+  {
+    "chemin": "assets/motif-botanique.jpg",
+    "role": "Image du site",
+    "largeur": 1100,
+    "hauteur": 1100,
+    "poids_ko": 176
+  },
+  {
+    "chemin": "assets/motif-geometrique.jpg",
+    "role": "Image du site",
+    "largeur": 1100,
+    "hauteur": 1100,
+    "poids_ko": 215
+  },
+  {
+    "chemin": "assets/passementerie.jpg",
+    "role": "La passementerie — page À propos",
+    "largeur": 1100,
+    "hauteur": 1100,
+    "poids_ko": 190
+  },
+  {
+    "chemin": "assets/ressorts.jpg",
+    "role": "Les ressorts guindés — page À propos",
+    "largeur": 1100,
+    "hauteur": 821,
+    "poids_ko": 215
+  },
+  {
+    "chemin": "assets/semences.jpg",
+    "role": "Les semences — page À propos",
+    "largeur": 1100,
+    "hauteur": 821,
+    "poids_ko": 120
+  },
+  {
+    "chemin": "assets/tissus/chenille-rouge.jpg",
+    "role": "Étoffe — page Les tissus",
+    "largeur": 806,
+    "hauteur": 860,
+    "poids_ko": 213
+  },
+  {
+    "chemin": "assets/tissus/damas-bourgogne.jpg",
+    "role": "Étoffe — page Les tissus",
+    "largeur": 860,
+    "hauteur": 826,
+    "poids_ko": 228
+  },
+  {
+    "chemin": "assets/tissus/jacquard-rose.jpg",
+    "role": "Étoffe — page Les tissus",
+    "largeur": 860,
+    "hauteur": 803,
+    "poids_ko": 199
+  },
+  {
+    "chemin": "assets/tissus/losange-bourgogne.jpg",
+    "role": "Étoffe — page Les tissus",
+    "largeur": 860,
+    "hauteur": 803,
+    "poids_ko": 203
+  },
+  {
+    "chemin": "assets/tissus/ogive-prune.jpg",
+    "role": "Étoffe — page Les tissus",
+    "largeur": 860,
+    "hauteur": 826,
+    "poids_ko": 219
+  },
+  {
+    "chemin": "assets/tissus/ogive-taupe.jpg",
+    "role": "Étoffe — page Les tissus",
+    "largeur": 750,
+    "hauteur": 860,
+    "poids_ko": 190
+  },
+  {
+    "chemin": "assets/travaux/art-deco-chevron.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 195
+  },
+  {
+    "chemin": "assets/travaux/bergeres-bleues.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 130
+  },
+  {
+    "chemin": "assets/travaux/chaise-corde-noire.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 53
+  },
+  {
+    "chemin": "assets/travaux/cuir-elda.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 70
+  },
+  {
+    "chemin": "assets/travaux/fauteuil-tonneau.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 147
+  },
+  {
+    "chemin": "assets/travaux/louis-xv-fleuri.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 102
+  },
+  {
+    "chemin": "assets/travaux/louis-xvi-velours.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 89
+  },
+  {
+    "chemin": "assets/travaux/paire-os-mouton.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 144
+  },
+  {
+    "chemin": "assets/travaux/rocking-cannage.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 100
+  },
+  {
+    "chemin": "assets/travaux/traineau.jpg",
+    "role": "Pièce sortie de l’atelier",
+    "largeur": 1000,
+    "hauteur": 1000,
+    "poids_ko": 51
+  }
+]

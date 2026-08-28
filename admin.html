@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=3fc11a2a">
+<link rel="stylesheet" href="assets/site.css?v=d959c163">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -125,7 +125,7 @@
     <div class="sec-head">
       <span class="lbl">Interne</span>
       <h1>Modifier le site</h1>
-      <p class="kicker">Changez ce que vous voulez, puis enregistrez le fichier et remettez-le dans <code>site/data/</code>. Rien n’est envoyé d’ici : la page ne fait qu’écrire un fichier que vous récupérez.</p>
+      <p class="kicker">Textes, coordonnées, heures, services et photographies. Enregistrez, décompressez le dossier par-dessus <code>site/</code>, relancez le build. Rien n’est envoyé d’ici : la page ne fait qu’écrire un fichier que vous récupérez.</p>
     </div>
 
     <div class="adm-bar">
@@ -140,15 +140,15 @@
 
     <h2 style="margin-top:44px">Mettre les changements en ligne</h2>
     <ol class="muted" style="max-width:70ch">
-      <li>Enregistrer le fichier ci-dessus — il s’appelle <code>site.json</code>.</li>
-      <li>Le déposer dans <code>site/data/</code>, en remplaçant l’ancien.</li>
+      <li>Enregistrer — vous obtenez <code>opera-contenu.zip</code>.</li>
+      <li>Le décompresser par-dessus le dossier <code>site/</code>, en remplaçant ce qu’il propose. Il contient les textes et, s’il y en a, les photographies changées, déjà aux bonnes mesures et sous les bons noms.</li>
       <li>Dans le dossier <code>site/</code> : <code>python3 build.py</code></li>
       <li>Puis : <code>git add -A &amp;&amp; git commit -m "contenu" &amp;&amp; git push</code></li>
     </ol>
     <p class="muted small">Sans la dernière étape, les changements ne vivent que sur cet ordinateur.</p>
 
     <h2 style="margin-top:34px">Ce qui ne se modifie pas ici</h2>
-    <p class="muted" style="max-width:70ch">Les longs textes des pages Les tissus, Cannage et Savoir-faire vivent dans <code>content.json</code>, et la mise en forme dans <code>assets/site.css</code>. Ils se modifient dans un éditeur de texte. Un vrai panneau où l’on écrit tout depuis le navigateur, sans fichier à déplacer, demanderait un hébergement avec base de données — ce site est fait de fichiers immobiles, ce qui le rend rapide et gratuit à héberger.</p>
+    <p class="muted" style="max-width:70ch">Les textes contenant des liens ou de la mise en forme restent dans <code>content.json</code>, et l’apparence dans <code>assets/site.css</code>. Ils se modifient dans un éditeur de texte. Un vrai panneau où l’on écrit tout depuis le navigateur, sans fichier à déplacer, demanderait un hébergement avec base de données — ce site est fait de fichiers immobiles, ce qui le rend rapide et gratuit à héberger.</p>
 
     <h2 style="margin-top:34px">À confirmer</h2>
     <ul class="muted">
@@ -160,7 +160,8 @@
   </div>
 </section>
 
-<script src="assets/admin.js?v=33f5ace3"></script>
+<script src="assets/admin-zip.js"></script>
+<script src="assets/admin.js?v=5bc48417"></script>
 </main>
 
 <footer>

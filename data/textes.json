@@ -1,0 +1,702 @@
+{
+  "atelier": [
+    {
+      "fr": "Un atelier, pas une salle de montre",
+      "en": "A shop, not a showroom"
+    },
+    {
+      "fr": "Soixante et onze ans à la même adresse, sur la rue Saint-Hubert. On ouvre la structure, on reguinde les ressorts, vous choisissez le tissu au mur devant vous — et la pièce ressort mieux bâtie que la plupart des meubles vendus neufs aujourd’hui.",
+      "en": "Seventy-one years at the same address on rue Saint-Hubert. The frame gets opened, the springs get retied, the fabric gets chosen off the wall in front of you — and the piece leaves better built than most furniture sold new today."
+    },
+    {
+      "fr": "Ce qui se passe vraiment ici",
+      "en": "What actually happens here"
+    },
+    {
+      "fr": "Le rembourrage, ce n’est pas de la housse. Une pièce qui entre est dégarnie jusqu’à la structure, et tout ce qui se trouve sous le tissu est inspecté avant qu’une seule verge soit coupée.",
+      "en": "Reupholstery is not slipcovering. A piece that comes in is stripped to the frame, and everything under the fabric is inspected before a single yard is cut."
+    },
+    {
+      "fr": "Les joints lâches sont recollés et chevillés. Les sangles cassées sont remplacées et tendues à la main. Les ressorts sont reguindés — huit nœuds par ressort, comme on l’a toujours fait. Crin, feutre de coton ou mousse haute densité selon la pièce et selon ce sur quoi vous voulez vous asseoir. C’est seulement là que le tissu monte.",
+      "en": "Loose joints are re-glued and doweled. Broken webbing is replaced and stretched by hand. Coil springs are retied — eight knots per spring, the way it has always been done. Horsehair, cotton felt or high-density foam goes back in depending on the piece and on what you want to sit on. Only then does the fabric go on."
+    },
+    {
+      "fr": "C’est pour ça qu’une estimation doit voir la pièce, et pourquoi une chaise de 1940 est souvent un meilleur achat qu’un sofa de l’an dernier.",
+      "en": "That is why an estimate needs to see the piece, and why a chair from 1940 is often a better purchase than a sofa from last year."
+    },
+    {
+      "fr": "Planche II — L’établi : tendeur, jute, ficelle, semences, et une bergère à demi dégarnie",
+      "en": "Plate II — The bench: stretcher, jute, twine, tacks, and a half-stripped bergère"
+    },
+    {
+      "fr": "Planche III — Ressorts guindés à la main, huit nœuds chacun",
+      "en": "Plate III — Coil springs, hand-tied, eight knots each"
+    },
+    {
+      "fr": "Planche IV — Semences bleuies, posées à la main le long de la traverse",
+      "en": "Plate IV — Blued tacks, set by hand along the rail"
+    },
+    {
+      "fr": "Planche V — Galon, cordonnet, frange, glands et clous de laiton",
+      "en": "Plate V — Gimp, cord, fringe, tassels and brass nails"
+    }
+  ],
+  "bibliotheque": [
+    {
+      "fr": "La bibliothèque",
+      "en": "The library"
+    },
+    {
+      "fr": "Cinquante-huit collections de neuf maisons, filtrables par maison, texture, tenue et couleur. Un écran rend mal la couleur et la main : trois échantillons, quels qu’ils soient, peuvent être mis de côté au comptoir et vus dans la lumière de la pièce à laquelle ils sont destinés.",
+      "en": "Fifty-eight collections from nine houses, filterable by house, texture, behaviour and colour. A screen renders colour and hand imperfectly, so any three swatches can be set aside at the counter and seen in the light of the room they are meant for."
+    },
+    {
+      "fr": "Les maisons",
+      "en": "The houses"
+    },
+    {
+      "fr": "Les dos bleus",
+      "en": "The blue spines"
+    },
+    {
+      "fr": "La gamme la plus profonde de l’atelier — Affordable Lux, Yates, Catalyst, Mixer, Scoop, Felicity, Denali, Marvel, Comrade, Asher, Jeffery 2ᵉ éd., Pace, Endurepel, Self Expression, Holistic, Our World, Curated Town House &amp; Lake House, The Luxe Collection.",
+      "en": "The deepest range in the shop — Affordable Lux, Yates, Catalyst, Mixer, Scoop, Felicity, Denali, Marvel, Comrade, Asher, Jeffery 2nd ed., Pace, Endurepel, Self Expression, Holistic, Our World, Curated Town House &amp; Lake House, The Luxe Collection."
+    },
+    {
+      "fr": "Performance &amp; garantie",
+      "en": "Performance &amp; warranty"
+    },
+    {
+      "fr": "Essentials, Performance, Select Microsuède, Crypton et Crypton Revival, Outdoor Prints &amp; Wovens, et la série Colors — Seaglass, Adore, Inspire, Spring, Gold. Plusieurs portent une étiquette de garantie à vie.",
+      "en": "Essentials, Performance, Select Microsuede, Crypton and Crypton Revival, Outdoor Prints &amp; Wovens, and the Colors series — Seaglass, Adore, Inspire, Spring, Gold. Many carry a lifetime warranty tag."
+    },
+    {
+      "fr": "Velours &amp; texture",
+      "en": "Velvet &amp; texture"
+    },
+    {
+      "fr": "Majestic Luxury Textures, Splendid effet velours, Playful Patterns &amp; Wovens, Delight Textured Wovens, Myriad, Impression, Eden, Mojo, Camelot, Fusion, Sensation, Identity, Network, Melody, Iconic.",
+      "en": "Majestic Luxury Textures, Splendid lush velvet effect, Playful Patterns &amp; Wovens, Delight Textured Wovens, Myriad, Impression, Eden, Mojo, Camelot, Fusion, Sensation, Identity, Network, Melody, Iconic."
+    },
+    {
+      "fr": "Chenille",
+      "en": "Chenille"
+    },
+    {
+      "fr": "Collection Alpaga — une gamme de chenille profonde et tactile, dans les neutres doux qui dominent les intérieurs montréalais en ce moment.",
+      "en": "Collection Alpaga — a deep, tactile chenille range in the soft neutrals that dominate Montreal interiors right now."
+    },
+    {
+      "fr": "Tambora &amp; Versailles",
+      "en": "Tambora &amp; Versailles"
+    },
+    {
+      "fr": "La collection Tambora, plus le cartable Versailles qui couvre rembourrage, draperies, couvre-lits et coussins — une collection qui habille une pièce complète.",
+      "en": "The Tambora Collection, plus the Versailles binder covering upholstery, drapery, bedspreads and cushions — one collection that dresses an entire room."
+    },
+    {
+      "fr": "Velours double face",
+      "en": "Double-sided velvet"
+    },
+    {
+      "fr": "La carte FA1030 : crème, avoine, sauge, brume et gris tourterelle — une vingtaine de nuances d’une même main, utile quand tout doit s’accorder dans une pièce.",
+      "en": "The FA1030 card: cream, oat, sage, mist and dove grey — twenty-odd shades of one hand, useful when a room needs everything to agree."
+    },
+    {
+      "fr": "Extérieur &amp; marine",
+      "en": "Outdoor &amp; marine"
+    },
+    {
+      "fr": "Acrylique teint dans la masse : la couleur traverse la fibre au lieu de reposer dessus. Résistant au soleil, nettoyable à l’eau de Javel diluée, et coté pour usage marin.",
+      "en": "Solution-dyed acrylic: colour runs through the fibre rather than sitting on it. Fade resistant, cleanable with diluted bleach, and rated for marine use."
+    },
+    {
+      "fr": "Tissés courants",
+      "en": "Mid-range wovens"
+    },
+    {
+      "fr": "Les tissés de tous les jours — la gamme où aboutissent la plupart des sofas familiaux, et l’endroit le plus facile pour trouver une texture qui pardonne.",
+      "en": "The everyday wovens — the range most family sofas end up in, and the easiest place to find a texture that hides a household."
+    },
+    {
+      "fr": "Mélanges de laine",
+      "en": "Wool blends"
+    },
+    {
+      "fr": "Le côté mélanges de laine de la bibliothèque : main sèche, couleur profonde, et cette façon qu’a la laine de vieillir plutôt que de s’user.",
+      "en": "The wool-blend end of the library: dry hand, deep colour, and the way only wool ages rather than wears."
+    },
+    {
+      "fr": "Commercial",
+      "en": "Commercial"
+    },
+    {
+      "fr": "Cartables de qualité contrat pour restaurants, cliniques et hôtellerie — cotes d’abrasion et d’ignifugation imprimées sur chaque échantillon.",
+      "en": "Contract-grade binders for restaurant, clinic and hospitality work — abrasion and fire-code ratings printed on every sample."
+    },
+    {
+      "fr": "Tissu fourni par le client",
+      "en": "Customer’s own material"
+    },
+    {
+      "fr": "Le tissu fourni par le client est vérifié pour la laize, le rapport et la cote d’abrasion avant toute coupe. Les cotons à vêtement et à courtepointe survivent rarement à un siège.",
+      "en": "Fabric supplied by the client is measured for width, repeat and abrasion rating before anything is cut. Dress and quilting cottons rarely survive a seat."
+    },
+    {
+      "fr": "Mur de garnitures",
+      "en": "Trim wall"
+    },
+    {
+      "fr": "Galon, cordonnet, frange, glands et clous décoratifs, dans les folios Everyday Colors. Le travail d’époque tient à les accorder à la pièce plutôt qu’au tissu.",
+      "en": "Gimp, cord, fringe, tassels and decorative nailing, in the Everyday Colors folios. Period work depends on matching these to the piece rather than to the fabric."
+    },
+    {
+      "fr": "Parcourir les échantillons",
+      "en": "Browse the swatches"
+    },
+    {
+      "fr": "Ceci n’est qu’un aperçu — un coloris par collection. Il y en a plus de quatre mille autres en magasin, et un écran ne rend jamais correctement une couleur ni une main. Venez les toucher.",
+      "en": "This is a sample of what the shop carries — one colourway per collection. There are over four thousand more in store, and a screen never renders a colour or a hand correctly. Come and put your hands on them."
+    },
+    {
+      "fr": "Texture",
+      "en": "Texture"
+    },
+    {
+      "fr": "Couleur",
+      "en": "Colour"
+    },
+    {
+      "fr": "Floral aquarelle sur lin naturel",
+      "en": "Watercolour floral on natural linen"
+    },
+    {
+      "fr": "Botanique sur fond ocre",
+      "en": "Botanical print on ochre"
+    },
+    {
+      "fr": "Tissé à chevrons",
+      "en": "Chevron weave"
+    },
+    {
+      "fr": "Chenilles rouges · damassé, losange, rayure",
+      "en": "Red chenilles · damask, trellis, stripe"
+    },
+    {
+      "fr": "Damassé bourgogne et or",
+      "en": "Burgundy and gold damask"
+    },
+    {
+      "fr": "Jacquard à la rose · rouge sur charbon",
+      "en": "Rose jacquard · red on charcoal"
+    },
+    {
+      "fr": "Losange bourgogne · fil d’or",
+      "en": "Burgundy trellis · gold thread"
+    },
+    {
+      "fr": "Ogives prune à losanges crème",
+      "en": "Plum ogee with cream diamonds"
+    },
+    {
+      "fr": "Ogives taupe à losanges crème",
+      "en": "Taupe ogee with cream diamonds"
+    }
+  ],
+  "cannage": [
+    {
+      "fr": "Cannage, roseau et jonc",
+      "en": "Cane, reed and rush"
+    },
+    {
+      "fr": "Le cannage se tisse à la main, un trou à la fois, dans le maillage d’origine de la chaise. L’espacement des trous percés permet de l’identifier, et le respecter distingue une réparation d’une rustine.",
+      "en": "Cane is woven by hand, one hole at a time, in the mesh the chair was originally made with. The spacing of the drilled holes identifies it, and matching it is what separates a repair from a patch."
+    },
+    {
+      "fr": "Cannage tissé à la main ou en feuille ?",
+      "en": "Hand-woven or sheet cane?"
+    },
+    {
+      "fr": "Si votre chaise a une couronne de trous individuels percés autour de l’ouverture, elle a été tissée à la main et doit l’être de nouveau — sept passes, enfilées un trou à la fois, généralement de six à dix heures pour un siège.",
+      "en": "If your chair has a ring of individual holes drilled around the opening, it was hand-woven and must be hand-woven again — seven strands, threaded one hole at a time, usually six to ten hours for a seat."
+    },
+    {
+      "fr": "Si elle a une rainure continue avec une baguette de rotin enfoncée dedans, c’est du cannage en feuille : le panneau tissé est trempé, posé dans la rainure et bloqué avec une baguette neuve. Plus rapide, solide, et correct pour tout ce qui a été fait après environ 1920.",
+      "en": "If it has a continuous groove with a thin reed spline pressed into it, it takes sheet cane: the woven panel is soaked, set into the groove and locked with new spline. Faster, sound, and correct for anything made after roughly 1920."
+    },
+    {
+      "fr": "Les sièges de jonc, la corde de papier danoise et les panneaux de fibre pressée se travaillent également ici, et un tissage sur mesure peut être commandé lorsqu’un motif est discontinué.",
+      "en": "Rush seats, Danish paper cord and pressed-fibre panels are also worked here, and a custom weave can be ordered when a pattern has been discontinued."
+    },
+    {
+      "fr": "Demander pour un cannage",
+      "en": "Ask about a caning job"
+    },
+    {
+      "fr": "Berçante en rotin · assise et dossier recannés à la main",
+      "en": "Rattan rocker · seat and back re-caned by hand"
+    },
+    {
+      "fr": "Le travail lui-même",
+      "en": "The work itself"
+    },
+    {
+      "fr": "Cannage tissé à la main, sièges travaillés en corde de papier danoise, et panneaux terminés posés dans leur cadre.",
+      "en": "Cane woven by hand, seats worked in Danish paper cord, and finished panels set into their frames."
+    },
+    {
+      "fr": "Cannage tissé à la main, motif à sept passes",
+      "en": "Hand-woven cane, seven-way pattern"
+    },
+    {
+      "fr": "Panneau de cannage posé dans son cadre",
+      "en": "Cane panel set into its frame"
+    },
+    {
+      "fr": "Corde de papier danoise, tissée en damier",
+      "en": "Danish paper cord, basket weave"
+    },
+    {
+      "fr": "Reconnaître le maillage",
+      "en": "Measuring the mesh"
+    },
+    {
+      "fr": "Un maillage se nomme d’après la distance entre les centres des trous : mesurez le vôtre sur ceux-ci et vous saurez avec lequel la chaise a été faite. Une quinzaine d’autres tissages sont tenus en magasin — jonc, corde danoise, panneaux tressés — et des tissages sur mesure peuvent être commandés.",
+      "en": "A mesh is named for the distance between hole centres — measure yours against these and you will know which one the chair was made with. A further fifteen weaves are kept in stock, including rush, Danish cord and woven panels; custom weaves can be ordered."
+    }
+  ],
+  "performance": [
+    {
+      "fr": "Quel tissu survit à votre maison",
+      "en": "Which cloth survives your household"
+    },
+    {
+      "fr": "Les doubles frottements mesurent la résistance à l’abrasion : une machine Wyzenbeek travaille le tissu jusqu’à la rupture. Sous 15 000, un tissu convient à une pièce décorative; au-delà de 100 000, il tient en salle à manger commerciale.",
+      "en": "Double rubs measure abrasion resistance: a Wyzenbeek machine works the cloth until it fails. Below 15,000 a fabric suits a decorative chair; above 100,000 it holds up in a dining room in commercial service."
+    },
+    {
+      "fr": "Famille",
+      "en": "Family"
+    },
+    {
+      "fr": "Résiste à",
+      "en": "Resists"
+    },
+    {
+      "fr": "Doubles frottements",
+      "en": "Double rubs"
+    },
+    {
+      "fr": "Idéal pour",
+      "en": "Best for"
+    },
+    {
+      "fr": "Attention",
+      "en": "Watch out"
+    },
+    {
+      "fr": "Liquides, taches, odeurs, bactéries — la barrière est intégrée à la fibre",
+      "en": "Liquid, stains, odour, bacteria — barrier is built into the fibre"
+    },
+    {
+      "fr": "Chiens, chats, tout-petits, chaises de salle à manger",
+      "en": "Dogs, cats, toddlers, dining chairs"
+    },
+    {
+      "fr": "Main plus ferme qu’un tissé non traité",
+      "en": "Firmer hand than an untreated woven"
+    },
+    {
+      "fr": "UV, moisissure, chlore, pluie; nettoyable à l’eau de Javel diluée",
+      "en": "UV, mildew, chlorine, rain; cleanable with diluted bleach"
+    },
+    {
+      "fr": "Balcons, bateaux, solariums, fenêtres plein ouest",
+      "en": "Balconies, boats, sunrooms, west-facing windows"
+    },
+    {
+      "fr": "Gamme de couleurs volontairement plus restreinte",
+      "en": "Colour range is deliberately narrower"
+    },
+    {
+      "fr": "Les dégâts à base d’eau et d’huile perlent en surface",
+      "en": "Water and oil-based spills bead on the surface"
+    },
+    {
+      "fr": "Sofas familiaux qui doivent rester doux",
+      "en": "Family sofas that still need to feel soft"
+    },
+    {
+      "fr": "Traitement de surface — il s’use avec les années",
+      "en": "Topical finish — it wears off over years"
+    },
+    {
+      "fr": "Microsuède",
+      "en": "Microsuede"
+    },
+    {
+      "fr": "Griffes, boulochage, abus général; se brosse",
+      "en": "Claws, pilling, general abuse; brushes clean"
+    },
+    {
+      "fr": "Maisons à chats — les griffes ne trouvent aucune boucle",
+      "en": "Cat households — claws find no loop to pull"
+    },
+    {
+      "fr": "Marque à l’eau si on ne tamponne pas uniformément",
+      "en": "Shows watermarks unless blotted evenly"
+    },
+    {
+      "fr": "Velours performance",
+      "en": "Performance velvet"
+    },
+    {
+      "fr": "L’écrasement et le passage bien mieux que le velours de coton",
+      "en": "Crushing and traffic far better than cotton velvet"
+    },
+    {
+      "fr": "Fauteuils signature, têtes de lit, banquettes",
+      "en": "Statement armchairs, headboards, banquettes"
+    },
+    {
+      "fr": "Le sens du poil change la couleur — demandez à voir les deux",
+      "en": "Pile direction changes the colour — ask to see both ways"
+    },
+    {
+      "fr": "Bouclé &amp; tissés bouclés",
+      "en": "Bouclé &amp; loop wovens"
+    },
+    {
+      "fr": "Semble indulgent; la boucle est le point faible",
+      "en": "Looks forgiving; the loop is the weak point"
+    },
+    {
+      "fr": "Salons d’adultes, fauteuils d’appoint, têtes de lit",
+      "en": "Adult living rooms, occasional chairs, headboards"
+    },
+    {
+      "fr": "Une seule griffe tire toute une rangée de boucles; à éviter là où il y a un chat.",
+      "en": "A single claw pulls a whole run of loops; unsuitable where there is a cat."
+    },
+    {
+      "fr": "Vinyle &amp; enduits contrat",
+      "en": "Contract vinyl &amp; coated"
+    },
+    {
+      "fr": "Graisse, désinfectant, essuyage constant",
+      "en": "Grease, disinfectant, constant wiping"
+    },
+    {
+      "fr": "Banquettes de restaurant, cliniques, salles d’attente",
+      "en": "Restaurant banquettes, clinics, waiting rooms"
+    },
+    {
+      "fr": "La cote d’ignifugation doit correspondre à l’usage du local",
+      "en": "Fire-code rating must match the room’s use"
+    },
+    {
+      "fr": "Ces plages sont les chiffres publiés par les filatures; la cote exacte est imprimée sur chaque échantillon en magasin. L’ensoleillement, les animaux, les enfants et la fréquence d’usage réelle sont ce qui restreint le choix.",
+      "en": "These ranges are the mills’ published figures; the exact rating is printed on every sample in the shop. Sun exposure, pets, children and how often the piece is actually used are what narrow the choice."
+    }
+  ],
+  "prix": [
+    {
+      "fr": "Ce qui décide du prix",
+      "en": "What decides the price"
+    },
+    {
+      "fr": "Deux fauteuils de dimensions identiques peuvent être séparés par quatre heures de travail, et c’est pourquoi un nom de catégorie ne suffit pas à chiffrer une pièce. Voici les postes qui font varier une estimation.",
+      "en": "Two armchairs of identical dimensions can be four hours apart in labour, which is why a category name is not enough to price a piece. These are the lines that move an estimate."
+    },
+    {
+      "fr": "Facteur",
+      "en": "Factor"
+    },
+    {
+      "fr": "Pourquoi ça bouge le prix",
+      "en": "Why it moves the price"
+    },
+    {
+      "fr": "Ce qui aide",
+      "en": "What helps"
+    },
+    {
+      "fr": "Métrage",
+      "en": "Yardage"
+    },
+    {
+      "fr": "Le tissu est habituellement la plus grosse ligne de l’estimation, et il se chiffre à la verge avant même la main-d’œuvre.",
+      "en": "Fabric is usually the largest single line on the estimate, and it is priced per yard before labour is even counted."
+    },
+    {
+      "fr": "Servez-vous du calculateur ci-dessus, puis choisissez une gamme de prix au mur.",
+      "en": "Use the calculator above, then pick a price band on the wall."
+    },
+    {
+      "fr": "Rapport de motif",
+      "en": "Pattern repeat"
+    },
+    {
+      "fr": "Tout ce qui doit se raccorder entre siège, dossier et bras gaspille du tissu entre les coupes — parfois un cinquième de la commande.",
+      "en": "Anything that must line up across a seat, back and arms wastes cloth between cuts — sometimes a fifth of the order."
+    },
+    {
+      "fr": "Un uni ou une petite texture répétée élimine complètement le supplément.",
+      "en": "A plain or a small all-over texture removes the surcharge entirely."
+    },
+    {
+      "fr": "Ce que la structure exige",
+      "en": "What the frame needs"
+    },
+    {
+      "fr": "Recollage, chevillage, blocs de coin neufs et guindage des ressorts sont des heures qui n’apparaissent qu’une fois la pièce dégarnie.",
+      "en": "Re-gluing, doweling, new corner blocks and retying springs are hours that only appear once the piece is stripped."
+    },
+    {
+      "fr": "Des photos de tout jeu ou affaissement nous permettent de le signaler dans l’estimation plutôt qu’après.",
+      "en": "Photos of any wobble or sag let us flag it in the estimate rather than after."
+    },
+    {
+      "fr": "Capitonnage &amp; boutons",
+      "en": "Tufting &amp; buttons"
+    },
+    {
+      "fr": "Le capitonnage profond se mesure, se marque, se perce et se tire un bouton à la fois. Ça peut doubler la main-d’œuvre sur une tête de lit.",
+      "en": "Deep buttoning is measured, marked, drilled and pulled one button at a time. It can double the labour on a headboard."
+    },
+    {
+      "fr": "Les cannelures donnent un effet semblable pour nettement moins de travail.",
+      "en": "Channelling gives a similar look for meaningfully less work."
+    },
+    {
+      "fr": "Garniture &amp; clouage",
+      "en": "Trim &amp; nailing"
+    },
+    {
+      "fr": "Galon, cordonnet et clous décoratifs posés à la main se chiffrent au pied et au clou.",
+      "en": "Hand-applied gimp, cord and individual decorative nails are priced by the foot and by the nail."
+    },
+    {
+      "fr": "Un passepoil simple dans le même tissu est inclus dans la plupart des travaux.",
+      "en": "A simple welt in the same cloth is included in most jobs."
+    },
+    {
+      "fr": "Garnissage des coussins",
+      "en": "Cushion fill"
+    },
+    {
+      "fr": "Mousse haute densité neuve, enveloppe de duvet ou noyau à ressorts sont trois coûts très différents pour la même housse.",
+      "en": "New high-density foam, a feather-down wrap or a spring-down core are three very different costs for the same cover."
+    },
+    {
+      "fr": "Dites comment vous voulez que ça s’assoie — ferme, moyen, enveloppant — avant qu’on chiffre.",
+      "en": "Say how you want it to sit — firm, medium, sink-in — before we quote."
+    },
+    {
+      "fr": "Saison",
+      "en": "Season"
+    },
+    {
+      "fr": "D’avril à juin, c’est la période la plus chargée de l’année pour les coussins d’extérieur et le travail d’avant-été.",
+      "en": "April to June is the busiest stretch of the year for outdoor cushions and pre-summer work."
+    },
+    {
+      "fr": "Réserver en janvier ou en septembre raccourcit beaucoup le délai.",
+      "en": "Booking in January or September shortens the delay considerably."
+    },
+    {
+      "fr": "Chiffré séparément",
+      "en": "Quoted separately"
+    },
+    {
+      "fr": "Réparation de structure, guindage des ressorts, mousse ou duvet neufs, clouage décoratif, garniture contrastante, jupes, et livraison. Chacun apparaît sur sa propre ligne pour que vous décidiez quoi garder.",
+      "en": "Frame repair, spring retying, new foam or down, decorative nailing, contrast trim, skirts, and delivery. Each appears as its own line so you can decide what to keep."
+    },
+    {
+      "fr": "Est-ce que ça vaut la peine ?",
+      "en": "Is it worth it?"
+    },
+    {
+      "fr": "Une structure de bois franc aux joints sains vaut presque toujours la peine d’être refaite, et la pièce terminée dure plus longtemps que la plupart des meubles neufs au même prix. Une structure de bois mou agrafé ou d’aggloméré, généralement non — et le dire ne coûte rien.",
+      "en": "A hardwood frame with sound joints is almost always worth rebuilding, and the finished piece outlasts most new furniture at the same price. A stapled softwood or particle-board frame usually is not, and saying so costs nothing."
+    }
+  ],
+  "procede": [
+    {
+      "fr": "Comment ça marche",
+      "en": "How it works"
+    },
+    {
+      "fr": "Six étapes. La première prend une minute et ne coûte rien.",
+      "en": "Six steps. The first one takes a minute and costs nothing."
+    },
+    {
+      "fr": "Envoyez-nous des photos",
+      "en": "Send us photos"
+    },
+    {
+      "fr": "La pièce au complet, un gros plan de ce qui est usé, et une main sur la photo pour voir la taille. Texto, WhatsApp ou courriel — au plus simple.",
+      "en": "The whole piece, a close-up of what is worn, and a hand in the picture so we can see the size. Text, WhatsApp or email — whatever is easiest."
+    },
+    {
+      "fr": "Vous recevez un prix",
+      "en": "You get a price"
+    },
+    {
+      "fr": "Habituellement le jour ouvrable suivant, détaillé pour que vous voyiez ce qui coûte quoi.",
+      "en": "Usually the next working day, written out so you can see what costs what."
+    },
+    {
+      "fr": "Choisissez votre tissu",
+      "en": "Choose your fabric"
+    },
+    {
+      "fr": "Venez les toucher en magasin, ou choisissez-en trois ici et on les garde au comptoir pour vous.",
+      "en": "Come and feel them in the shop, or pick three here and we will keep them at the counter for you."
+    },
+    {
+      "fr": "On ouvre la pièce",
+      "en": "We open it up"
+    },
+    {
+      "fr": "Si on trouve quelque chose que les photos ne montraient pas, on vous appelle avant de faire quoi que ce soit de plus.",
+      "en": "If we find something the photos did not show, we call you before doing any extra work."
+    },
+    {
+      "fr": "On la refait",
+      "en": "We rebuild it"
+    },
+    {
+      "fr": "La structure d’abord, ensuite tout ce qui va dessous, et le tissu en dernier.",
+      "en": "Frame first, then everything that goes underneath, and the fabric last."
+    }
+  ],
+  "questions": [
+    {
+      "fr": "Questions courantes",
+      "en": "Common questions"
+    },
+    {
+      "fr": "Est-ce moins cher de rembourrer ou d’acheter neuf ?",
+      "en": "Is it cheaper to reupholster or to buy new?"
+    },
+    {
+      "fr": "Rembourrer coûte généralement plus cher qu’un sofa comparable d’une chaîne, et moins cher qu’un sofa neuf de construction équivalente. Une structure de bois franc à ressorts guindés ne se vend plus au prix des chaînes : lorsque la structure est saine, la pièce refaite est la mieux bâtie des deux, et elle échappe au dépotoir.",
+      "en": "Reupholstering generally costs more than a comparable sofa from a chain and less than a new sofa of equivalent construction. A hardwood frame with hand-tied springs is no longer sold at chain prices, so where the frame is sound the rebuilt piece is the better-built of the two — and it stays out of a landfill."
+    },
+    {
+      "fr": "Puis-je apporter mon propre tissu ?",
+      "en": "Can I bring my own fabric?"
+    },
+    {
+      "fr": "Oui. C’est une pratique courante, appelée COM dans le métier — le tissu fourni par le client. Il doit arriver avant la coupe pour que la laize, le rapport et la cote d’abrasion soient vérifiés; le tissu à vêtement et le coton à courtepointe durent rarement sur un siège.",
+      "en": "Yes. It is standard practice, known in the trade as COM — customer’s own material. It should arrive before cutting so the width, the repeat and the abrasion rating can be checked; dress fabric and quilting cotton rarely last on a seat."
+    },
+    {
+      "fr": "Quel tissu survit à un chat ?",
+      "en": "What fabric survives a cat?"
+    },
+    {
+      "fr": "Tout ce qui n’offre pas de boucle où une griffe peut s’accrocher : microsuède, tissé plat et serré, ou velours performance. Le bouclé, la chenille et les tissages à boucle ouverte sont à éviter, une seule griffe tirant toute une rangée et la réparation restant visible. Le Crypton ajoute une barrière aux liquides par-dessus la cote d’abrasion.",
+      "en": "Anything without a loop for a claw to catch: microsuede, a tight flat weave, or a performance velvet. Bouclé, chenille and open loop weaves are the ones to avoid, since a single claw pulls a whole run and the repair is always visible. Crypton adds a liquid barrier on top of the abrasion rating."
+    },
+    {
+      "fr": "Comment les antiquités sont-elles traitées ?",
+      "en": "How is antique furniture handled?"
+    },
+    {
+      "fr": "Avec des matériaux traditionnels : sangles de jute, ressorts guindés à la main, crin conservé partout où il demeure sain, bourrelets piqués reconstruits, semences sur les structures d’époque, et galon et clouage choisis selon la période. La méthode est plus longue et plus coûteuse qu’un simple recouvrement.",
+      "en": "With traditional materials: jute webbing, hand-tied coils, horsehair kept wherever it remains sound, stitched edge rolls rebuilt, tacks on period frames, and gimp and nailing chosen to suit the period. The method takes longer and costs more than a straight recover."
+    },
+    {
+      "fr": "Faites-vous la cueillette et la livraison ?",
+      "en": "Do you pick up and deliver?"
+    },
+    {
+      "fr": "Oui, sur l’île de Montréal et en proche banlieue, chiffré selon la distance et le nombre de personnes nécessaires pour porter la pièce. Les cages d’escalier étroites, les escaliers en colimaçon et les ascenseurs à réserver doivent être signalés à l’avance.",
+      "en": "Yes, across the island of Montreal and the near suburbs, quoted by distance and by the number of people needed to carry the piece. Narrow stairwells, spiral staircases and elevators that require booking should be mentioned in advance."
+    },
+    {
+      "fr": "Combien de verges pour un sofa trois places ?",
+      "en": "How many yards do I need for a three-seat sofa?"
+    },
+    {
+      "fr": "De quatorze à dix-huit verges de tissu de 54 pouces pour un uni, passepoil inclus. Ajoutez environ vingt pour cent pour un grand rapport de motif, et vingt de plus si le tissu ne fait que 45 pouces de large. Le calculateur ci-dessus le fera pour votre pièce exacte.",
+      "en": "Fourteen to eighteen yards of 54-inch goods for a plain fabric, including welting. Add about twenty percent for a large pattern repeat, and another twenty if the cloth is only 45 inches wide. The calculator above will do it for your exact piece."
+    },
+    {
+      "fr": "Quels types de cannage sont réalisés ?",
+      "en": "What kinds of caning are done?"
+    },
+    {
+      "fr": "Cannage tissé à la main trou par trou, cannage en feuille posé en rainure, sièges de jonc, corde de papier danoise et réparation d’osier. Vingt maillages et tissages sont tenus en stock, et des tissages sur mesure peuvent être commandés.",
+      "en": "Hand-woven cane threaded hole by hole, sheet cane set into a spline groove, rush seats, Danish paper cord and wicker repair. Twenty mesh sizes and weaves are held in stock, and custom weaves can be ordered."
+    }
+  ],
+  "soumission": [
+    {
+      "fr": "Estimation sur photographies",
+      "en": "Estimates from photographs"
+    },
+    {
+      "fr": "Trois photographies suffisent pour commencer : la pièce au complet, une vue rapprochée de l’usure, et une main dans le cadre pour l’échelle. Elles peuvent être envoyées par texto, WhatsApp ou courriel, et un chiffre écrit suit le jour ouvrable suivant.",
+      "en": "Three photographs are enough to begin: the whole piece, a close view of the wear, and a hand in frame for scale. They can be sent by text, WhatsApp or email, and a written figure follows the next business day."
+    },
+    {
+      "fr": "Votre nom",
+      "en": "Your name"
+    },
+    {
+      "fr": "Téléphone ou courriel",
+      "en": "Phone or email"
+    },
+    {
+      "fr": "La pièce",
+      "en": "The piece"
+    },
+    {
+      "fr": "Description",
+      "en": "Description"
+    },
+    {
+      "fr": "Échantillons réservés",
+      "en": "Swatches reserved"
+    },
+    {
+      "fr": "Rien n’est transmis depuis cette page : le message s’ouvre dans votre propre application de courriel ou de messagerie, où les trois photographies peuvent être jointes avant que vous l’envoyiez vous-même.",
+      "en": "Nothing is transmitted from this page: the message opens in your own mail or messaging app, where the three photographs can be attached before you send it yourself."
+    },
+    {
+      "fr": "Ouvrir mon courriel",
+      "en": "Open my email"
+    },
+    {
+      "fr": "Envoyer un texto",
+      "en": "Send a text"
+    },
+    {
+      "fr": "Nous trouver",
+      "en": "Finding the shop"
+    },
+    {
+      "fr": "Adresse",
+      "en": "Address"
+    },
+    {
+      "fr": "Ouvrir dans Maps",
+      "en": "Open in Maps"
+    },
+    {
+      "fr": "Téléphone",
+      "en": "Phone"
+    },
+    {
+      "fr": "Heures d’ouverture",
+      "en": "Hours"
+    },
+    {
+      "fr": "Un appel avant un long déplacement est prudent : une livraison peut fermer l’atelier une heure.",
+      "en": "A call ahead is worthwhile before a long trip: a delivery can close the shop for an hour."
+    }
+  ]
+}

@@ -258,11 +258,37 @@ def page(filename, title, desc, body, statusbar=False, noindex=False):
     pathlib.Path(filename).write_text(fill(html), encoding='utf-8')
     print('wrote', filename, len(html), 'bytes')
 
+
+# ── Les textes édités depuis /admin.html recouvrent content.json ────
+# L'index ordinal des balises [data-en] est la clé. Si le balisage
+# d'une section change ici, régénérer data/textes.json.
+_TXT_PATH = pathlib.Path('data/textes.json')
+TXT = json.loads(_TXT_PATH.read_text(encoding='utf-8')) if _TXT_PATH.exists() else {}
+_TXT_PAT = re.compile(r'<(\w+)([^>]*\sdata-en="([^"]*)"[^>]*)>(.*?)</\1>', re.S)
+
+def apply_textes(key, html):
+    edits = TXT.get(key)
+    if not edits:
+        return html
+    i = [0]
+    def swap(m):
+        fr = m.group(4)
+        if '<' in fr:                 # balisage interne : laissé tel quel
+            return m.group(0)
+        n = i[0]; i[0] += 1
+        if n >= len(edits):
+            return m.group(0)
+        e = edits[n]
+        attrs = m.group(2).replace('data-en="%s"' % m.group(3),
+                                   'data-en="%s"' % esc(e.get('en', m.group(3))))
+        return '<%s%s>%s</%s>' % (m.group(1), attrs, esc(e.get('fr', fr)), m.group(1))
+    return _TXT_PAT.sub(swap, html)
+
 def sec(sid, extra_class='', keep_id=None):
     """Re-wrap an extracted planche body as a plain section."""
     cls = ('section' + (' ' + extra_class if extra_class else '')).replace('section', '').strip()
     attrs = (' class="%s"' % cls) if cls else ''
-    return '<section%s id="%s">%s\n</section>' % (attrs, keep_id or sid, S[sid])
+    return '<section%s id="%s">%s\n</section>' % (attrs, keep_id or sid, apply_textes(sid, S[sid]))
 
 # ── strip the old "Planche N" eyebrow furniture ──────────────────────────
 def clean(html):
@@ -516,7 +542,7 @@ ADMIN_BODY = '''<section>
     <div class="sec-head">
       <span class="lbl">Interne</span>
       <h1>Modifier le site</h1>
-      <p class="kicker">Changez ce que vous voulez, puis enregistrez le fichier et remettez-le dans <code>site/data/</code>. Rien n’est envoyé d’ici : la page ne fait qu’écrire un fichier que vous récupérez.</p>
+      <p class="kicker">Textes, coordonnées, heures, services et photographies. Enregistrez, décompressez le dossier par-dessus <code>site/</code>, relancez le build. Rien n’est envoyé d’ici : la page ne fait qu’écrire un fichier que vous récupérez.</p>
     </div>
 
     <div class="adm-bar">
@@ -531,15 +557,15 @@ ADMIN_BODY = '''<section>
 
     <h2 style="margin-top:44px">Mettre les changements en ligne</h2>
     <ol class="muted" style="max-width:70ch">
-      <li>Enregistrer le fichier ci-dessus — il s’appelle <code>site.json</code>.</li>
-      <li>Le déposer dans <code>site/data/</code>, en remplaçant l’ancien.</li>
+      <li>Enregistrer — vous obtenez <code>opera-contenu.zip</code>.</li>
+      <li>Le décompresser par-dessus le dossier <code>site/</code>, en remplaçant ce qu’il propose. Il contient les textes et, s’il y en a, les photographies changées, déjà aux bonnes mesures et sous les bons noms.</li>
       <li>Dans le dossier <code>site/</code> : <code>python3 build.py</code></li>
       <li>Puis : <code>git add -A &amp;&amp; git commit -m "contenu" &amp;&amp; git push</code></li>
     </ol>
     <p class="muted small">Sans la dernière étape, les changements ne vivent que sur cet ordinateur.</p>
 
     <h2 style="margin-top:34px">Ce qui ne se modifie pas ici</h2>
-    <p class="muted" style="max-width:70ch">Les longs textes des pages Les tissus, Cannage et Savoir-faire vivent dans <code>content.json</code>, et la mise en forme dans <code>assets/site.css</code>. Ils se modifient dans un éditeur de texte. Un vrai panneau où l’on écrit tout depuis le navigateur, sans fichier à déplacer, demanderait un hébergement avec base de données — ce site est fait de fichiers immobiles, ce qui le rend rapide et gratuit à héberger.</p>
+    <p class="muted" style="max-width:70ch">Les textes contenant des liens ou de la mise en forme restent dans <code>content.json</code>, et l’apparence dans <code>assets/site.css</code>. Ils se modifient dans un éditeur de texte. Un vrai panneau où l’on écrit tout depuis le navigateur, sans fichier à déplacer, demanderait un hébergement avec base de données — ce site est fait de fichiers immobiles, ce qui le rend rapide et gratuit à héberger.</p>
 
     <h2 style="margin-top:34px">À confirmer</h2>
     <ul class="muted">
@@ -551,6 +577,7 @@ ADMIN_BODY = '''<section>
   </div>
 </section>
 
+<script src="assets/admin-zip.js"></script>
 <script src="assets/admin.js?v={ADMINVER}"></script>'''.replace('{ADMINVER}', ver('assets/admin.js'))
 
 page('admin.html', 'Admin — Opera Upholstering',

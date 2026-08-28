@@ -7,7 +7,8 @@
    ═══════════════════════════════════════════════════════════ */
 (function(){
   'use strict';
-  var DATA = null, DIRTY = false;
+  var DATA = null, TXT = null, IMGS = null, DIRTY = false;
+  var NEWIMG = {};   /* chemin -> Uint8Array du fichier redimensionné */
   var $ = function(s, r){ return (r||document).querySelector(s); };
   var el = function(tag, cls, txt){
     var n = document.createElement(tag);
@@ -152,50 +153,141 @@
     return p;
   }
 
+
+  /* ── Textes des pages ─────────────────────────────────── */
+  var SECTION_NOMS = {
+    atelier:'Accueil · l’atelier', bibliotheque:'Les tissus',
+    performance:'Les tissus · tenue des étoffes', cannage:'Cannage',
+    procede:'Savoir-faire · comment ça marche', prix:'Savoir-faire · le prix',
+    questions:'Savoir-faire · questions', soumission:'Contact et soumission'
+  };
+  function paneTextes(){
+    var p = el('div', 'adm-pane');
+    p.appendChild(el('h2', null, 'Tous les textes des pages'));
+    p.appendChild(el('p', 'adm-note', 'Chaque phrase du site, en français et en anglais. Les titres, les paragraphes, les questions, les cellules des tableaux. Ce qui contient des liens ou de la mise en forme n’apparaît pas ici et se modifie dans content.json.'));
+
+    var pick = el('div', 'adm-seltabs');
+    var host = el('div');
+    Object.keys(TXT).forEach(function(key, i){
+      var n = TXT[key].length;
+      if(!n) return;
+      var btn = el('button', 'adm-seltab', (SECTION_NOMS[key] || key) + ' · ' + n);
+      if(i === 0) btn.classList.add('on');
+      btn.addEventListener('click', function(){
+        [].forEach.call(pick.children, function(c){ c.classList.remove('on'); });
+        btn.classList.add('on'); draw(key);
+      });
+      pick.appendChild(btn);
+    });
+    function draw(key){
+      host.innerHTML = '';
+      TXT[key].forEach(function(t, i){
+        var box = el('div', 'adm-card');
+        box.appendChild(el('span', 'adm-idx', (SECTION_NOMS[key] || key) + ' · ' + (i + 1)));
+        var isLong = (t.fr || '').length > 90;
+        box.appendChild(pair(t, 'fr', 'en', 'Texte', {long:isLong, rows:isLong ? 3 : 2}));
+        host.appendChild(box);
+      });
+    }
+    p.appendChild(pick); p.appendChild(host);
+    draw(Object.keys(TXT).filter(function(k){ return TXT[k].length; })[0]);
+    return p;
+  }
+
   /* ── Photographies ────────────────────────────────────── */
   function paneImages(){
     var p = el('div', 'adm-pane');
     p.appendChild(el('h2', null, 'Les photographies'));
-    p.appendChild(el('p', 'adm-note', 'Les images ne se téléversent pas depuis cette page : elles se remplacent dans le dossier, en gardant exactement le même nom de fichier. Le site les reprend au prochain build.'));
-    var rows = [
-      ['assets/hero.jpg', 'La grande image de la page d’accueil', '2000 × 1116'],
-      ['assets/travaux/', 'Les pièces sorties de l’atelier — un fichier carré par pièce', '1000 × 1000'],
-      ['assets/tissus/', 'Les étoffes de la page Les tissus', '1200 de côté'],
-      ['assets/cannage/', 'Le travail de cannage', '1200 de côté'],
-      ['assets/logo-opera.png', 'Le logotype', 'PNG transparent']
-    ];
-    var t = el('div', 'adm-files');
-    rows.forEach(function(r){
-      var row = el('div', 'adm-frow');
-      row.appendChild(el('code', null, r[0]));
-      row.appendChild(el('span', null, r[1]));
-      row.appendChild(el('span', 'adm-dim', r[2]));
-      t.appendChild(row);
+    p.appendChild(el('p', 'adm-note', 'Choisissez une image : elle est recadrée et redimensionnée aux mesures exactes de son emplacement, puis rendue dans le dossier sous le même nom. L’originale n’est pas touchée tant que vous ne la remplacez pas.'));
+
+    IMGS.forEach(function(im){
+      var box = el('div', 'adm-imgrow');
+      var thumb = el('img', 'adm-thumb');
+      thumb.src = NEWIMG[im.chemin] ? NEWIMG[im.chemin].url : (im.chemin + '?t=' + Date.now());
+      thumb.alt = '';
+      box.appendChild(thumb);
+
+      var meta = el('div', 'adm-imgmeta');
+      meta.appendChild(el('span', 'adm-imgrole', im.role));
+      meta.appendChild(el('code', null, im.chemin));
+      meta.appendChild(el('span', 'adm-dim', im.largeur + ' × ' + im.hauteur + ' · ' + im.poids_ko + ' ko'));
+      var status = el('span', 'adm-imgstate');
+      if(NEWIMG[im.chemin]) { status.textContent = 'Remplacée'; status.classList.add('ok'); }
+      meta.appendChild(status);
+      box.appendChild(meta);
+
+      var lab = el('label', 'adm-btn ghost adm-choose', 'Choisir une image');
+      var inp = el('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.hidden = true;
+      inp.addEventListener('change', function(){
+        var f = inp.files && inp.files[0];
+        if(!f) return;
+        status.textContent = 'Traitement…'; status.className = 'adm-imgstate';
+        resize(f, im.largeur, im.hauteur, im.chemin, function(rec){
+          NEWIMG[im.chemin] = rec;
+          thumb.src = rec.url;
+          status.textContent = 'Remplacée — ' + Math.round(rec.bytes.length / 1024) + ' ko';
+          status.className = 'adm-imgstate ok';
+          touch();
+        });
+      });
+      lab.appendChild(inp);
+      box.appendChild(lab);
+      p.appendChild(box);
     });
-    p.appendChild(t);
     return p;
   }
 
+  /* Recadre au centre puis redimensionne aux mesures de l'emplacement. */
+  function resize(file, w, h, path, done){
+    var img = new Image();
+    img.onload = function(){
+      var cv = document.createElement('canvas');
+      cv.width = w; cv.height = h;
+      var ctx = cv.getContext('2d');
+      ctx.fillStyle = '#EEEBE2'; ctx.fillRect(0, 0, w, h);
+      var s = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+      var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+      var png = /\.png$/i.test(path);
+      cv.toBlob(function(blob){
+        blob.arrayBuffer().then(function(buf){
+          done({ bytes: new Uint8Array(buf), url: URL.createObjectURL(blob) });
+        });
+      }, png ? 'image/png' : 'image/jpeg', png ? undefined : 0.82);
+    };
+    img.onerror = function(){ alert('Fichier image illisible.'); };
+    img.src = URL.createObjectURL(file);
+  }
+
   /* ── Enregistrer ──────────────────────────────────────── */
-  function output(){ return JSON.stringify(DATA, null, 2); }
+  function bytes(str){ return new TextEncoder().encode(str); }
 
   function save(){
-    var txt = output();
-    var blob = new Blob([txt], {type:'application/json'});
+    var files = [
+      { name: 'data/site.json',   data: bytes(JSON.stringify(DATA, null, 2)) },
+      { name: 'data/textes.json', data: bytes(JSON.stringify(TXT,  null, 2)) }
+    ];
+    Object.keys(NEWIMG).forEach(function(path){
+      files.push({ name: path, data: NEWIMG[path].bytes });
+    });
+    var blob = window.makeZip(files);
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'site.json';
+    a.download = 'opera-contenu.zip';
     document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
-    $('#state').textContent = 'Fichier enregistré — à remettre dans site/data/';
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1500);
+    var nImg = Object.keys(NEWIMG).length;
+    $('#state').textContent = 'Dossier enregistré — 2 fichiers de texte'
+      + (nImg ? ' et ' + nImg + ' image' + (nImg > 1 ? 's' : '') : '');
     $('#state').className = 'adm-state ok';
     DIRTY = false;
   }
 
   function copy(){
-    var txt = output();
+    var txt = JSON.stringify(DATA, null, 2);
     function done(){
-      $('#state').textContent = 'Copié — à coller dans site/data/site.json';
+      $('#state').textContent = 'Réglages copiés — à coller dans site/data/site.json';
       $('#state').className = 'adm-state ok';
     }
     if(navigator.clipboard && navigator.clipboard.writeText){
@@ -213,11 +305,12 @@
     ['Réglages', paneReglages],
     ['Enseigne', paneEnseigne],
     ['Services', paneServices],
+    ['Textes', paneTextes],
     ['Photographies', paneImages]
   ];
 
-  function boot(data){
-    DATA = data;
+  function boot(d, t, i){
+    DATA = d; TXT = t; IMGS = i;
     var tabs = $('#tabs'), body = $('#pane');
     TABS.forEach(function(t, i){
       var btn = el('button', 'adm-tab', t[0]);
@@ -237,14 +330,19 @@
     });
   }
 
-  fetch('data/site.json?t=' + Date.now())
-    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(boot)
-    .catch(function(){
+  function get(u){
+    return fetch(u + '?t=' + Date.now()).then(function(r){
+      if(!r.ok) throw new Error(u + ' — ' + r.status);
+      return r.json();
+    });
+  }
+  Promise.all([get('data/site.json'), get('data/textes.json'), get('data/images.json')])
+    .then(function(a){ boot(a[0], a[1], a[2]); })
+    .catch(function(err){
       $('#pane').innerHTML =
-        '<p class="adm-note">Impossible de lire <code>data/site.json</code>. ' +
-        'Cette page doit être ouverte à travers un serveur — ' +
-        '<code>python3 -m http.server</code> depuis le dossier <code>site/</code> — ' +
-        'et non par un double-clic sur le fichier.</p>';
+        '<p class="adm-note">Impossible de lire les fichiers de contenu (' +
+        String(err.message || err) + '). Cette page doit être ouverte à travers un ' +
+        'serveur — <code>python3 -m http.server</code> depuis le dossier ' +
+        '<code>site/</code> — et non par un double-clic sur le fichier.</p>';
     });
 })();
