@@ -1,0 +1,46 @@
+# Un commit sur data/** relance build.py et republie les pages. C'est ce
+# qui fait qu'« enregistrer » depuis /admin.html met le site à jour sans
+# que personne n'ouvre un terminal.
+name: Reconstruire le site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - 'content.json'
+      - 'build.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Reconstruire les pages
+        run: python3 build.py
+
+      - name: Committer si les pages ont changé
+        run: |
+          git config user.name  "opera-build"
+          git config user.email "noreply@operaupholstering.com"
+          # Uniquement les pages générées : jamais data/, qui vient d'être
+          # écrit par l'éditeur et relancerait le workflow en boucle.
+          git add ./*.html sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Aucune page modifiée."
+          else
+            git commit -m "Pages reconstruites [skip ci]"
+            git push
+          fi
