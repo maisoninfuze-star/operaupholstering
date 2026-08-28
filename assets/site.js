@@ -541,27 +541,133 @@ function openState(){
 
 /* ═══════ 7 · SOUMISSION PAR COURRIEL ══════════════ */
 var qf = document.getElementById('quoteform');
-if(qf) qf.addEventListener('submit', function(e){
-  e.preventDefault();
-  var g = function(id){ return (document.getElementById(id).value || '').trim(); };
-  var lines = [
-    t('Nom', 'Name') + ' : ' + g('q-name'),
-    t('Coordonnées', 'Contact') + ' : ' + g('q-contact'),
-    t('Pièce', 'Piece') + ' : ' + g('q-piece'),
-    '',
-    g('q-msg')
-  ];
-  if(tray.length){
-    lines.push('', t('Échantillons réservés', 'Swatches reserved') + ' : ' +
-      tray.map(function(k){ var s = trayRecord(k); return s ? s.n + ' (' + s.h + ') — ' + t(s.d[0], s.d[1]) : ''; }).join(' · '));
+if(qf){
+  /* ── Photos jointes ─────────────────────────────────────────
+     Redimensionnées ici même (1400 px, JPEG) : la demande entière
+     reste sous la limite des fonctions, et personne n'envoie une
+     photo de 8 Mo depuis son téléphone. */
+  var PHOTOS = [];
+  var MAXP = 6;
+  var addBtn = document.getElementById('q-addphotos');
+  var fileIn = document.getElementById('q-photos');
+  var strip  = document.getElementById('q-strip');
+  var status = document.getElementById('q-status');
+
+  function say(msg, cls){
+    if(!status) return;
+    if(msg == null){ applyLangTo(status); status.className = 'tiny muted'; return; }
+    status.textContent = msg; status.className = 'tiny muted ' + (cls || '');
   }
-  lines.push('', t('(Trois photos jointes : la pièce, l’usure, une main pour l’échelle.)',
-                   '(Three photos attached: the piece, the wear, a hand for scale.)'));
-  var subject = t('Demande de soumission — ', 'Quote request — ') + (g('q-piece') || t('rembourrage', 'upholstery'));
-  var form = document.getElementById('quoteform');
-  var dest = (LANG === 'en' ? form.getAttribute('data-mail-en') : form.getAttribute('data-mail-fr')) || '';
-  window.location.href = 'mailto:' + dest + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
-});
+  function applyLangTo(el){
+    el.innerHTML = LANG === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-fr') || el.getAttribute('data-en');
+  }
+
+  function drawStrip(){
+    strip.innerHTML = '';
+    PHOTOS.forEach(function(p, i){
+      var d = document.createElement('div');
+      d.className = 'ph-thumb';
+      d.innerHTML = '<img src="' + p.url + '" alt="">' +
+                    '<button type="button" aria-label="' + t('Retirer','Remove') + '">×</button>';
+      d.querySelector('button').addEventListener('click', function(){
+        PHOTOS.splice(i, 1); drawStrip();
+      });
+      strip.appendChild(d);
+    });
+  }
+
+  function shrink(file, done){
+    var img = new Image();
+    img.onload = function(){
+      var M = 1400;
+      var sc = Math.min(1, M / Math.max(img.naturalWidth, img.naturalHeight));
+      var cv = document.createElement('canvas');
+      cv.width = Math.round(img.naturalWidth * sc);
+      cv.height = Math.round(img.naturalHeight * sc);
+      var cx = cv.getContext('2d');
+      cx.imageSmoothingQuality = 'high';
+      cx.drawImage(img, 0, 0, cv.width, cv.height);
+      cv.toBlob(function(b){
+        var r = new FileReader();
+        r.onload = function(){
+          done({ name: (file.name || 'photo.jpg').replace(/\.[^.]+$/, '') + '.jpg',
+                 data: String(r.result).split(',')[1],
+                 url: URL.createObjectURL(b) });
+        };
+        r.readAsDataURL(b);
+      }, 'image/jpeg', 0.78);
+    };
+    img.onerror = function(){ done(null); };
+    img.src = URL.createObjectURL(file);
+  }
+
+  if(addBtn && fileIn){
+    addBtn.addEventListener('click', function(){ fileIn.click(); });
+    fileIn.addEventListener('change', function(){
+      var files = Array.prototype.slice.call(fileIn.files || []).slice(0, MAXP - PHOTOS.length);
+      fileIn.value = '';
+      files.forEach(function(f){
+        shrink(f, function(p){ if(p){ PHOTOS.push(p); drawStrip(); } });
+      });
+    });
+  }
+
+  function fields(){
+    var g = function(id){ return (document.getElementById(id).value || '').trim(); };
+    return { name: g('q-name'), contact: g('q-contact'), piece: g('q-piece'),
+             message: g('q-msg'), website: g('q-website'), lang: LANG,
+             swatches: tray.map(function(k){
+               var s = trayRecord(k); return s ? s.n + ' (' + s.h + ') — ' + t(s.d[0], s.d[1]) : '';
+             }).filter(Boolean) };
+  }
+
+  /* le courriel dans l'application du visiteur : la voie de secours */
+  function viaMailApp(f){
+    var lines = [
+      t('Nom', 'Name') + ' : ' + f.name,
+      t('Coordonnées', 'Contact') + ' : ' + f.contact,
+      t('Pièce', 'Piece') + ' : ' + f.piece, '', f.message
+    ];
+    if(f.swatches.length) lines.push('', t('Échantillons réservés', 'Swatches reserved') + ' : ' + f.swatches.join(' · '));
+    lines.push('', t('(Joignez vos photos à ce courriel.)', '(Attach your photos to this email.)'));
+    var subject = t('Demande de soumission — ', 'Quote request — ') + (f.piece || t('rembourrage', 'upholstery'));
+    var dest = (LANG === 'en' ? qf.getAttribute('data-mail-en') : qf.getAttribute('data-mail-fr')) || '';
+    window.location.href = 'mailto:' + dest + '?subject=' + encodeURIComponent(subject) +
+                           '&body=' + encodeURIComponent(lines.join('\n'));
+    if(PHOTOS.length) say(t('Votre courriel s’ouvre — joignez-y vos photos avant d’envoyer.',
+                            'Your email is opening — attach your photos before sending.'));
+  }
+
+  qf.addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = fields();
+    f.photos = PHOTOS.map(function(p){ return { name: p.name, data: p.data }; });
+    say(t('Envoi…', 'Sending…'));
+
+    fetch('/api/estimate', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(f)
+    })
+    .then(function(r){ return r.text().then(function(txt){
+      var b = null; try { b = JSON.parse(txt); } catch(err){}
+      return { ok: r.ok, status: r.status, b: b };
+    }); })
+    .then(function(res){
+      if(res.ok){
+        PHOTOS = []; drawStrip(); qf.reset(); renderTray();
+        say(t('Demande envoyée — l’atelier vous répond le jour ouvrable suivant.',
+              'Request sent — the shop replies the next business day.'), 'ok');
+        return;
+      }
+      /* fonction absente ou service non configuré : l'application de
+         courriel du visiteur prend le relais, sans rien perdre du texte */
+      if(res.status === 404 || res.status === 405 || res.status === 503){ viaMailApp(f); return; }
+      say((res.b && res.b.error) || t('Échec de l’envoi — réessayez ou appelez-nous.',
+                                      'Sending failed — try again or call us.'), 'err');
+    })
+    .catch(function(){ viaMailApp(f); });
+  });
+}
 
 /* ═══════ 8 · RÉVÉLATION AU DÉFILEMENT ═════════════ */
 var MOTION = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;

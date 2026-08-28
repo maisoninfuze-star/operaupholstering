@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=9a1839e4">
+<link rel="stylesheet" href="assets/site.css?v=b612fe80">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -340,8 +340,18 @@
         </div>
         <div class="field"><label for="q-piece" data-en="The piece">La pièce</label><input type="text" id="q-piece" name="piece" placeholder="Fauteuil club, 6 chaises, banquette de 12 pi…"></div>
         <div class="field"><label for="q-msg" data-en="Description">Description</label><textarea id="q-msg" name="message" placeholder="Âge approximatif, ce qui ne va pas, si ça branle ou si ça s’affaisse, tissu souhaité, échéance…"></textarea></div>
+        <div class="field">
+          <label for="q-photos" data-en="Your photos">Vos photos</label>
+          <input type="file" id="q-photos" accept="image/*" multiple hidden>
+          <div class="ph-row">
+            <button type="button" class="btn ghost" id="q-addphotos" data-en="Add photos">Ajouter des photos</button>
+            <span class="tiny muted" data-en="The whole piece, the wear up close, a hand for scale.">La pièce au complet, l’usure de près, une main pour l’échelle.</span>
+          </div>
+          <div class="ph-strip" id="q-strip"></div>
+        </div>
+        <input type="text" name="website" id="q-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
         <div class="field" id="trayfield" hidden><label data-en="Swatches reserved">Échantillons réservés</label><div id="trayecho" class="tiny muted"></div></div>
-        <p class="tiny muted" data-en="Nothing is transmitted from this page: the message opens in your own mail or messaging app, where the three photographs can be attached before you send it yourself.">Rien n’est transmis depuis cette page : le message s’ouvre dans votre propre application de courriel ou de messagerie, où les trois photographies peuvent être jointes avant que vous l’envoyiez vous-même.</p>
+        <p class="tiny muted" id="q-status" data-en="Your photos travel with the request, straight to the shop’s inbox.">Vos photos accompagnent la demande, directement dans la boîte de l’atelier.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
           <button class="btn" type="submit" data-en="Open my email">Ouvrir mon courriel</button>
           <a class="btn ghost" href="sms:+15142704352" data-en="Send a text">Envoyer un texto</a>
@@ -426,7 +436,7 @@
   <a class="btn outline-light" href="index.html#soumission" data-en="Quote">Soumission</a>
 </div>
 
-<script src="assets/site.js?v=a5717abb"></script>
+<script src="assets/site.js?v=7b04e7b5"></script>
 
 </body>
 </html>

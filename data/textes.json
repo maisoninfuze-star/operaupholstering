@@ -663,12 +663,24 @@
       "en": "Description"
     },
     {
+      "fr": "Vos photos",
+      "en": "Your photos"
+    },
+    {
+      "fr": "Ajouter des photos",
+      "en": "Add photos"
+    },
+    {
+      "fr": "La pièce au complet, l’usure de près, une main pour l’échelle.",
+      "en": "The whole piece, the wear up close, a hand for scale."
+    },
+    {
       "fr": "Échantillons réservés",
       "en": "Swatches reserved"
     },
     {
-      "fr": "Rien n’est transmis depuis cette page : le message s’ouvre dans votre propre application de courriel ou de messagerie, où les trois photographies peuvent être jointes avant que vous l’envoyiez vous-même.",
-      "en": "Nothing is transmitted from this page: the message opens in your own mail or messaging app, where the three photographs can be attached before you send it yourself."
+      "fr": "Vos photos accompagnent la demande, directement dans la boîte de l’atelier.",
+      "en": "Your photos travel with the request, straight to the shop’s inbox."
     },
     {
       "fr": "Ouvrir mon courriel",
