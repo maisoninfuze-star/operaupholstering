@@ -1,0 +1,7 @@
+{
+  "name": "opera-upholstering",
+  "private": true,
+  "type": "module",
+  "description": "Site statique construit par build.py. Les fichiers de api/ sont des fonctions Vercel en modules ES — d'où le \"type\": \"module\", sans lequel Vercel les exécuterait en CommonJS et le premier import échouerait.",
+  "engines": { "node": ">=20" }
+}
