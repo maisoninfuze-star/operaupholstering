@@ -602,7 +602,7 @@ ADMIN_BODY = '''<section>
     <p class="muted small">Sans la dernière étape, les changements ne vivent que sur cet ordinateur.</p>
 
     <h2 style="margin-top:34px">Accès et protection</h2>
-    <p class="muted" style="max-width:70ch">Cette page ne peut rien changer en ligne : elle lit des fichiers, en écrit un que vous récupérez, et n’envoie rien nulle part. Quelqu’un qui tomberait dessus ne pourrait pas toucher au site — il verrait le contenu, qui est déjà public.</p>
+    <p class="muted" style="max-width:70ch">La page demande le mot de passe à l’entrée, vérifié par le serveur — le même que pour publier. Servie en local sans fonctions, elle s’ouvre librement : elle ne peut alors qu’écrire un dossier, et le contenu qu’elle montre est celui, déjà public, du site.</p>
     <p class="muted" style="max-width:70ch">Elle est tout de même exclue des moteurs de recherche (<code>noindex</code> et <code>robots.txt</code>) et absente du plan du site et du menu. Trois façons de la fermer davantage, de la plus sûre à la plus commode :</p>
     <div class="tablewrap" style="margin:16px 0 8px">
       <table>

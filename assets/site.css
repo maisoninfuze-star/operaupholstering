@@ -790,3 +790,7 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
 .ph-thumb button:hover{border-color:var(--accent);color:var(--accent)}
 #q-status.err{color:var(--accent)}
 #q-status.ok{color:var(--jute)}
+
+/* verrou d'entrée de l'éditeur : rien ne s'affiche avant le mot de passe */
+body.adm-locked .wrap > *:not(.sec-head):not(.adm-gate){display:none!important}
+body.adm-locked #gatecancel{display:none}

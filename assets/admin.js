@@ -343,7 +343,7 @@
         var m = errText(res.j) || res.raw || '';
         /* 401 seulement : rouvrir la boîte pour autre chose donnait
            l'impression que le mot de passe avait été refusé. */
-        if(res.status === 401 && /session/i.test(m)) return gate(true);
+        if(res.status === 401 && /session/i.test(m)) return gate(true, publish);
         if(/protected|authenticate|sso/i.test(m)){
           m = 'Ce déploiement est protégé par Vercel. Ouvrez l’adresse de production (sans -git-…).';
         }
@@ -363,12 +363,19 @@
     });
   }
 
-  /* Écran de mot de passe. Affiché quand /api/save répond 401. */
-  function gate(expired){
+  /* Écran de mot de passe. À l'entrée de la page, puis de nouveau si
+     la session expire en cours de route. */
+  var afterLogin = null;
+  function gate(expired, then){
+    afterLogin = then || null;
     var box = $('#gate');
     box.hidden = false;
     $('#gatemsg').textContent = expired ? 'Session expirée. Entrez le mot de passe.' : '';
     $('#pass').focus();
+  }
+  function unlock(){
+    document.body.classList.remove('adm-locked');
+    $('#gate').hidden = true;
   }
   /* Un message d'erreur peut arriver de nous ({error:"…"}) ou d'un
      intermédiaire — Vercel renvoie {error:{message:"…"}} sur les
@@ -410,11 +417,12 @@
       if(done) return; done = true; clearTimeout(timer);
       if(res.ok){
         $('#gatemsg').textContent = '';        /* sinon « Vérification… » reste collé */
-        $('#gate').hidden = true;
         $('#pass').value = '';
-        $('#state').textContent = 'Connecté.';   /* on distingue « mot de passe refusé » de « publication échouée » */
+        unlock();
+        $('#state').textContent = 'Connecté.';
         $('#state').className = 'adm-state ok';
-        publish();
+        var next = afterLogin; afterLogin = null;
+        if(next) next();
         return;
       }
       var msg = errText(res.j);
@@ -492,13 +500,38 @@
       return r.json();
     });
   }
-  Promise.all([get('data/site.json'), get('data/textes.json'), get('data/images.json')])
-    .then(function(a){ boot(a[0], a[1], a[2]); })
-    .catch(function(err){
+  function loadEditor(){
+    Promise.all([get('data/site.json'), get('data/textes.json'), get('data/images.json')])
+      .then(function(a){ boot(a[0], a[1], a[2]); })
+      .catch(loadFail);
+  }
+
+  /* Le verrou d'entrée. Trois issues :
+     — session valide          -> l'éditeur se charge;
+     — pas de session          -> la boîte de mot de passe, et rien d'autre;
+     — pas de fonctions du tout (serveur local, python3 serve.py)
+                               -> l'éditeur s'ouvre en mode dossier .zip,
+                                  puisqu'aucune publication n'est possible. */
+  document.body.classList.add('adm-locked');
+  fetch('/api/session', { cache: 'no-store' })
+    .then(function(r){
+      if(r.status === 503){
+        gate(false);
+        $('#gatemsg').textContent = 'Mot de passe non configuré sur l’hébergeur.';
+        return null;
+      }
+      if(!r.ok) throw new Error('no-functions');
+      return r.json();
+    })
+    .then(function(j){
+      if(!j) return;
+      if(j.authed){ unlock(); loadEditor(); }
+      else gate(false, loadEditor);
+    })
+    .catch(function(){ unlock(); loadEditor(); });   /* local : mode dossier */
+  function loadFail(err){
       $('#pane').innerHTML =
         '<p class="adm-note">Impossible de lire les fichiers de contenu (' +
-        String(err.message || err) + '). Cette page doit être ouverte à travers un ' +
-        'serveur — <code>python3 -m http.server</code> depuis le dossier ' +
-        '<code>site/</code> — et non par un double-clic sur le fichier.</p>';
-    });
+        String(err.message || err) + ').</p>';
+  }
 })();
