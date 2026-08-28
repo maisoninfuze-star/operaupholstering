@@ -758,3 +758,13 @@ html:not(.intro-skip) body:has(.splash:not(.done)){overflow:hidden}
   .adm-thumb{width:72px;height:72px}
   .adm-choose{grid-column:1/-1}
 }
+
+/* écran de mot de passe de l'éditeur */
+.adm-gate{position:fixed;inset:0;z-index:120;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--noir) 78%,transparent);backdrop-filter:blur(4px)}
+.adm-gatebox{background:var(--paper);border:1px solid var(--rule);padding:30px;
+  width:min(92vw,400px);box-shadow:0 30px 70px -30px rgba(0,0,0,.6)}
+.adm-gatebox input{font-family:'Jost',sans-serif;font-size:1rem;padding:12px 13px;
+  border:1px solid var(--rule);background:var(--paper-2);color:var(--ink);width:100%}
+.adm-gatemsg{font-family:'Jost',sans-serif;font-size:.72rem;letter-spacing:.1em;
+  color:var(--accent);min-height:1.2em;margin:10px 0 0}

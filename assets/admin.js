@@ -300,6 +300,81 @@
     }
   }
 
+
+  /* ── Publier en ligne ─────────────────────────────────────
+     Passe par /api/save, qui vérifie le cookie signé puis commit
+     dans le dépôt ; l'action GitHub relance build.py. Si les
+     fonctions ne répondent pas (site servi en local, ou secrets non
+     réglés), le bouton le dit et le .zip reste la voie de secours. */
+  function b64(u8){
+    var s = '', C = 0x8000;
+    for(var i = 0; i < u8.length; i += C){
+      s += String.fromCharCode.apply(null, u8.subarray(i, i + C));
+    }
+    return btoa(s);
+  }
+
+  function setBusy(on, msg){
+    $('#publish').disabled = on;
+    $('#save').disabled = on;
+    if(msg){ $('#state').textContent = msg; $('#state').className = 'adm-state'; }
+  }
+
+  function publish(){
+    var imgs = {};
+    Object.keys(NEWIMG).forEach(function(p){ imgs[p] = b64(NEWIMG[p].bytes); });
+    var n = Object.keys(imgs).length;
+    setBusy(true, 'Publication…' + (n ? ' (' + n + ' image' + (n > 1 ? 's' : '') + ')' : ''));
+
+    fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ site: DATA, textes: TXT, images: imgs })
+    })
+    .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, j: j }; }); })
+    .then(function(res){
+      setBusy(false);
+      if(!res.ok){
+        if(res.j && /Session/.test(res.j.error || '')) return gate(true);
+        $('#state').textContent = (res.j && res.j.error) || 'Échec de la publication.';
+        $('#state').className = 'adm-state dirty';
+        return;
+      }
+      NEWIMG = {};
+      DIRTY = false;
+      $('#state').textContent = 'Publié — le site se reconstruit, comptez une minute.';
+      $('#state').className = 'adm-state ok';
+    })
+    .catch(function(){
+      setBusy(false);
+      $('#state').textContent = 'Les fonctions ne répondent pas — utilisez « Enregistrer le dossier ».';
+      $('#state').className = 'adm-state dirty';
+    });
+  }
+
+  /* Écran de mot de passe. Affiché quand /api/save répond 401. */
+  function gate(expired){
+    var box = $('#gate');
+    box.hidden = false;
+    $('#gatemsg').textContent = expired ? 'Session expirée. Entrez le mot de passe.' : '';
+    $('#pass').focus();
+  }
+  function signIn(){
+    var pw = $('#pass').value;
+    if(!pw) return;
+    $('#gatemsg').textContent = 'Vérification…';
+    fetch('/api/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ passcode: pw })
+    })
+    .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, j: j }; }); })
+    .then(function(res){
+      if(res.ok){ $('#gate').hidden = true; $('#pass').value = ''; publish(); }
+      else $('#gatemsg').textContent = (res.j && res.j.error) || 'Refusé.';
+    })
+    .catch(function(){ $('#gatemsg').textContent = 'Les fonctions ne répondent pas.'; });
+  }
+
   /* ── Démarrage ────────────────────────────────────────── */
   var TABS = [
     ['Réglages', paneReglages],
@@ -324,6 +399,17 @@
     });
     body.appendChild(TABS[0][1]());
     $('#save').addEventListener('click', save);
+    var pub = $('#publish');
+    if(pub) pub.addEventListener('click', function(){
+      /* on tente directement : si la session manque, /api/save répond 401 */
+      publish();
+    });
+    var sb = $('#signin');
+    if(sb){
+      sb.addEventListener('click', signIn);
+      $('#pass').addEventListener('keydown', function(e){ if(e.key === 'Enter') signIn(); });
+      $('#gatecancel').addEventListener('click', function(){ $('#gate').hidden = true; });
+    }
     $('#copy').addEventListener('click', copy);
     window.addEventListener('beforeunload', function(e){
       if(DIRTY){ e.preventDefault(); e.returnValue = ''; }

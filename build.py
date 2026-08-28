@@ -561,7 +561,21 @@ ADMIN_BODY = '''<section>
     <div class="adm-bar">
       <span class="adm-state" id="state">Chargement…</span>
       <button class="adm-btn ghost" id="copy" type="button">Copier</button>
-      <button class="adm-btn" id="save" type="button" disabled>Enregistrer le fichier</button>
+      <button class="adm-btn ghost" id="save" type="button" disabled>Enregistrer le dossier</button>
+      <button class="adm-btn" id="publish" type="button">Publier en ligne</button>
+    </div>
+
+    <div class="adm-gate" id="gate" hidden>
+      <div class="adm-gatebox">
+        <span class="lbl">Accès</span>
+        <p class="adm-note" style="margin:10px 0 16px">Le mot de passe est réglé sur l’hébergeur. Il n’est pas écrit dans cette page.</p>
+        <input id="pass" type="password" autocomplete="current-password" placeholder="Mot de passe" aria-label="Mot de passe">
+        <p class="adm-gatemsg" id="gatemsg"></p>
+        <div style="display:flex;gap:9px;margin-top:14px">
+          <button class="adm-btn" id="signin" type="button">Entrer</button>
+          <button class="adm-btn ghost" id="gatecancel" type="button">Annuler</button>
+        </div>
+      </div>
     </div>
 
     <div id="tabs"></div>
@@ -570,7 +584,11 @@ ADMIN_BODY = '''<section>
 
     <h2 style="margin-top:44px">Mettre les changements en ligne</h2>
     <ol class="muted" style="max-width:70ch">
-      <li>Enregistrer — vous obtenez <code>opera-contenu.zip</code>.</li>
+      <li><strong>Publier en ligne</strong> — le plus simple. Un mot de passe la première fois, puis les changements partent dans le dépôt et le site se reconstruit tout seul en une minute environ. Rien à décompresser, rien à taper dans un terminal.</li>
+    </ol>
+    <p class="muted small">Si l’hébergeur n’est pas encore configuré, la voie de secours reste ouverte :</p>
+    <ol class="muted" style="max-width:70ch">
+      <li>Enregistrer le dossier — vous obtenez <code>opera-contenu.zip</code>.</li>
       <li>Le décompresser par-dessus le dossier <code>site/</code>, en remplaçant ce qu’il propose. Il contient les textes et, s’il y en a, les photographies changées, déjà aux bonnes mesures et sous les bons noms.</li>
       <li>Dans le dossier <code>site/</code> : <code>python3 build.py</code></li>
       <li>Puis : <code>git add -A &amp;&amp; git commit -m "contenu" &amp;&amp; git push</code></li>
