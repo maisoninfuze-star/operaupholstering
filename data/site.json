@@ -11,6 +11,7 @@
     "fondation": "1955"
   },
   "heures": {
+    "0": null,
     "1": [
       "9",
       "17"
@@ -34,8 +35,7 @@
     "6": [
       "10",
       "17"
-    ],
-    "0": null
+    ]
   },
   "enseigne": {
     "surtitre_fr": "Rue Saint-Hubert · Montréal",
@@ -54,7 +54,7 @@
   "chiffres": [
     {
       "valeur": "71",
-      "label_fr": "ans d’expérience",
+      "label_fr": "ans de métier",
       "label_en": "years of experience"
     },
     {
