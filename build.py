@@ -67,9 +67,10 @@ SCHEMA = """<script type="application/ld+json">
 }
 </script>"""
 
-def head(title, desc, page):
+def head(title, desc, page, noindex=False):
     canon = SITE + ('' if page == 'index.html' else page)
     og = OG_IMAGE
+    ROBOTS = '\n<meta name="robots" content="noindex, nofollow">' if noindex else ''
     return f'''<!doctype html>
 <html lang="fr">
 <head>
@@ -77,7 +78,7 @@ def head(title, desc, page):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="canonical" href="{canon}">
+<link rel="canonical" href="{canon}">{ROBOTS}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Opera Upholstering">
 <meta property="og:locale" content="fr_CA">
@@ -153,10 +154,8 @@ def header(current):
 
 STATUSBAR = '''<div class="statusbar">
   <div class="wrap bar">
-    <span id="openstate"><span class="dot off"></span><b data-en="Hours below">Horaire ci-dessous</b></span>
-    <span>7498 rue Saint-Hubert, Montréal</span>
-    <a href="tel:+15142704352">(514) 270-4352</a>
-    <span data-en="Service in French and English">Service en français et en anglais</span>
+    <span class="sb-left">7498 rue Saint-Hubert, Montréal</span>
+    <a class="sb-right" href="tel:+15142704352">(514) 270-4352</a>
   </div>
 </div>
 '''
@@ -166,7 +165,7 @@ FOOTER = '''<footer>
     <div class="cols">
       <div>
         <div class="flogo"><img src="assets/logo-opera.png" alt="Opera Upholstering"></div>
-        <p style="margin-top:16px;max-width:34ch" data-en="Upholstery, antique restoration and hand caning on Plaza Saint-Hubert since 1955.">Rembourrage, restauration d’antiquités et cannage tissé à la main sur la Plaza Saint-Hubert depuis 1955.</p>
+        <p style="margin-top:16px;max-width:34ch" data-en="Upholstery, antique restoration and hand caning on rue Saint-Hubert since 1955.">Rembourrage, restauration d’antiquités et cannage tissé à la main sur la rue Saint-Hubert depuis 1955.</p>
         <p style="margin-top:14px"><a href="tel:+15142704352">(514) 270-4352</a><br>7498 rue Saint-Hubert<br>Montréal (Québec) H2R 2N3</p>
       </div>
       <div>
@@ -195,7 +194,7 @@ FOOTER = '''<footer>
     </div>
     <div class="colophon">
       <span>© <span id="year">2026</span> Opera Upholstering</span>
-      <span data-en="Est. 1955 · Plaza Saint-Hubert">Depuis 1955 · Plaza Saint-Hubert</span>
+      <span data-en="Depuis 1955 · rue Saint-Hubert">Depuis 1955 · rue Saint-Hubert</span>
       <span data-en="Service in French and English">Service en français et en anglais</span>
     </div>
   </div>
@@ -218,9 +217,9 @@ FOOTER = '''<footer>
 <script src="assets/site.js?v={JSVER}"></script>
 '''
 
-def page(filename, title, desc, body, statusbar=False):
+def page(filename, title, desc, body, statusbar=False, noindex=False):
     footer = FOOTER.replace('{JSVER}', ver('assets/site.js'))
-    html = head(title, desc, filename).replace('{PREPAINT}', PREPAINT) + '\n' + header(filename) + (STATUSBAR if statusbar else '') + '\n<main id="contenu">\n' + body + '\n</main>\n\n' + footer + '\n</body>\n</html>\n'
+    html = head(title, desc, filename, noindex).replace('{PREPAINT}', PREPAINT) + '\n' + header(filename) + (STATUSBAR if statusbar else '') + '\n<main id="contenu">\n' + body + '\n</main>\n\n' + footer + '\n</body>\n</html>\n'
     pathlib.Path(filename).write_text(html, encoding='utf-8')
     print('wrote', filename, len(html), 'bytes')
 
@@ -250,46 +249,53 @@ print('sections loaded')
 SERVICES_SHORT = [
  ('Fauteuils &amp; sofas','Armchairs &amp; sofas',
   'La pièce est dégarnie jusqu’à la structure. Sangles, ressorts et bourrage sont refaits avant la pose du tissu.',
-  'The piece is stripped to the frame. Webbing, springs and stuffing are rebuilt before the cloth is fitted.','3–5 semaines','3–5 weeks'),
+  'The piece is stripped to the frame. Webbing, springs and stuffing are rebuilt before the cloth is fitted.','',''),
  ('Restauration d’antiquités','Antique restoration',
   'Sangles de jute, crin conservé, ressorts guindés à la main et semences sur les structures d’époque.',
-  'Jute webbing, horsehair kept, hand-tied springs and tacks on period frames.','5–9 semaines','5–9 weeks'),
+  'Jute webbing, horsehair kept, hand-tied springs and tacks on period frames.','',''),
  ('Cannage &amp; rotin','Cane &amp; rattan',
   'Cannage tissé à la main, trou par trou, ou cannage en feuille posé en rainure. Vingt maillages en stock.',
-  'Cane woven by hand, hole by hole, or sheet cane set into a spline groove. Twenty meshes in stock.','2–4 semaines','2–4 weeks'),
+  'Cane woven by hand, hole by hole, or sheet cane set into a spline groove. Twenty meshes in stock.','',''),
  ('Chaises de salle à manger','Dining chairs',
   'Traitées en lot et chiffrées par ensemble. Un tissu performance convient mieux à une salle à manger.',
-  'Handled as a batch and priced by the set. A performance fabric suits a dining room better.','1–3 semaines','1–3 weeks'),
+  'Handled as a batch and priced by the set. A performance fabric suits a dining room better.','',''),
  ('Têtes de lit','Headboards',
   'Toute hauteur et toute forme : unie, à cannelures ou capitonnée, fixée au mur ou au sommier.',
-  'Any height and any shape: plain, channelled or deep-buttoned, wall or bed mounted.','2–4 semaines','2–4 weeks'),
+  'Any height and any shape: plain, channelled or deep-buttoned, wall or bed mounted.','',''),
  ('Coussins &amp; extérieur','Cushions &amp; outdoor',
   'Sunbrella et acryliques teints dans la masse, coupés au gabarit, fil de qualité marine.',
-  'Sunbrella and solution-dyed acrylics, cut to template, marine-grade thread.','2–3 semaines','2–3 weeks'),
+  'Sunbrella and solution-dyed acrylics, cut to template, marine-grade thread.','',''),
  ('Banquettes &amp; contrat','Banquettes &amp; contract',
   'Restaurants, cliniques et hôtellerie. Chiffré au pied linéaire, cotes d’abrasion et d’ignifugation vérifiées.',
-  'Restaurants, clinics and hospitality. Quoted per linear foot, abrasion and fire ratings verified.','Sur soumission','Quoted'),
+  'Restaurants, clinics and hospitality. Quoted per linear foot, abrasion and fire ratings verified.','',''),
  ('Structure &amp; ressorts','Frames &amp; springs',
   'Traverses fendues, blocs de coin remplacés, sièges affaissés, mécanismes d’inclinaison entretenus.',
-  'Cracked rails, corner blocks replaced, sagging seats, recliner mechanisms serviced.','Estimation gratuite','Free estimate'),
+  'Cracked rails, corner blocks replaced, sagging seats, recliner mechanisms serviced.','',''),
  ('Cuir','Leather',
   'Cuir pleine fleur cousu et tendu à la main : fauteuils, banquettes, capitonnage et sièges d’auto anciens.',
-  'Full-grain leather, sewn and stretched by hand: armchairs, banquettes, buttoning and vintage car seats.','4–7 semaines','4–7 weeks'),
+  'Full-grain leather, sewn and stretched by hand: armchairs, banquettes, buttoning and vintage car seats.','',''),
  ('Décapage &amp; finition du bois','Wood stripping &amp; finishing',
   'Le bois apparent est décapé, poncé, teint et refini : vernis, huile ou cire, selon la pièce.',
-  'Show-wood is stripped, sanded, stained and refinished — varnish, oil or wax, to suit the piece.','2–4 semaines','2–4 weeks'),
+  'Show-wood is stripped, sanded, stained and refinished — varnish, oil or wax, to suit the piece.','',''),
  ('Cueillette &amp; livraison','Pick-up &amp; delivery',
   'On vient chercher la pièce et on la rapporte, sur l’île de Montréal et en proche banlieue.',
   'We collect the piece and bring it back, across the island of Montreal and the near suburbs.','Sur demande','On request'),
+ ('Mousse &amp; coussins','Foam &amp; cushions',
+  'Mousse haute densité, enveloppe de duvet ou noyau à ressorts : l’assise se choisit ferme, moyenne ou enveloppante.',
+  'High-density foam, a down wrap or a spring-down core — the seat is chosen firm, medium or sink-in.','',''),
 ]
 
-svc_cards = '\n'.join(
- '''      <article class="svc rise">
-        <h3 data-en="%s">%s</h3>
-        <p data-en="%s">%s</p>
-        <div class="meta"><span data-en="Typical delay">Délai type</span><b data-en="%s">%s</b></div>
-      </article>''' % (en, fr, den, dfr, men, mfr)
- for fr, en, dfr, den, mfr, men in SERVICES_SHORT)
+def _svc_card(fr, en, dfr, den, mfr, men):
+    """La ligne « meta » ne s'affiche que si le service en a une —
+       seul Cueillette & livraison en garde une désormais."""
+    meta = ('\n        <div class="meta"><span data-en="On request">Sur demande</span>'
+            '<b data-en="%s">%s</b></div>' % (men, mfr)) if mfr else ''
+    return ('      <article class="svc rise">\n'
+            '        <h3 data-en="%s">%s</h3>\n'
+            '        <p data-en="%s">%s</p>%s\n'
+            '      </article>' % (en, fr, den, dfr, meta))
+
+svc_cards = '\n'.join(_svc_card(*row) for row in SERVICES_SHORT)
 
 HOME = '''<section class="hero" id="haut">
   <div class="hero-media">
@@ -297,8 +303,12 @@ HOME = '''<section class="hero" id="haut">
     <span class="hero-scrim"></span>
   </div>
   <div class="hero-type">
-    <span class="lbl" data-en="Plaza Saint-Hubert · Montréal">Plaza Saint-Hubert · Montréal</span>
-    <h1 data-en="Seventy-one years at the same bench.">Soixante et onze ans au même établi.</h1>
+    <span class="lbl" data-en="Rue Saint-Hubert · Montréal">Rue Saint-Hubert · Montréal</span>
+    <h1 class="hero-logo">
+      <span class="hero-logo-fr">Rembourrage</span>
+      <img src="assets/logo-mark.png" alt="Opera" width="511" height="140">
+      <span class="hero-logo-en">Upholstering</span>
+    </h1>
     <p class="hero-sub" data-en="Upholstering · Leather · Restoration · Caning">Rembourrage · Cuir · Restauration · Cannage</p>
     <p class="tagline" data-en="The frame is opened before any fabric is discussed.">On ouvre la structure avant de parler de tissu.</p>
     <p class="lede" data-en="Full reupholstery in fabric and leather, antique restoration and hand caning at 7498 rue Saint-Hubert since 1955. Estimates are made from photographs and returned the next business day.">Rembourrage complet en tissu et en cuir, restauration de meubles anciens et cannage tissé à la main, au 7498, rue Saint-Hubert depuis 1955. Les estimations se font sur photographies et reviennent le jour ouvrable suivant.</p>
@@ -307,7 +317,7 @@ HOME = '''<section class="hero" id="haut">
       <a class="btn outline-light" href="#realisations" data-en="See the work">Voir les réalisations</a>
     </div>
     <div class="hero-figures">
-      <div class="fig"><b>71</b><span data-en="years on Saint-Hubert">ans rue Saint-Hubert</span></div>
+      <div class="fig"><b>71</b><span data-en="years of experience">ans d’expérience</span></div>
       <div class="fig"><b>4 000+</b><span data-en="fabrics in stock">tissus en magasin</span></div>
       <div class="fig"><b>20</b><span data-en="cane weaves">maillages de cannage</span></div>
       <div class="fig"><b>4,3</b><span data-en="Google · 47 reviews">Google · 47 avis</span></div>
@@ -435,7 +445,7 @@ HOME = '''<section class="hero" id="haut">
 
 page('index.html',
      'Opera Upholstering — Rembourrage, restauration et cannage · Montréal',
-     'Atelier de rembourrage sur la Plaza Saint-Hubert depuis 1955. Restauration de meubles anciens, cannage, banquettes, têtes de lit. Des centaines de tissus en magasin.',
+     'Atelier de rembourrage sur la rue Saint-Hubert depuis 1955. Restauration de meubles anciens, cannage, banquettes, têtes de lit. Des centaines de tissus en magasin.',
      HOME, statusbar=True)
 
 # ═════════════════════════ SOUS-PAGES ═════════════════════════
@@ -450,7 +460,7 @@ APROPOS = '''<section>
 
     <div class="cols-2 rise">
       <div>
-        <p class="muted" data-en="The shop opened when Plaza Saint-Hubert was still lined with tailors and furriers. Most of those trades have gone. Upholstery stayed, because a well-built chair is worth repairing and because someone has to know how.">L’atelier a ouvert quand la Plaza Saint-Hubert comptait encore des tailleurs et des fourreurs. La plupart de ces métiers ont disparu. Le rembourrage est resté, parce qu’un fauteuil bien bâti mérite d’être réparé et parce qu’il faut bien que quelqu’un sache le faire.</p>
+        <p class="muted" data-en="The shop opened when rue Saint-Hubert was still lined with tailors and furriers. Most of those trades have gone. Upholstery stayed, because a well-built chair is worth repairing and because someone has to know how.">L’atelier a ouvert quand la rue Saint-Hubert comptait encore des tailleurs et des fourreurs. La plupart de ces métiers ont disparu. Le rembourrage est resté, parce qu’un fauteuil bien bâti mérite d’être réparé et parce qu’il faut bien que quelqu’un sache le faire.</p>
         <p class="muted" data-en="Everything is done on site: stripping, frame repair, webbing, springs, stuffing, sewing, caning and wood finishing. Nothing is sent out, which is why the estimate holds and the delay is ours to keep.">Tout se fait sur place : dégarnissage, réparation de structure, sangles, ressorts, bourrage, couture, cannage et finition du bois. Rien n’est envoyé ailleurs, et c’est pour ça que l’estimation tient et que le délai nous appartient.</p>
         <p class="muted" data-en="Customers come with a chair from a grandmother, a sofa that has held up for thirty years, or twelve restaurant banquettes that need to be back in service by Friday. The work is the same: open it, look, and rebuild it properly.">Les clients arrivent avec un fauteuil de grand-mère, un sofa qui a tenu trente ans, ou douze banquettes de restaurant à remettre en service pour vendredi. Le travail est le même : ouvrir, regarder, et refaire les choses comme il faut.</p>
       </div>
@@ -471,7 +481,7 @@ APROPOS = '''<section>
     </div>
 
     <div class="cols rise" style="margin-top:clamp(30px,4vw,52px)">
-      <div><h3 data-en="Since 1955">Depuis 1955</h3><p class="muted small" data-en="Seventy-one years at the same address, through the whole life of the Plaza and its marquee.">Soixante et onze ans à la même adresse, à travers toute la vie de la Plaza et de sa marquise.</p></div>
+      <div><h3 data-en="Since 1955">Depuis 1955</h3><p class="muted small" data-en="Seventy-one years at the same address, through the whole life of the street and its marquee.">Soixante et onze ans à la même adresse, à travers toute la vie de la rue et de sa marquise.</p></div>
       <div><h3 data-en="Everything under one roof">Tout sous un même toit</h3><p class="muted small" data-en="Upholstery, antique restoration, caning, wood finishing, commercial banquettes, pick-up and delivery.">Rembourrage, restauration d’antiquités, cannage, finition du bois, banquettes commerciales, cueillette et livraison.</p></div>
       <div><h3 data-en="French and English">Français et anglais</h3><p class="muted small" data-en="At the counter and on the phone, whichever you are more comfortable in.">Au comptoir et au téléphone, dans la langue qui vous convient.</p></div>
       <div><h3 data-en="Free estimates">Estimation gratuite</h3><p class="muted small" data-en="Send three photographs and a written figure comes back the next business day.">Envoyez trois photographies et un chiffre écrit revient le jour ouvrable suivant.</p></div>
@@ -488,6 +498,52 @@ page('a-propos.html',
      'À propos — Opera Upholstering, rue Saint-Hubert depuis 1955',
      'Atelier de rembourrage au 7498, rue Saint-Hubert depuis 1955. Rembourrage, restauration d’antiquités, cannage et finition du bois, tout sur place.',
      APROPOS)
+
+# ═════════════════════════ ADMIN ═════════════════════════
+# Page interne : hors navigation, hors index, hors plan de site.
+ADMIN_BODY = '''<section>
+  <div class="wrap narrow">
+    <div class="sec-head">
+      <span class="lbl">Interne</span>
+      <h1>Tenir le site à jour</h1>
+      <p class="kicker">Cette page n’est pas dans le menu, n’est pas indexée et n’apparaît pas dans le plan du site. Elle sert à l’atelier.</p>
+    </div>
+
+    <h3>Changer un texte ou une photo</h3>
+    <p class="muted">Tout le site est construit par un script à partir de deux fichiers. On ne modifie jamais les pages <code>.html</code> directement : elles sont réécrites au prochain build et les changements seraient perdus.</p>
+    <div class="tablewrap" style="margin:16px 0 26px">
+      <table>
+        <thead><tr><th>Fichier</th><th>Ce qu’il contient</th></tr></thead>
+        <tbody>
+          <tr><td>build.py</td><td>L’enseigne, les services, l’atelier, les réalisations, le pied de page, le contact.</td></tr>
+          <tr><td>content.json</td><td>Les tissus, le cannage, le procédé, les prix, les questions.</td></tr>
+          <tr><td>assets/site.css</td><td>Toute la mise en forme.</td></tr>
+          <tr><td>assets/site.js</td><td>La langue, les filtres, les heures d’ouverture.</td></tr>
+          <tr><td>assets/travaux/</td><td>Les pièces sorties de l’atelier.</td></tr>
+          <tr><td>assets/tissus/ · assets/cannage/</td><td>Les étoffes et le travail de cannage.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted small">Après toute modification : <code>python3 build.py</code> depuis le dossier <code>site/</code>, puis <code>git add -A &amp;&amp; git commit &amp;&amp; git push</code>.</p>
+
+    <h3 style="margin-top:34px">Les heures d’ouverture</h3>
+    <p class="muted">Elles sont écrites une seule fois, dans <code>assets/site.js</code>, dans la table <code>HOURS</code>. Le bandeau « ouvert / fermé » et le tableau de la page contact s’y accordent tout seuls.</p>
+
+    <h3 style="margin-top:34px">À confirmer avant la mise en ligne</h3>
+    <ul class="muted">
+      <li>L’année de fondation (1955) — aucune source publique ne la confirme.</li>
+      <li>Les heures d’ouverture — les annuaires se contredisent.</li>
+      <li>La fiche Google, non revendiquée et dédoublée par une seconde adresse.</li>
+      <li>Le domaine operaupholstering.com, pas encore pointé sur le site.</li>
+    </ul>
+
+    <h3 style="margin-top:34px">Ce que le site ne fait pas</h3>
+    <p class="muted">Il n’y a ni base de données ni connexion : le formulaire de soumission ouvre l’application de courriel du visiteur, rien n’est transmis par la page. Un vrai panneau d’administration — modifier les textes depuis le navigateur — demanderait un hébergement différent.</p>
+  </div>
+</section>'''
+
+page('admin.html', 'Admin — Opera Upholstering',
+     'Page interne de gestion du site.', ADMIN_BODY, noindex=True)
 
 page('tissus.html',
      'La bibliothèque de tissus — Opera Upholstering',
